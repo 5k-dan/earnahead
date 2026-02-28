@@ -59,6 +59,17 @@ a {
   border-radius: var(--radius);
   backdrop-filter: blur(14px);
 }
+.cardActions {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.opportunityCard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 
 .hr {
   height: 1px;
@@ -153,4 +164,16 @@ a {
   .grid4 {
     grid-template-columns: repeat(4, 1fr);
   }
+}
+.opportunityCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.cardActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
 }

@@ -98,10 +98,19 @@ export default function DashboardPage() {
 
         <div style={{ height: 14 }} />
 
-        <div className="grid grid3" style={{ paddingBottom: 40 }}>
-          {filtered.map((o) => (
-            <OpportunityCard key={o.id} o={o} />
-          ))}
+        <div
+        style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))",
+            gap: 24,
+            alignItems: "stretch",
+        }}
+        >
+        {filtered.map((o) => (
+            <div key={o.id} style={{ display: "flex" }}>
+            <OpportunityCard o={o} />
+            </div>
+        ))}
         </div>
       </div>
     </div>

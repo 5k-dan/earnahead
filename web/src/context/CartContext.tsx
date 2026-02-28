@@ -5,6 +5,8 @@ import { AuthContext } from "@/context/AuthContext";
 import { db } from "@/lib/firebase";
 import { doc, setDoc, deleteDoc, collection, getDocs } from "firebase/firestore";
 
+
+
 export type Opportunity = {
   id: string;
   title: string;
@@ -13,16 +15,16 @@ export type Opportunity = {
   locationName: string;
   city: string;
   state: string;
-  description: string;
-  requirements: string;
-};
+  latitude?: number;
+  longitude?: number;
 
-type CartCtx = {
-  plan: Opportunity[];
-  addToPlan: (o: Opportunity) => void;
-  removeFromPlan: (id: string) => void;
-  clearPlan: () => void;
-  weeklyPotential: number;
+  requirements: {
+    minAge?: number | null;
+    maxAge?: number | null;
+    gender?: string;
+    requiresValidID?: boolean;
+    requiresHealthScreening?: boolean;
+  };
 };
 
 export const CartContext = createContext<CartCtx>({
