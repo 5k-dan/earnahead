@@ -1,108 +1,118 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { auth, db } from "@/firebase";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import Navbar from "@/components/Navbar";
-import { AuthContext } from "@/context/AuthContext";
-import { db } from "@/lib/firebase";
-import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
-
-type Profile = {
-  name: string;
-  age: string;
-  city: string;
-  state: string;
-};
 
 export default function ProfilePage() {
-  const { user, loading } = useContext(AuthContext);
-
-  const [profile, setProfile] = useState<Profile>({ name: "", age: "", city: "Atlanta", state: "GA" });
-  const [saving, setSaving] = useState(false);
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("any");
+  const [hasValidID, setHasValidID] = useState(false);
+  const [hasHealthScreening, setHasHealthScreening] = useState(false);
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const load = async () => {
+    const loadProfile = async () => {
+      const user = auth.currentUser;
       if (!user) return;
-      const ref = doc(db, "users", user.uid);
-      const snap = await getDoc(ref);
-      if (snap.exists()) {
-        const d = snap.data() as any;
-        setProfile({
-          name: d.name ?? "",
-          age: d.age ?? "",
-          city: d.city ?? "Atlanta",
-          state: d.state ?? "GA",
-        });
-      }
-    };
-    load();
-  }, [user]);
 
-  const save = async () => {
+      const snap = await getDoc(doc(db, "users", user.uid));
+      if (snap.exists()) {
+        const data = snap.data();
+        setAge(data.age || "");
+        setGender(data.gender || "any");
+        setHasValidID(data.hasValidID || false);
+        setHasHealthScreening(data.hasHealthScreening || false);
+        setCity(data.city || "");
+        setState(data.state || "");
+      }
+      setLoading(false);
+    };
+
+    loadProfile();
+  }, []);
+
+  const handleSave = async () => {
+    const user = auth.currentUser;
     if (!user) return;
-    setSaving(true);
-    await setDoc(
-      doc(db, "users", user.uid),
-      {
-        ...profile,
-        email: user.email,
-        updatedAt: serverTimestamp(),
-      },
-      { merge: true }
-    );
-    setSaving(false);
+
+    await setDoc(doc(db, "users", user.uid), {
+      age: Number(age),
+      gender,
+      hasValidID,
+      hasHealthScreening,
+      city,
+      state,
+    });
+
+    alert("Profile saved");
   };
 
-  if (loading) return null;
+  if (loading) return <div>Loading...</div>;
 
   return (
     <div>
       <Navbar />
-      <div style={{ padding: "26px 0" }}>
-        <div className="container">
-          <div className="surface" style={{ padding: 22, maxWidth: 720 }}>
-            <div style={{ fontSize: 22, fontWeight: 900 }}>Profile</div>
-            <div className="kicker" style={{ marginTop: 6 }}>
-              Update your info used for eligibility checks later.
-            </div>
+      <div className="container" style={{ padding: 30 }}>
+        <div className="surface" style={{ padding: 24 }}>
+          <h2>Profile</h2>
 
-            <hr className="hr" style={{ margin: "16px 0" }} />
+          <div style={{ display: "grid", gap: 12, marginTop: 20 }}>
+            <input
+              placeholder="Age"
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
+              className="input"
+            />
 
-            <div style={{ display: "grid", gap: 12 }}>
-              <div>
-                <div className="kicker" style={{ marginBottom: 6 }}>
-                  Name
-                </div>
-                <input className="input" value={profile.name} onChange={(e) => setProfile((p) => ({ ...p, name: e.target.value }))} />
-              </div>
+            <select
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              className="input"
+            >
+              <option value="any">Any</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
 
-              <div>
-                <div className="kicker" style={{ marginBottom: 6 }}>
-                  Age
-                </div>
-                <input className="input" value={profile.age} onChange={(e) => setProfile((p) => ({ ...p, age: e.target.value }))} />
-              </div>
+            <label>
+              <input
+                type="checkbox"
+                checked={hasValidID}
+                onChange={(e) => setHasValidID(e.target.checked)}
+              />
+              I have a valid government ID
+            </label>
 
-              <div style={{ display: "grid", gap: 12, gridTemplateColumns: "1fr 140px" }}>
-                <div>
-                  <div className="kicker" style={{ marginBottom: 6 }}>
-                    City
-                  </div>
-                  <input className="input" value={profile.city} onChange={(e) => setProfile((p) => ({ ...p, city: e.target.value }))} />
-                </div>
-                <div>
-                  <div className="kicker" style={{ marginBottom: 6 }}>
-                    State
-                  </div>
-                  <input className="input" value={profile.state} onChange={(e) => setProfile((p) => ({ ...p, state: e.target.value }))} />
-                </div>
-              </div>
+            <label>
+              <input
+                type="checkbox"
+                checked={hasHealthScreening}
+                onChange={(e) => setHasHealthScreening(e.target.checked)}
+              />
+              I completed required health screening
+            </label>
 
-              <div style={{ display: "flex", gap: 10, marginTop: 6 }}>
-                <button className="btn btnPrimary" onClick={save} disabled={saving} style={{ opacity: saving ? 0.7 : 1 }}>
-                  {saving ? "Saving..." : "Save"}
-                </button>
-              </div>
-            </div>
+            <input
+              placeholder="City"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              className="input"
+            />
+
+            <input
+              placeholder="State"
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+              className="input"
+            />
+
+            <button className="btn btnPrimary" onClick={handleSave}>
+              Save Profile
+            </button>
           </div>
         </div>
       </div>
