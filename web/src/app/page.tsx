@@ -1,65 +1,87 @@
-import Image from "next/image";
+"use client";
+
+import { useContext, useMemo, useState } from "react";
+import { AuthContext } from "@/context/AuthContext";
+import { auth, db } from "@/lib/firebase";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const { user, loading } = useContext(AuthContext);
+  const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const cleanEmail = useMemo(() => email.trim(), [email]);
+  const canSubmit = cleanEmail.length > 3 && password.length >= 6;
+
+  const signUp = async () => {
+    if (!canSubmit) return;
+    const cred = await createUserWithEmailAndPassword(auth, cleanEmail, password);
+
+    await setDoc(
+      doc(db, "users", cred.user.uid),
+      {
+        email: cred.user.email,
+        role: "user",
+        createdAt: serverTimestamp(),
+        name: "",
+        age: "",
+        city: "Atlanta",
+        state: "GA",
+      },
+      { merge: true }
+    );
+
+    router.push("/dashboard");
+  };
+
+  const login = async () => {
+    if (!canSubmit) return;
+    await signInWithEmailAndPassword(auth, cleanEmail, password);
+    router.push("/dashboard");
+  };
+
+  if (loading) return null;
+
+  if (user) {
+    router.push("/dashboard");
+    return null;
+  }
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div style={{ padding: "70px 0" }}>
+      <div className="container" style={{ display: "grid", gap: 18, gridTemplateColumns: "1fr", alignItems: "start" }}>
+        <div className="surface" style={{ padding: 26, maxWidth: 520 }}>
+          <div className="badge">Sign in to EarnAhead</div>
+          <div className="h1" style={{ fontSize: 42 }}>
+            Find verified ways to earn near you.
+          </div>
+          <div className="sub">
+            Donations, research studies, and regulated opportunities — organized in one hub.
+          </div>
+
+          <div style={{ marginTop: 18, display: "grid", gap: 12 }}>
+            <input className="input" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input className="input" placeholder="Password (min 6)" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+
+            <div style={{ display: "flex", gap: 10, marginTop: 6 }}>
+              <button className="btn btnPrimary" onClick={signUp} disabled={!canSubmit} style={{ opacity: canSubmit ? 1 : 0.6 }}>
+                Create account
+              </button>
+              <button className="btn" onClick={login} disabled={!canSubmit} style={{ opacity: canSubmit ? 1 : 0.6 }}>
+                Login
+              </button>
+            </div>
+
+            <div style={{ color: "rgba(255,255,255,0.52)", fontSize: 13 }}>
+              Tip: use a real email format. Trim spaces automatically.
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </div>
     </div>
   );
 }
