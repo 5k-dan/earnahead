@@ -1,0 +1,8 @@
+{
+  "cron": [
+    {
+      "path": "/api/sync/clinicaltrials",
+      "schedule": "0 3 * * *"
+    }
+  ]
+}
