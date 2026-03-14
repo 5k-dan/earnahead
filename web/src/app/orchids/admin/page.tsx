@@ -22,9 +22,10 @@ export default function AdminPage() {
   const [users, setUsers] = useState<UserRow[]>([]);
   const [fetching, setFetching] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
+  const [actionLoading, setActionLoading] = useState<string | null>(null);
   const [statusMsg, setStatusMsg] = useState("");
+  const [statusOk, setStatusOk] = useState(true);
 
-  // Guard: must be signed in + admin
   useEffect(() => {
     if (loading) return;
     if (!user) router.replace("/orchids/auth");
@@ -43,6 +44,7 @@ export default function AdminPage() {
       if (data.users) setUsers(data.users);
     } catch {
       setStatusMsg("Failed to load users.");
+      setStatusOk(false);
     } finally {
       setFetching(false);
     }
@@ -52,29 +54,56 @@ export default function AdminPage() {
     if (!loading && user && isAdmin) fetchUsers();
   }, [loading, user, isAdmin, fetchUsers]);
 
+  const showStatus = (msg: string, ok = true) => {
+    setStatusMsg(msg);
+    setStatusOk(ok);
+    setTimeout(() => setStatusMsg(""), 3500);
+  };
+
   const handleDelete = async (uid: string) => {
+    setActionLoading(uid);
     try {
       const token = await auth.currentUser?.getIdToken();
       const res = await fetch("/api/admin/users", {
         method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
+        headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
         body: JSON.stringify({ uid }),
       });
       const data = await res.json();
       if (data.success) {
         setUsers((prev) => prev.filter((u) => u.uid !== uid));
-        setStatusMsg("User deleted.");
+        showStatus("User deleted.");
       } else {
-        setStatusMsg(data.error ?? "Delete failed.");
+        showStatus(data.error ?? "Delete failed.", false);
       }
     } catch {
-      setStatusMsg("Delete failed.");
+      showStatus("Delete failed.", false);
     } finally {
+      setActionLoading(null);
       setDeleteConfirm(null);
-      setTimeout(() => setStatusMsg(""), 3000);
+    }
+  };
+
+  const handlePatch = async (uid: string, action: string, optimistic: (u: UserRow) => UserRow) => {
+    setActionLoading(uid + action);
+    try {
+      const token = await auth.currentUser?.getIdToken();
+      const res = await fetch("/api/admin/users", {
+        method: "PATCH",
+        headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ uid, action }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setUsers((prev) => prev.map((u) => (u.uid === uid ? optimistic(u) : u)));
+        showStatus("Updated.");
+      } else {
+        showStatus(data.error ?? "Action failed.", false);
+      }
+    } catch {
+      showStatus("Action failed.", false);
+    } finally {
+      setActionLoading(null);
     }
   };
 
@@ -117,7 +146,7 @@ export default function AdminPage() {
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "32px 40px" }}>
         {/* Status message */}
         {statusMsg && (
-          <div style={{ background: statusMsg.includes("deleted") || statusMsg.includes("Deleted") ? "#eafaf1" : "#fdecea", border: `1px solid ${statusMsg.includes("deleted") || statusMsg.includes("Deleted") ? "#52be80" : "#e74c3c"}40`, borderRadius: 8, padding: "10px 16px", fontSize: 13, color: statusMsg.includes("deleted") || statusMsg.includes("Deleted") ? "#1e8449" : "#c0392b", marginBottom: 24 }}>
+          <div style={{ background: statusOk ? "#eafaf1" : "#fdecea", border: `1px solid ${statusOk ? "#52be80" : "#e74c3c"}40`, borderRadius: 8, padding: "10px 16px", fontSize: 13, color: statusOk ? "#1e8449" : "#c0392b", marginBottom: 24 }}>
             {statusMsg}
           </div>
         )}
@@ -125,8 +154,8 @@ export default function AdminPage() {
         {/* Table */}
         <div style={{ background: "white", border: "1px solid var(--border)", borderRadius: 12, overflow: "hidden" }}>
           {/* Table header */}
-          <div style={{ display: "grid", gridTemplateColumns: "2fr 2fr 1fr 1fr 1fr 1fr 80px", padding: "12px 20px", background: "var(--off-white)", borderBottom: "1px solid var(--border)" }}>
-            {["Name", "Email", "Verified", "Role", "Joined", "Last Sign In", ""].map((h) => (
+          <div style={{ display: "grid", gridTemplateColumns: "2fr 2fr 1fr 1fr 1fr 1fr 220px", padding: "12px 20px", background: "var(--off-white)", borderBottom: "1px solid var(--border)" }}>
+            {["Name", "Email", "Verified", "Role", "Joined", "Last Sign In", "Actions"].map((h) => (
               <div key={h} style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", color: "var(--text-muted)" }}>{h}</div>
             ))}
           </div>
@@ -137,7 +166,7 @@ export default function AdminPage() {
             <div style={{ padding: "60px 20px", textAlign: "center", color: "var(--text-muted)", fontSize: 14 }}>No users found.</div>
           ) : (
             users.map((u, i) => (
-              <div key={u.uid} style={{ display: "grid", gridTemplateColumns: "2fr 2fr 1fr 1fr 1fr 1fr 80px", padding: "16px 20px", borderBottom: i < users.length - 1 ? "1px solid var(--border)" : "none", alignItems: "center", background: u.admin ? "rgba(30,90,168,0.03)" : "white" }}>
+              <div key={u.uid} style={{ display: "grid", gridTemplateColumns: "2fr 2fr 1fr 1fr 1fr 1fr 220px", padding: "16px 20px", borderBottom: i < users.length - 1 ? "1px solid var(--border)" : "none", alignItems: "center", background: u.disabled ? "rgba(0,0,0,0.02)" : u.admin ? "rgba(30,90,168,0.03)" : "white", opacity: u.disabled ? 0.6 : 1 }}>
                 {/* Name */}
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                   <div style={{ width: 30, height: 30, borderRadius: "50%", background: u.admin ? "var(--blue)" : "var(--navy)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 700, color: "white", flexShrink: 0 }}>
@@ -169,30 +198,51 @@ export default function AdminPage() {
                 {/* Last sign in */}
                 <div style={{ fontSize: 12, color: "var(--text-muted)" }}>{fmtDate(u.lastSignIn)}</div>
 
-                {/* Delete */}
-                <div>
-                  {u.admin ? (
-                    <span style={{ fontSize: 11, color: "var(--text-muted)" }}>—</span>
-                  ) : deleteConfirm === u.uid ? (
-                    <div style={{ display: "flex", gap: 6 }}>
-                      <button onClick={() => handleDelete(u.uid)} style={{ padding: "4px 10px", background: "#c0392b", color: "white", border: "none", borderRadius: 4, fontSize: 11, fontWeight: 700, cursor: "pointer" }}>Yes</button>
-                      <button onClick={() => setDeleteConfirm(null)} style={{ padding: "4px 10px", background: "var(--off-white)", color: "var(--navy)", border: "1px solid var(--border)", borderRadius: 4, fontSize: 11, cursor: "pointer" }}>No</button>
-                    </div>
-                  ) : (
-                    <button onClick={() => setDeleteConfirm(u.uid)} style={{ padding: "4px 12px", background: "transparent", color: "#c0392b", border: "1px solid #f1948a", borderRadius: 4, fontSize: 11, fontWeight: 600, cursor: "pointer" }}>
-                      Delete
+                {/* Actions */}
+                <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                  {/* Promote / demote admin */}
+                  {u.uid !== user.uid && (
+                    <button
+                      onClick={() => handlePatch(u.uid, u.admin ? "removeAdmin" : "setAdmin", (row) => ({ ...row, admin: !row.admin }))}
+                      disabled={!!actionLoading}
+                      style={{ padding: "4px 10px", background: u.admin ? "var(--off-white)" : "rgba(30,90,168,0.1)", color: u.admin ? "var(--text-muted)" : "var(--blue)", border: `1px solid ${u.admin ? "var(--border)" : "rgba(30,90,168,0.3)"}`, borderRadius: 4, fontSize: 11, fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap" }}
+                    >
+                      {actionLoading === u.uid + (u.admin ? "removeAdmin" : "setAdmin") ? "…" : u.admin ? "Demote" : "Make Admin"}
                     </button>
+                  )}
+
+                  {/* Disable / enable */}
+                  {u.uid !== user.uid && (
+                    <button
+                      onClick={() => handlePatch(u.uid, u.disabled ? "enable" : "disable", (row) => ({ ...row, disabled: !row.disabled }))}
+                      disabled={!!actionLoading}
+                      style={{ padding: "4px 10px", background: u.disabled ? "#eafaf1" : "#fef9e7", color: u.disabled ? "#1e8449" : "#d68910", border: `1px solid ${u.disabled ? "#52be8040" : "#d6891040"}`, borderRadius: 4, fontSize: 11, fontWeight: 600, cursor: "pointer" }}
+                    >
+                      {actionLoading === u.uid + (u.disabled ? "enable" : "disable") ? "…" : u.disabled ? "Enable" : "Suspend"}
+                    </button>
+                  )}
+
+                  {/* Delete */}
+                  {u.uid !== user.uid && (
+                    deleteConfirm === u.uid ? (
+                      <div style={{ display: "flex", gap: 4 }}>
+                        <button onClick={() => handleDelete(u.uid)} disabled={!!actionLoading} style={{ padding: "4px 8px", background: "#c0392b", color: "white", border: "none", borderRadius: 4, fontSize: 11, fontWeight: 700, cursor: "pointer" }}>Yes</button>
+                        <button onClick={() => setDeleteConfirm(null)} style={{ padding: "4px 8px", background: "var(--off-white)", color: "var(--navy)", border: "1px solid var(--border)", borderRadius: 4, fontSize: 11, cursor: "pointer" }}>No</button>
+                      </div>
+                    ) : (
+                      <button onClick={() => setDeleteConfirm(u.uid)} style={{ padding: "4px 10px", background: "transparent", color: "#c0392b", border: "1px solid #f1948a", borderRadius: 4, fontSize: 11, fontWeight: 600, cursor: "pointer" }}>
+                        Delete
+                      </button>
+                    )
+                  )}
+
+                  {u.uid === user.uid && (
+                    <span style={{ fontSize: 11, color: "var(--text-muted)", fontStyle: "italic" }}>you</span>
                   )}
                 </div>
               </div>
             ))
           )}
-        </div>
-
-        {/* Seed reminder */}
-        <div style={{ marginTop: 24, padding: "14px 20px", background: "rgba(30,90,168,0.06)", border: "1px solid rgba(30,90,168,0.15)", borderRadius: 8, fontSize: 13, color: "var(--navy)" }}>
-          <strong>Admin account setup:</strong> If the admin@vitalink.co account hasn&apos;t been created yet, call{" "}
-          <code style={{ background: "rgba(0,0,0,0.06)", padding: "1px 6px", borderRadius: 3 }}>POST /api/seed-admin</code> once to initialize it.
         </div>
       </div>
     </div>
