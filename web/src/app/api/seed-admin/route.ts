@@ -2,10 +2,12 @@ import { NextResponse } from "next/server";
 import { adminAuth, adminDb } from "@/lib/firebase-admin";
 
 const ADMIN_EMAIL = "admin@vitalink.co";
-const ADMIN_PASSWORD = "e@rnAhead";
 const ADMIN_NAME = "Vitalink Admin";
+// Password is set via env — never hardcoded
+const ADMIN_PASSWORD = process.env.ADMIN_SEED_PASSWORD;
 
 async function seed() {
+  if (!ADMIN_PASSWORD) throw new Error("ADMIN_SEED_PASSWORD is not set in .env.local");
   let uid: string;
   try {
     const existing = await adminAuth.getUserByEmail(ADMIN_EMAIL);
