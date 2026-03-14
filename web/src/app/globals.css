@@ -81,22 +81,22 @@
 
 /* ─── Lumen (Combined) Theme ─────────────────────────────────────────────── */
 .combined-theme {
-  --bg: #060D18;
-  --surface: #0D1A2E;
-  --surface-2: #142237;
-  --surface-3: #1B2D4A;
-  --accent: #C8861A;
-  --accent-2: #E0A030;
-  --accent-pale: rgba(200, 134, 26, 0.10);
-  --white: #F9F5EE;
-  --cream: #EDE8DF;
-  --text: #D6D0C4;
-  --text-2: #7A8CA6;
-  --text-3: #3E5268;
-  --border: rgba(214, 208, 196, 0.07);
-  --border-2: rgba(214, 208, 196, 0.13);
-  background: #060D18;
-  color: #D6D0C4;
+  --bg: #0C0D0C;
+  --surface: #131513;
+  --surface-2: #191C19;
+  --surface-3: #212421;
+  --accent: #1CB85E;
+  --accent-2: #24D46E;
+  --accent-pale: rgba(28, 184, 94, 0.10);
+  --white: #F1F4EE;
+  --cream: #E8E4DA;
+  --text: #B8BDB5;
+  --text-2: #626862;
+  --text-3: #383C38;
+  --border: rgba(184, 189, 181, 0.06);
+  --border-2: rgba(184, 189, 181, 0.12);
+  background: #0C0D0C;
+  color: #B8BDB5;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
