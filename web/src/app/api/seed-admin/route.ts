@@ -43,40 +43,10 @@ export async function GET() {
 /** POST /api/seed-admin — same thing, callable via curl */
 export async function POST() {
   try {
-    let uid: string;
-
-    try {
-      // Try to fetch existing user
-      const existing = await adminAuth.getUserByEmail(ADMIN_EMAIL);
-      uid = existing.uid;
-    } catch {
-      // User doesn't exist — create them
-      const newUser = await adminAuth.createUser({
-        email: ADMIN_EMAIL,
-        password: ADMIN_PASSWORD,
-        displayName: ADMIN_NAME,
-        emailVerified: true, // admin account is pre-verified
-      });
-      uid = newUser.uid;
-    }
-
-    // Set admin custom claim (idempotent)
-    await adminAuth.setCustomUserClaims(uid, { admin: true });
-
-    // Write/overwrite Firestore profile
-    await adminDb.collection("users").doc(uid).set({
-      displayName: ADMIN_NAME,
-      email: ADMIN_EMAIL,
-      role: "admin",
-      createdAt: new Date().toISOString(),
-    }, { merge: true });
-
+    const uid = await seed();
     return NextResponse.json({ success: true, uid });
   } catch (err) {
     console.error("seed-admin error:", err);
-    return NextResponse.json(
-      { error: String(err) },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: String(err) }, { status: 500 });
   }
 }
