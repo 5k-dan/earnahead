@@ -40,12 +40,18 @@ async function seedTestUser() {
   try {
     const existing = await adminAuth.getUserByEmail(TEST_EMAIL);
     uid = existing.uid;
+    // Fix existing account: force correct name + verified status
+    await adminAuth.updateUser(uid, {
+      displayName: TEST_NAME,
+      emailVerified: true,
+      password: TEST_PASSWORD,
+    });
   } catch {
     const newUser = await adminAuth.createUser({
       email: TEST_EMAIL,
       password: TEST_PASSWORD,
       displayName: TEST_NAME,
-      emailVerified: true, // pre-verified — no email confirmation needed
+      emailVerified: true,
     });
     uid = newUser.uid;
   }
