@@ -45,14 +45,17 @@ export default function OrchidsDashboard() {
   const { user, loading } = useAuth();
   const router = useRouter();
 
-  // Auth guard — redirect to login if not signed in
+  // Auth guard — redirect to login if not signed in, or verify page if unverified
   useEffect(() => {
-    if (!loading && !user) {
+    if (loading) return;
+    if (!user) {
       router.replace("/orchids/auth?redirect=/orchids/dashboard");
+    } else if (!user.emailVerified) {
+      router.replace("/orchids/auth/verify");
     }
   }, [user, loading, router]);
 
-  if (loading || !user) {
+  if (loading || !user || !user.emailVerified) {
     return (
       <div style={{ paddingTop: 64, minHeight: "100vh", background: "var(--off-white)", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <div style={{ width: 32, height: 32, border: "3px solid var(--blue)", borderTopColor: "transparent", borderRadius: "50%", animation: "spin 0.7s linear infinite" }} />
