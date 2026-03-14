@@ -1,114 +1,120 @@
 "use client";
 
-import { useContext, useEffect, useMemo, useState } from "react";
-import { AuthContext } from "@/context/AuthContext";
-import { auth, db } from "@/lib/firebase";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { doc, serverTimestamp, setDoc } from "firebase/firestore";
-import { useRouter, usePathname } from "next/navigation";
+import Link from "next/link";
 
-export default function Home() {
-  const { user, loading } = useContext(AuthContext);
-  const router = useRouter();
-  const pathname = usePathname();
+const designs = [
+  {
+    href: "/figma",
+    label: "Figma Professional",
+    description: "Clean, professional healthcare platform with polished UI and animations.",
+    accent: "#2E5C8A",
+    tag: "Figma",
+  },
+  {
+    href: "/figma/concept",
+    label: "Figma Experimental",
+    description: "Bold editorial layout with gradients, floating cards, and full-screen hero.",
+    accent: "#6B8E7F",
+    tag: "Figma · Concept",
+  },
+  {
+    href: "/orchids",
+    label: "Orchids",
+    description: "Dark navy, serif-driven design — refined and data-focused.",
+    accent: "#1d5fa8",
+    tag: "Orchids",
+  },
+];
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const cleanEmail = useMemo(() => email.trim(), [email]);
-  const canSubmit = cleanEmail.length > 3 && password.length >= 6;
-
-  useEffect(() => {
-    if (user && pathname === "/") {
-      router.replace("/dashboard");
-    }
-  }, [user, pathname, router]);
-
-  const signUp = async () => {
-    if (!canSubmit) return;
-
-    const cred = await createUserWithEmailAndPassword(
-      auth,
-      cleanEmail,
-      password
-    );
-
-    await setDoc(
-      doc(db, "users", cred.user.uid),
-      {
-        email: cred.user.email,
-        role: "user",
-        createdAt: serverTimestamp(),
-        name: "",
-        age: "",
-        city: "Atlanta",
-        state: "GA",
-        hasValidID: false,
-        hasHealthScreening: false,
-        gender: "any",
-      },
-      { merge: true }
-    );
-
-    router.replace("/dashboard");
-  };
-
-  const login = async () => {
-    if (!canSubmit) return;
-    await signInWithEmailAndPassword(auth, cleanEmail, password);
-    router.replace("/dashboard");
-  };
-
-  if (loading) return null;
-
+export default function DesignPicker() {
   return (
-    <div style={{ padding: "70px 0" }}>
-      <div className="container" style={{ maxWidth: 520 }}>
-        <div className="surface" style={{ padding: 26 }}>
-          <div className="badge">Sign in to EarnAhead</div>
-          <div className="h1" style={{ fontSize: 42 }}>
-            Find verified ways to earn near you.
-          </div>
-
-          <div style={{ marginTop: 18, display: "grid", gap: 12 }}>
-            <input
-              className="input"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-
-            <input
-              className="input"
-              placeholder="Password (min 6)"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-
-            <div style={{ display: "flex", gap: 10 }}>
-              <button
-                className="btn btnPrimary"
-                onClick={signUp}
-                disabled={!canSubmit}
-              >
-                Create account
-              </button>
-
-              <button
-                className="btn"
-                onClick={login}
-                disabled={!canSubmit}
-              >
-                Login
-              </button>
-            </div>
-          </div>
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "40px 24px",
+        gap: 48,
+      }}
+    >
+      <div style={{ textAlign: "center" }}>
+        <div className="badge" style={{ marginBottom: 16, display: "inline-flex" }}>
+          EarnAhead Design Preview
         </div>
+        <div className="h1" style={{ fontSize: 48, marginTop: 0 }}>
+          Choose a UI
+        </div>
+        <p className="sub" style={{ maxWidth: 480, margin: "8px auto 0" }}>
+          Three design directions for the same platform. Pick one to explore.
+        </p>
       </div>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+          gap: 20,
+          width: "100%",
+          maxWidth: 960,
+        }}
+      >
+        {designs.map((d) => (
+          <Link key={d.href} href={d.href} style={{ textDecoration: "none" }}>
+            <div
+              className="surface"
+              style={{
+                padding: 28,
+                cursor: "pointer",
+                transition: "transform 0.15s ease, box-shadow 0.15s ease",
+                borderTop: `3px solid ${d.accent}`,
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
+              }}
+            >
+              <div
+                style={{
+                  display: "inline-block",
+                  fontSize: 11,
+                  fontWeight: 600,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  color: d.accent,
+                  marginBottom: 12,
+                  padding: "3px 10px",
+                  borderRadius: 20,
+                  background: `${d.accent}18`,
+                }}
+              >
+                {d.tag}
+              </div>
+              <div className="h2" style={{ marginBottom: 10, color: "var(--text)" }}>
+                {d.label}
+              </div>
+              <p className="kicker">{d.description}</p>
+              <div
+                style={{
+                  marginTop: 20,
+                  fontSize: 13,
+                  fontWeight: 600,
+                  color: d.accent,
+                }}
+              >
+                View design →
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+
+      <Link href="/login" style={{ fontSize: 13, color: "var(--muted2)" }}>
+        Go to app →
+      </Link>
     </div>
   );
 }
