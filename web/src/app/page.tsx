@@ -2,38 +2,13 @@
 
 import Link from "next/link";
 
+// Order deliberately mixed — not labeled so viewers can't tell which is which
 const designs = [
-  {
-    num: "1",
-    href: "/figma",
-    description: "Clean professional layout with polished cards and animations.",
-    accent: "#2E5C8A",
-  },
-  {
-    num: "2",
-    href: "/figma/concept",
-    description: "Bold editorial hero, asymmetric grids, floating map cards.",
-    accent: "#6B8E7F",
-  },
-  {
-    num: "3",
-    href: "/orchids",
-    description: "Dark navy, serif-driven — refined and data-focused.",
-    accent: "#1d5fa8",
-  },
-  {
-    num: "4",
-    href: "/dashboard",
-    description: "The original working app with Firebase auth and live data.",
-    accent: "#a855f7",
-  },
-  {
-    num: "5",
-    href: "/combined",
-    description: "Best of all designs — coming soon.",
-    accent: "#ec4899",
-    disabled: true,
-  },
+  { num: "1", href: "/orchids", accent: "#1d5fa8" },
+  { num: "2", href: "/dashboard", accent: "#a855f7" },
+  { num: "3", href: "/figma", accent: "#2E5C8A" },
+  { num: "4", href: "/figma/concept", accent: "#6B8E7F" },
+  { num: "5", href: "/combined", accent: "#ec4899", disabled: true },
 ];
 
 export default function DesignPicker() {
@@ -57,17 +32,17 @@ export default function DesignPicker() {
           Choose a UI
         </div>
         <p className="sub" style={{ maxWidth: 480, margin: "8px auto 0" }}>
-          Five design directions for the same platform. Pick one to explore.
+          Five design directions. Pick one to explore.
         </p>
       </div>
 
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(5, 1fr)",
+          display: "flex",
           gap: 16,
           width: "100%",
-          maxWidth: 1100,
+          maxWidth: 900,
+          justifyContent: "center",
         }}
       >
         {designs.map((d) => {
@@ -75,14 +50,17 @@ export default function DesignPicker() {
             <div
               className="surface"
               style={{
-                padding: "28px 20px",
+                width: 140,
+                height: 140,
                 cursor: d.disabled ? "default" : "pointer",
                 transition: "transform 0.15s ease",
                 borderTop: `3px solid ${d.accent}`,
-                opacity: d.disabled ? 0.5 : 1,
-                height: "100%",
+                opacity: d.disabled ? 0.45 : 1,
                 display: "flex",
                 flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 12,
               }}
               onMouseEnter={(e) => {
                 if (!d.disabled) (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";
@@ -93,31 +71,29 @@ export default function DesignPicker() {
             >
               <div
                 style={{
-                  width: 40,
-                  height: 40,
+                  width: 52,
+                  height: 52,
                   borderRadius: "50%",
                   background: `${d.accent}20`,
                   border: `1.5px solid ${d.accent}40`,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  fontSize: 18,
+                  fontSize: 22,
                   fontWeight: 700,
                   color: d.accent,
-                  marginBottom: 16,
                 }}
               >
                 {d.num}
               </div>
-              <p className="kicker" style={{ flex: 1, marginBottom: 20 }}>{d.description}</p>
-              <div style={{ fontSize: 12, fontWeight: 600, color: d.accent }}>
-                {d.disabled ? "Coming soon" : "View →"}
+              <div style={{ fontSize: 11, fontWeight: 600, color: d.disabled ? "rgba(255,255,255,0.3)" : d.accent, letterSpacing: "0.04em" }}>
+                {d.disabled ? "SOON" : "VIEW →"}
               </div>
             </div>
           );
 
           return d.disabled ? (
-            <div key={d.num} style={{ textDecoration: "none" }}>{card}</div>
+            <div key={d.num}>{card}</div>
           ) : (
             <Link key={d.num} href={d.href} style={{ textDecoration: "none" }}>{card}</Link>
           );

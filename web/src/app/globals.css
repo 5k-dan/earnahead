@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /* ─── Figma Design Theme ─────────────────────────────────────────────────── */
 .figma-theme {
   --background: #FFFFFF;
@@ -232,7 +234,7 @@ a {
   color: rgba(255, 255, 255, 0.35);
 }
 
-.grid {
+.app-grid {
   display: grid;
   gap: 16px;
 }
