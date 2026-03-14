@@ -79,6 +79,27 @@
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
+/* ─── Lumen (Combined) Theme ─────────────────────────────────────────────── */
+.combined-theme {
+  --bg: #060D18;
+  --surface: #0D1A2E;
+  --surface-2: #142237;
+  --surface-3: #1B2D4A;
+  --accent: #C8861A;
+  --accent-2: #E0A030;
+  --accent-pale: rgba(200, 134, 26, 0.10);
+  --white: #F9F5EE;
+  --cream: #EDE8DF;
+  --text: #D6D0C4;
+  --text-2: #7A8CA6;
+  --text-3: #3E5268;
+  --border: rgba(214, 208, 196, 0.07);
+  --border-2: rgba(214, 208, 196, 0.13);
+  background: #060D18;
+  color: #D6D0C4;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
 /* ─── Existing App Theme ─────────────────────────────────────────────────── */
 :root {
   --bg: #0b0a12;
