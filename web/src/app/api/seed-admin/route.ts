@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { adminAuth, adminDb } from "@/lib/firebase-admin";
 
-const ADMIN_EMAIL = "admin@vitalink.co";
+const ADMIN_EMAIL = "dandmin@vitalink.co";
 const ADMIN_NAME = "Vitalink Admin";
 // Password is set via env — never hardcoded
 const ADMIN_PASSWORD = process.env.ADMIN_SEED_PASSWORD;
