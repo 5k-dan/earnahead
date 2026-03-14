@@ -4,13 +4,18 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
   updateProfile,
   sendEmailVerification,
   signOut as firebaseSignOut,
   User,
 } from "firebase/auth";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { auth } from "@/lib/firebase";
+import { auth, db } from "@/lib/firebase";
+
+const googleProvider = new GoogleAuthProvider();
 
 type AuthCtx = {
   user: User | null;
@@ -18,6 +23,7 @@ type AuthCtx = {
   isAdmin: boolean;
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (email: string, password: string, displayName: string) => Promise<void>;
+  signInWithGoogle: () => Promise<void>;
   resendVerification: () => Promise<void>;
   signOut: () => Promise<void>;
 };
@@ -54,6 +60,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser({ ...newUser, displayName });
   };
 
+  const signInWithGoogle = async () => {
+    const result = await signInWithPopup(auth, googleProvider);
+    const u = result.user;
+    // Create Firestore profile on first Google sign-in
+    const ref = doc(db, "users", u.uid);
+    const snap = await getDoc(ref);
+    if (!snap.exists()) {
+      await setDoc(ref, {
+        displayName: u.displayName ?? "",
+        email: u.email ?? "",
+        role: "user",
+        createdAt: new Date().toISOString(),
+      });
+    }
+  };
+
   const resendVerification = async () => {
     if (auth.currentUser) {
       await sendEmailVerification(auth.currentUser);
@@ -65,7 +87,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const value = useMemo(
-    () => ({ user, loading, isAdmin, signIn, signUp, resendVerification, signOut }),
+    () => ({ user, loading, isAdmin, signIn, signUp, signInWithGoogle, resendVerification, signOut }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [user, loading, isAdmin]
   );
