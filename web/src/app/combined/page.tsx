@@ -3,13 +3,14 @@
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { motion } from "motion/react";
 
 function useInView(ref: React.RefObject<HTMLElement | null>) {
   const [inView, setInView] = useState(false);
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) { setInView(true); observer.disconnect(); } },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -24,10 +25,10 @@ function useCountUp(target: number, active: boolean, duration = 1800) {
     const start = Date.now();
     const frame = () => {
       const elapsed = Date.now() - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
+      const p = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
       setValue(Math.floor(eased * target));
-      if (progress < 1) requestAnimationFrame(frame);
+      if (p < 1) requestAnimationFrame(frame);
       else setValue(target);
     };
     requestAnimationFrame(frame);
@@ -35,18 +36,55 @@ function useCountUp(target: number, active: boolean, duration = 1800) {
   return value;
 }
 
-const sampleOpps = [
-  { type: "PLASMA", org: "BioLife Plasma Services", comp: "$110", time: "90 min", dist: "0.3 mi", live: true },
-  { type: "BLOOD", org: "American Red Cross", comp: "$50", time: "45 min", dist: "0.8 mi", live: true },
-  { type: "RESEARCH", org: "Northwestern Medicine", comp: "$300", time: "2 hrs", dist: "1.2 mi", live: false },
+const contributions = [
+  {
+    key: "plasma",
+    label: "Plasma",
+    comp: "$50–110", sub: "per session",
+    time: "90 min", freq: "Up to 2× per week", monthly: "$500+/month",
+    popular: true,
+    desc: "Treats rare immune disorders, hemophilia, and burn injuries. Plasma is the highest-recurring earning opportunity on the platform — FDA-regulated, private, and accessible.",
+  },
+  {
+    key: "blood",
+    label: "Whole Blood",
+    comp: "$20–50", sub: "per donation",
+    time: "45 min", freq: "Every 56 days", monthly: null,
+    popular: false,
+    desc: "One donation can save up to three lives. Over 40,000 pints are transfused every day in the United States — the most universally needed contribution on the platform.",
+  },
+  {
+    key: "research",
+    label: "Clinical Research",
+    comp: "$50–500+", sub: "per study",
+    time: "2–8 hrs", freq: "Study-specific", monthly: null,
+    popular: false,
+    desc: "Participate in FDA-regulated clinical trials. Opportunities range from single-visit studies to multi-month research commitments with significantly higher compensation.",
+  },
+  {
+    key: "egg",
+    label: "Egg Donation",
+    comp: "$5K–30K", sub: "per cycle",
+    time: "Multi-week", freq: "Per cycle", monthly: null,
+    popular: false,
+    desc: "Help families who cannot conceive naturally. The highest single-payout opportunity on the platform. Requires thorough medical screening and a multi-week commitment.",
+  },
+  {
+    key: "sperm",
+    label: "Sperm Donation",
+    comp: "$100–200", sub: "per sample",
+    time: "30 min", freq: "2–3× per month", monthly: "$600+/month",
+    popular: false,
+    desc: "Ongoing support for fertility clinics and cryobanks. Once accepted and screened, compensation is consistent and the scheduling is flexible around your life.",
+  },
 ];
 
-function AnimatedStat({
-  value, prefix = "", suffix = "", active, size = 52,
-}: { value: number; prefix?: string; suffix?: string; active: boolean; size?: number }) {
+function AnimStat({ value, prefix = "", suffix = "", active, size = 52 }: {
+  value: number; prefix?: string; suffix?: string; active: boolean; size?: number;
+}) {
   const n = useCountUp(value, active);
   return (
-    <span style={{ fontFamily: "'DM Serif Display', serif", fontSize: size, lineHeight: 1, color: "var(--white)" }}>
+    <span style={{ fontFamily: "'DM Serif Display', serif", fontSize: size, lineHeight: 1, color: "var(--white)", letterSpacing: "-0.02em" }}>
       {prefix}{n >= 1000 ? n.toLocaleString() : n}{suffix}
     </span>
   );
@@ -54,9 +92,12 @@ function AnimatedStat({
 
 export default function LumenLanding() {
   const [zip, setZip] = useState("");
+  const [expanded, setExpanded] = useState<string | null>(null);
   const router = useRouter();
   const statsRef = useRef<HTMLDivElement>(null);
+  const heroCountRef = useRef<HTMLDivElement>(null);
   const statsActive = useInView(statsRef as React.RefObject<HTMLElement>);
+  const heroCountActive = useInView(heroCountRef as React.RefObject<HTMLElement>);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -65,525 +106,414 @@ export default function LumenLanding() {
 
   return (
     <div style={{ background: "var(--bg)" }}>
-      {/* ── HERO ─────────────────────────────────────────────────────────────── */}
+
+      {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section style={{
-        minHeight: "100vh",
-        paddingTop: 64,
-        display: "flex",
-        alignItems: "center",
-        position: "relative",
-        overflow: "hidden",
+        minHeight: "100vh", paddingTop: 64, background: "var(--bg)",
+        display: "flex", flexDirection: "column", justifyContent: "center",
+        position: "relative", overflow: "hidden",
       }}>
-        {/* Dot-grid texture */}
-        <div style={{
-          position: "absolute", inset: 0, pointerEvents: "none",
-          backgroundImage: "radial-gradient(rgba(200,134,26,0.06) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-        }} />
-        {/* Gold glow */}
-        <div style={{
-          position: "absolute", right: "5%", top: "15%", width: 700, height: 600, pointerEvents: "none",
-          background: "radial-gradient(ellipse, rgba(200,134,26,0.07) 0%, transparent 70%)",
-        }} />
 
-        <div style={{
-          maxWidth: 1280, margin: "0 auto", padding: "80px 48px",
-          width: "100%", display: "grid", gridTemplateColumns: "55fr 45fr",
-          gap: 80, alignItems: "center",
-        }}>
-          {/* Left */}
-          <div>
-            <div style={{
-              fontSize: 11, letterSpacing: "0.14em", textTransform: "uppercase",
-              color: "var(--text-2)", marginBottom: 36, fontWeight: 500,
-              display: "flex", alignItems: "center", gap: 14,
-            }}>
-              <span style={{ display: "inline-block", width: 28, height: 1, background: "var(--accent)", flexShrink: 0 }} />
+        {/* Overline */}
+        <div style={{ padding: "0 80px", marginBottom: 32 }}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.1 }}
+            style={{ display: "flex", alignItems: "center", gap: 16 }}
+          >
+            <span style={{ display: "inline-block", width: 32, height: 1, background: "var(--accent)" }} />
+            <span style={{ fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--text-3)", fontWeight: 600 }}>
               The Health Contribution Marketplace
-            </div>
+            </span>
+          </motion.div>
+        </div>
 
-            <h1 style={{
+        {/* Full-width rule */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          style={{ height: 1, background: "linear-gradient(90deg, transparent 0%, rgba(200,134,26,0.6) 15%, rgba(200,134,26,0.6) 85%, transparent 100%)", transformOrigin: "left" }}
+        />
+
+        {/* HEADLINE — the entire design lives here */}
+        <div style={{ padding: "44px 80px 44px" }}>
+          <motion.h1
+            initial={{ opacity: 0, y: 32 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            style={{
               fontFamily: "'DM Serif Display', serif",
-              fontSize: "clamp(64px, 6.5vw, 96px)",
-              lineHeight: 0.95,
-              letterSpacing: "-0.025em",
+              fontSize: "clamp(76px, 10.5vw, 148px)",
+              lineHeight: 0.88,
+              letterSpacing: "-0.03em",
               color: "var(--white)",
-              margin: "0 0 6px",
-            }}>
-              Your body.
-            </h1>
-            <h1 style={{
+              margin: 0,
+            }}
+          >
+            Your body.
+          </motion.h1>
+          <motion.h1
+            initial={{ opacity: 0, y: 32 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            style={{
               fontFamily: "'DM Serif Display', serif",
-              fontSize: "clamp(64px, 6.5vw, 96px)",
-              lineHeight: 0.95,
-              letterSpacing: "-0.025em",
+              fontSize: "clamp(76px, 10.5vw, 148px)",
+              lineHeight: 0.88,
+              letterSpacing: "-0.03em",
               color: "var(--accent)",
               fontStyle: "italic",
-              margin: "0 0 52px",
-            }}>
-              Their tomorrow.
-            </h1>
+              margin: "10px 0 0",
+            }}
+          >
+            Their tomorrow.
+          </motion.h1>
+        </div>
 
-            <p style={{
-              fontSize: 17, lineHeight: 1.8, color: "var(--text-2)",
-              maxWidth: 420, marginBottom: 44,
-            }}>
-              Discover verified opportunities to donate blood, plasma, eggs, and more —
-              and earn real compensation for your contribution to community health.
+        {/* Full-width rule */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1.2, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          style={{ height: 1, background: "linear-gradient(90deg, transparent 0%, rgba(200,134,26,0.6) 15%, rgba(200,134,26,0.6) 85%, transparent 100%)", transformOrigin: "left" }}
+        />
+
+        {/* SEARCH + DESCRIPTOR — below the fold line */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.35 }}
+          style={{ padding: "44px 80px 0" }}
+        >
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
+            <p style={{ fontSize: 17, color: "var(--text-2)", lineHeight: 1.82, margin: 0, maxWidth: 420 }}>
+              Discover verified opportunities to donate blood, plasma, eggs, and more.
+              Earn real compensation. Make a measurable difference in your community.
             </p>
-
-            <form onSubmit={handleSearch} style={{ display: "flex", marginBottom: 36, maxWidth: 460 }}>
+            <form onSubmit={handleSearch} style={{ display: "flex" }}>
               <input
                 type="text"
-                placeholder="Enter ZIP code to discover opportunities"
+                placeholder="Enter your ZIP code"
                 value={zip}
                 onChange={(e) => setZip(e.target.value.replace(/\D/g, "").slice(0, 5))}
                 maxLength={5}
                 style={{
-                  flex: 1, height: 56, padding: "0 20px",
-                  background: "var(--surface)",
-                  border: "1px solid var(--border-2)", borderRight: "none",
-                  color: "var(--white)", fontSize: 16, outline: "none",
-                  fontFamily: "inherit",
+                  flex: 1, height: 60, padding: "0 24px",
+                  background: "transparent",
+                  border: "none",
+                  borderBottom: "1px solid var(--border-2)",
+                  borderLeft: "1px solid var(--border-2)",
+                  color: "var(--white)", fontSize: 18,
+                  outline: "none",
+                  fontFamily: "'DM Serif Display', serif",
+                  letterSpacing: "0.08em",
                 }}
               />
               <button
                 type="submit"
                 disabled={zip.length !== 5}
                 style={{
-                  height: 56, padding: "0 28px",
-                  background: zip.length === 5 ? "var(--accent)" : "var(--surface-2)",
+                  height: 60, padding: "0 32px",
+                  background: zip.length === 5 ? "var(--accent)" : "transparent",
                   color: zip.length === 5 ? "#060D18" : "var(--text-3)",
                   border: `1px solid ${zip.length === 5 ? "var(--accent)" : "var(--border-2)"}`,
-                  fontSize: 12, fontWeight: 700, letterSpacing: "0.08em",
-                  textTransform: "uppercase", cursor: zip.length === 5 ? "pointer" : "default",
+                  borderLeft: "none",
+                  fontSize: 11, fontWeight: 700,
+                  letterSpacing: "0.1em", textTransform: "uppercase",
+                  cursor: zip.length === 5 ? "pointer" : "default",
                   transition: "all 200ms", fontFamily: "inherit",
                 }}
               >
                 Discover
               </button>
             </form>
-
-            <div style={{ display: "flex", alignItems: "center", gap: 20, fontSize: 13, color: "var(--text-3)", fontWeight: 500 }}>
-              <span>2,400+ verified centers</span>
-              <span style={{ width: 3, height: 3, borderRadius: "50%", background: "var(--text-3)", display: "inline-block", flexShrink: 0 }} />
-              <span>142k+ donations</span>
-              <span style={{ width: 3, height: 3, borderRadius: "50%", background: "var(--text-3)", display: "inline-block", flexShrink: 0 }} />
-              <span>$4.2M+ paid out</span>
-            </div>
           </div>
+        </motion.div>
 
-          {/* Right — live opportunities panel */}
-          <div>
-            <div style={{
-              background: "var(--surface)",
-              border: "1px solid var(--border-2)",
-              boxShadow: "0 40px 100px rgba(0,0,0,0.5), 0 0 0 1px rgba(200,134,26,0.06)",
-            }}>
-              {/* Panel header */}
-              <div style={{
-                padding: "16px 24px",
-                borderBottom: "1px solid var(--border)",
-                display: "flex", alignItems: "center", justifyContent: "space-between",
-              }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <div style={{
-                    width: 7, height: 7, borderRadius: "50%", background: "#4ADE80",
-                    boxShadow: "0 0 8px rgba(74,222,128,0.5)",
-                  }} />
-                  <span style={{ fontSize: 12, color: "var(--text-2)", fontWeight: 500, letterSpacing: "0.02em" }}>
-                    Opportunities near 60614
-                  </span>
-                </div>
-                <span style={{ fontSize: 12, color: "var(--accent)", fontWeight: 600, letterSpacing: "0.03em" }}>8 available</span>
-              </div>
-
-              {/* Opportunity rows */}
-              {sampleOpps.map((opp, i) => (
-                <div
-                  key={i}
-                  style={{
-                    padding: "22px 24px",
-                    borderBottom: "1px solid var(--border)",
-                    display: "flex", alignItems: "center", justifyContent: "space-between",
-                    cursor: "pointer", transition: "background 150ms",
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget as HTMLDivElement).style.background = "var(--surface-2)"}
-                  onMouseLeave={(e) => (e.currentTarget as HTMLDivElement).style.background = "transparent"}
-                >
-                  <div style={{ flex: 1 }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 5 }}>
-                      <span style={{
-                        fontSize: 10, fontWeight: 700, color: "var(--accent)",
-                        letterSpacing: "0.1em", textTransform: "uppercase",
-                      }}>{opp.type}</span>
-                      {opp.live && (
-                        <span style={{ fontSize: 10, color: "#4ADE80", fontWeight: 500 }}>● Available</span>
-                      )}
-                    </div>
-                    <div style={{ fontSize: 15, fontWeight: 600, color: "var(--white)", marginBottom: 4, letterSpacing: "-0.01em" }}>
-                      {opp.org}
-                    </div>
-                    <div style={{ fontSize: 12, color: "var(--text-2)" }}>{opp.time} · {opp.dist}</div>
-                  </div>
-                  <div style={{ textAlign: "right", paddingLeft: 20 }}>
-                    <div style={{
-                      fontFamily: "'DM Serif Display', serif",
-                      fontSize: 26, color: "var(--accent)", lineHeight: 1, marginBottom: 3,
-                    }}>{opp.comp}</div>
-                    <div style={{ fontSize: 11, color: "var(--text-3)" }}>per session</div>
-                  </div>
-                </div>
-              ))}
-
-              {/* Footer */}
-              <div style={{ padding: "16px 24px" }}>
-                <Link
-                  href="/combined/map"
-                  style={{
-                    display: "block", textAlign: "center",
-                    fontSize: 13, fontWeight: 600, color: "var(--accent)",
-                    textDecoration: "none", letterSpacing: "0.04em",
-                    padding: "12px 0",
-                    border: "1px solid var(--border-2)",
-                    transition: "border-color 150ms",
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget as HTMLAnchorElement).style.borderColor = "var(--accent)"}
-                  onMouseLeave={(e) => (e.currentTarget as HTMLAnchorElement).style.borderColor = "var(--border-2)"}
-                >
-                  View all 8 opportunities on map →
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── TRUST BAND ───────────────────────────────────────────────────────── */}
-      <div style={{
-        height: 48, background: "var(--surface)",
-        borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)",
-        display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden",
-      }}>
-        <div style={{
-          display: "flex", gap: 48, fontSize: 11, color: "var(--text-2)",
-          letterSpacing: "0.07em", textTransform: "uppercase", fontWeight: 500,
-          whiteSpace: "nowrap",
-        }}>
+        {/* Bottom data bar */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.6 }}
+          ref={heroCountRef}
+          style={{
+            position: "absolute", bottom: 0, left: 0, right: 0,
+            borderTop: "1px solid var(--border)",
+            padding: "18px 80px",
+            display: "flex", alignItems: "center", gap: 0,
+            background: "rgba(6, 13, 24, 0.6)", backdropFilter: "blur(12px)",
+          }}
+        >
           {[
-            "All providers verified by licensed medical professionals",
-            "HIPAA-compliant · Secure & private",
-            "142,300+ successful contributions nationwide",
-            "FDA-regulated plasma centers only",
-          ].map((item, i) => (
-            <span key={i} style={{ display: "flex", alignItems: "center", gap: 48 }}>
-              {item}
-              {i < 3 && <span style={{ color: "var(--border-2)", lineHeight: 1 }}>·</span>}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* ── CONTRIBUTION TYPES ───────────────────────────────────────────────── */}
-      <section style={{ background: "var(--cream)", padding: "96px 48px" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-          <div style={{ marginBottom: 64, display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 40 }}>
-            <div>
-              <div style={{ fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--accent)", fontWeight: 600, marginBottom: 16 }}>
-                Contribution Types
-              </div>
-              <h2 style={{
-                fontFamily: "'DM Serif Display', serif",
-                fontSize: "clamp(40px, 4vw, 58px)",
-                letterSpacing: "-0.025em", color: "#060D18", lineHeight: 1.02, margin: 0,
-              }}>
-                What you can contribute.
-              </h2>
-            </div>
-            <p style={{ maxWidth: 320, fontSize: 15, lineHeight: 1.78, color: "#5A6A7E", textAlign: "right", flexShrink: 0 }}>
-              From routine donations to multi-week clinical trials — each opportunity is verified,
-              fairly compensated, and makes a measurable difference.
-            </p>
-          </div>
-
-          {/* Row 1 */}
-          <div style={{ display: "flex", gap: 12, marginBottom: 12 }}>
-            {/* Plasma — wide */}
-            <div style={{
-              flex: 2, background: "#0D1A2E", padding: "52px 52px",
-              position: "relative", overflow: "hidden", cursor: "pointer",
-              transition: "background 200ms",
-            }}
-              onMouseEnter={(e) => (e.currentTarget as HTMLDivElement).style.background = "#142237"}
-              onMouseLeave={(e) => (e.currentTarget as HTMLDivElement).style.background = "#0D1A2E"}
-            >
-              <div style={{
-                position: "absolute", top: 0, right: 0,
-                width: 300, height: 300, pointerEvents: "none",
-                background: "radial-gradient(ellipse, rgba(200,134,26,0.1) 0%, transparent 70%)",
-              }} />
-              <div style={{ fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--accent)", fontWeight: 700, marginBottom: 28 }}>
-                Most popular · Highest recurring earnings
-              </div>
-              <h3 style={{
-                fontFamily: "'DM Serif Display', serif", fontSize: 44,
-                color: "var(--white)", letterSpacing: "-0.02em", margin: "0 0 16px",
-              }}>Plasma Donation</h3>
-              <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.75, marginBottom: 40, maxWidth: 380 }}>
-                Treats rare immune disorders, burn injuries, and hemophilia.
-                The most consistent and accessible earning opportunity on the platform.
-              </p>
-              <div style={{ display: "flex", alignItems: "baseline", gap: 16, marginBottom: 36 }}>
-                <span style={{ fontFamily: "'DM Serif Display', serif", fontSize: 56, color: "var(--accent)", lineHeight: 1 }}>$50–110</span>
-                <span style={{ fontSize: 14, color: "var(--text-2)" }}>per session</span>
-              </div>
-              <div style={{ display: "flex", gap: 48 }}>
-                {[
-                  { label: "Frequency", val: "Up to 2× per week" },
-                  { label: "Session", val: "60–90 minutes" },
-                  { label: "Monthly potential", val: "Up to $500+", gold: true },
-                ].map((item) => (
-                  <div key={item.label}>
-                    <div style={{ fontSize: 10, color: "var(--text-3)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 5 }}>{item.label}</div>
-                    <div style={{ fontSize: 14, color: item.gold ? "var(--accent)" : "var(--text)", fontWeight: item.gold ? 600 : 500 }}>{item.val}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Blood */}
-            <div style={{
-              flex: 1, background: "#0D1A2E", padding: "44px 40px", cursor: "pointer",
-              transition: "background 200ms",
-            }}
-              onMouseEnter={(e) => (e.currentTarget as HTMLDivElement).style.background = "#142237"}
-              onMouseLeave={(e) => (e.currentTarget as HTMLDivElement).style.background = "#0D1A2E"}
-            >
-              <div style={{ fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--text-2)", fontWeight: 600, marginBottom: 28 }}>Whole Blood</div>
-              <h3 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 34, color: "var(--white)", letterSpacing: "-0.02em", margin: "0 0 16px" }}>Blood Donation</h3>
-              <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.75, marginBottom: 36 }}>
-                One donation can save up to 3 lives. The most widely needed contribution, with centers nationwide.
-              </p>
-              <div style={{ fontFamily: "'DM Serif Display', serif", fontSize: 42, color: "var(--accent)", lineHeight: 1, marginBottom: 8 }}>$20–50</div>
-              <div style={{ fontSize: 12, color: "var(--text-2)", marginBottom: 32 }}>per donation</div>
-              <div style={{ fontSize: 12, color: "var(--text-3)" }}>Every 56 days · 45 min session</div>
-            </div>
-          </div>
-
-          {/* Row 2 */}
-          <div style={{ display: "flex", gap: 12 }}>
-            {[
-              {
-                label: "Clinical Research",
-                comp: "$50–500+", sub: "per study",
-                freq: "Varies by trial", time: "2–8 hrs per visit",
-                desc: "Advance treatments for millions by participating in FDA-regulated clinical studies and trials.",
-              },
-              {
-                label: "Egg Donation",
-                comp: "$5K–30K", sub: "per cycle",
-                freq: "Selective process", time: "Multi-week commitment",
-                desc: "Help families unable to conceive naturally. The highest single-payout opportunity on the platform.",
-              },
-              {
-                label: "Sperm Donation",
-                comp: "$100–200", sub: "per sample",
-                freq: "2–3× per month", time: "30 min per visit",
-                desc: "Support fertility treatment and family building through regular, ongoing contribution.",
-              },
-            ].map((item) => (
-              <div
-                key={item.label}
-                style={{
-                  flex: 1, background: "#0D1A2E", padding: "40px 36px", cursor: "pointer",
-                  transition: "background 200ms",
-                }}
-                onMouseEnter={(e) => (e.currentTarget as HTMLDivElement).style.background = "#142237"}
-                onMouseLeave={(e) => (e.currentTarget as HTMLDivElement).style.background = "#0D1A2E"}
-              >
-                <div style={{ fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--text-2)", fontWeight: 600, marginBottom: 24 }}>
-                  {item.label}
-                </div>
-                <div style={{ fontFamily: "'DM Serif Display', serif", fontSize: 36, color: "var(--accent)", lineHeight: 1, marginBottom: 8 }}>
-                  {item.comp}
-                </div>
-                <div style={{ fontSize: 12, color: "var(--text-2)", marginBottom: 24 }}>{item.sub}</div>
-                <p style={{ fontSize: 13, color: "var(--text-2)", lineHeight: 1.75, marginBottom: 28 }}>{item.desc}</p>
-                <div style={{ fontSize: 12, color: "var(--text-3)" }}>{item.freq} · {item.time}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── HOW IT WORKS ─────────────────────────────────────────────────────── */}
-      <section style={{ background: "var(--bg)", padding: "96px 48px" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-          <div style={{ marginBottom: 72 }}>
-            <div style={{ fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--accent)", fontWeight: 600, marginBottom: 20 }}>
-              How it works
-            </div>
-            <h2 style={{
-              fontFamily: "'DM Serif Display', serif",
-              fontSize: "clamp(36px, 4vw, 54px)",
-              color: "var(--white)", letterSpacing: "-0.025em", margin: 0,
-            }}>
-              Three steps. Real impact.
-            </h2>
-          </div>
-
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
-            {[
-              {
-                n: "01", title: "Search",
-                body: "Enter your ZIP code to discover verified donation centers, clinical trials, and research studies in your area.",
-              },
-              {
-                n: "02", title: "Schedule",
-                body: "Review compensation, eligibility requirements, and time commitment. Book directly through verified partner facilities.",
-              },
-              {
-                n: "03", title: "Earn",
-                body: "Show up, contribute, and receive compensation directly. Track your sessions, earnings, and community impact over time.",
-              },
-            ].map((step, i) => (
-              <div key={i} style={{
-                padding: `48px ${i < 2 ? "48px" : "0"} 48px ${i > 0 ? "48px" : "0"}`,
-                borderLeft: i > 0 ? "1px solid var(--border)" : "none",
-              }}>
-                <div style={{
-                  fontFamily: "'DM Serif Display', serif",
-                  fontSize: 88, lineHeight: 1,
-                  color: "rgba(214,208,196,0.05)",
-                  marginBottom: 24, letterSpacing: "-0.04em",
-                }}>{step.n}</div>
-                <div style={{ fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--accent)", fontWeight: 600, marginBottom: 16 }}>
-                  {step.title}
-                </div>
-                <p style={{ fontSize: 15, color: "var(--text-2)", lineHeight: 1.8, margin: 0 }}>{step.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── STATS ────────────────────────────────────────────────────────────── */}
-      <div
-        ref={statsRef}
-        style={{
-          background: "var(--surface)",
-          borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)",
-          padding: "80px 48px",
-        }}
-      >
-        <div style={{ maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)" }}>
-          {[
-            { value: 142300, suffix: "+", label: "Total contributions nationwide" },
-            { value: 4200000, prefix: "$", label: "Paid to contributors", large: true },
-            { value: 89000, suffix: "+", label: "Patients directly helped" },
-            { value: 2400, suffix: "+", label: "Verified partner centers" },
+            { value: 142300, suffix: "+", label: "contributions" },
+            { value: 4200000, prefix: "$", label: "paid out" },
+            { value: 89000, suffix: "+", label: "patients helped" },
+            { value: 2400, suffix: "+", label: "verified centers" },
           ].map((s, i) => (
             <div key={i} style={{
-              paddingLeft: i > 0 ? 48 : 0,
+              flex: 1,
+              display: "flex", alignItems: "baseline", gap: 10,
+              paddingLeft: i > 0 ? 40 : 0,
               borderLeft: i > 0 ? "1px solid var(--border)" : "none",
             }}>
-              <div style={{ marginBottom: 12 }}>
-                <AnimatedStat value={s.value} prefix={s.prefix || ""} suffix={s.suffix || ""} active={statsActive} size={s.large ? 44 : 52} />
-              </div>
-              <div style={{ fontSize: 13, color: "var(--text-2)", letterSpacing: "0.01em" }}>{s.label}</div>
+              <AnimStat value={s.value} prefix={s.prefix || ""} suffix={s.suffix || ""} active={heroCountActive} size={s.value >= 1000000 ? 20 : 22} />
+              <span style={{ fontSize: 10, color: "var(--text-3)", letterSpacing: "0.08em", textTransform: "uppercase" }}>{s.label}</span>
             </div>
           ))}
-        </div>
-      </div>
-
-      {/* ── FEATURED STORY ───────────────────────────────────────────────────── */}
-      <section style={{ background: "var(--bg)", padding: "96px 48px" }}>
-        <div style={{
-          maxWidth: 1280, margin: "0 auto",
-          display: "grid", gridTemplateColumns: "1fr 1fr", gap: 96, alignItems: "center",
-        }}>
-          <div>
-            <div style={{ fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--accent)", fontWeight: 600, marginBottom: 40 }}>
-              Community
-            </div>
-            <blockquote style={{
-              fontFamily: "'DM Serif Display', serif",
-              fontSize: "clamp(22px, 2.4vw, 32px)",
-              color: "var(--white)", lineHeight: 1.48,
-              letterSpacing: "-0.01em", fontStyle: "italic",
-              margin: "0 0 48px",
-            }}>
-              "I started donating plasma to make ends meet. Two years later, I've earned over $9,000
-              and donated enough plasma to help an estimated 60 patients. I didn't know my body could do that."
-            </blockquote>
-            <div>
-              <div style={{ fontSize: 15, fontWeight: 600, color: "var(--white)", marginBottom: 4 }}>Marcus T.</div>
-              <div style={{ fontSize: 13, color: "var(--text-2)" }}>Plasma donor · Chicago, IL · 2 years active</div>
-            </div>
+          <div style={{ fontSize: 10, color: "var(--text-3)", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+            All providers verified · HIPAA compliant
           </div>
-
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-            {[
-              { label: "Total earned", value: "$9,200", sub: "over 24 months" },
-              { label: "Sessions completed", value: "184", sub: "plasma donations" },
-              { label: "Patients helped", value: "~60", sub: "estimated impact" },
-              { label: "Centers visited", value: "3", sub: "across Chicago, IL" },
-            ].map((item) => (
-              <div key={item.label} style={{
-                background: "var(--surface)", border: "1px solid var(--border)", padding: "28px 24px",
-              }}>
-                <div style={{ fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--text-2)", marginBottom: 14 }}>{item.label}</div>
-                <div style={{ fontFamily: "'DM Serif Display', serif", fontSize: 38, color: "var(--accent)", lineHeight: 1, marginBottom: 6 }}>{item.value}</div>
-                <div style={{ fontSize: 12, color: "var(--text-3)" }}>{item.sub}</div>
-              </div>
-            ))}
-          </div>
-        </div>
+        </motion.div>
       </section>
 
-      {/* ── CTA ──────────────────────────────────────────────────────────────── */}
+      {/* ── CONTRIBUTION LIST ─────────────────────────────────────────────── */}
+      <section style={{ background: "var(--bg)" }}>
+        <div style={{ padding: "80px 80px 0" }}>
+          <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 40 }}>
+            <h2 style={{
+              fontFamily: "'DM Serif Display', serif",
+              fontSize: "clamp(28px, 3vw, 44px)",
+              color: "var(--white)", letterSpacing: "-0.02em", margin: 0,
+            }}>
+              What you can contribute.
+            </h2>
+            <span style={{ fontSize: 11, color: "var(--text-3)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+              5 contribution types
+            </span>
+          </div>
+        </div>
+
+        <div style={{ height: 1, background: "var(--border-2)" }} />
+
+        {contributions.map((c) => {
+          const open = expanded === c.key;
+          return (
+            <div key={c.key}>
+              <div
+                onClick={() => setExpanded(open ? null : c.key)}
+                style={{ padding: "0 80px", cursor: "pointer", transition: "background 200ms" }}
+                onMouseEnter={(e) => (e.currentTarget as HTMLDivElement).style.background = open ? "rgba(200,134,26,0.05)" : "rgba(214,208,196,0.02)"}
+                onMouseLeave={(e) => (e.currentTarget as HTMLDivElement).style.background = open ? "rgba(200,134,26,0.04)" : "transparent"}
+              >
+                <div style={{
+                  display: "grid",
+                  gridTemplateColumns: "2.5fr 160px 120px 1fr 48px",
+                  alignItems: "center",
+                  padding: "30px 0",
+                  gap: 16,
+                  background: open ? "rgba(200,134,26,0.04)" : "transparent",
+                  transition: "background 200ms",
+                  margin: "0 -80px", padding: "30px 80px",
+                } as React.CSSProperties}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                    <span style={{
+                      fontFamily: "'DM Serif Display', serif",
+                      fontSize: 28, color: open ? "var(--accent)" : "var(--white)",
+                      letterSpacing: "-0.01em", transition: "color 200ms",
+                    }}>{c.label}</span>
+                    {c.popular && (
+                      <span style={{
+                        fontSize: 8, fontWeight: 700, letterSpacing: "0.14em",
+                        color: "var(--accent)", padding: "2px 8px",
+                        border: "1px solid rgba(200,134,26,0.4)",
+                      }}>POPULAR</span>
+                    )}
+                  </div>
+                  <span style={{
+                    fontFamily: "'DM Serif Display', serif",
+                    fontSize: 22, color: "var(--accent)", letterSpacing: "-0.01em",
+                  }}>{c.comp}</span>
+                  <span style={{ fontSize: 13, color: "var(--text-2)" }}>{c.time}</span>
+                  <span style={{ fontSize: 13, color: "var(--text-2)" }}>{c.freq}</span>
+                  <span style={{
+                    fontSize: 20, color: open ? "var(--accent)" : "var(--text-3)",
+                    textAlign: "right", transition: "color 200ms, transform 200ms",
+                    display: "block",
+                    transform: open ? "rotate(45deg)" : "none",
+                  }}>+</span>
+                </div>
+              </div>
+
+              {open && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  style={{
+                    padding: "0 80px",
+                    borderTop: "1px solid var(--border)",
+                    background: "rgba(200,134,26,0.03)",
+                    overflow: "hidden",
+                  }}
+                >
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, padding: "40px 0 48px" }}>
+                    <p style={{ fontSize: 15, color: "var(--text-2)", lineHeight: 1.85, margin: 0 }}>{c.desc}</p>
+                    <div style={{ display: "flex", gap: 48, flexWrap: "wrap", alignItems: "flex-start" }}>
+                      <div>
+                        <div style={{ fontSize: 9, color: "var(--text-3)", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 10, fontWeight: 700 }}>Compensation</div>
+                        <div style={{ fontFamily: "'DM Serif Display', serif", fontSize: 32, color: "var(--accent)", lineHeight: 1, marginBottom: 4 }}>{c.comp}</div>
+                        <div style={{ fontSize: 12, color: "var(--text-3)" }}>{c.sub}</div>
+                      </div>
+                      {c.monthly && (
+                        <div>
+                          <div style={{ fontSize: 9, color: "var(--text-3)", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 10, fontWeight: 700 }}>Monthly potential</div>
+                          <div style={{ fontFamily: "'DM Serif Display', serif", fontSize: 32, color: "var(--accent)", lineHeight: 1, marginBottom: 4 }}>{c.monthly.split("/")[0]}</div>
+                        </div>
+                      )}
+                      <div>
+                        <div style={{ fontSize: 9, color: "var(--text-3)", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 10, fontWeight: 700 }}>Per session</div>
+                        <div style={{ fontFamily: "'DM Serif Display', serif", fontSize: 32, color: "var(--white)", lineHeight: 1 }}>{c.time}</div>
+                      </div>
+                      <Link href="/combined/map" style={{
+                        display: "inline-block", alignSelf: "flex-end",
+                        fontSize: 12, fontWeight: 700, color: "var(--accent)",
+                        textDecoration: "none", letterSpacing: "0.06em",
+                        textTransform: "uppercase",
+                        borderBottom: "1px solid rgba(200,134,26,0.4)",
+                        paddingBottom: 3,
+                      }}>
+                        Find centers →
+                      </Link>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              <div style={{ height: 1, background: "var(--border)" }} />
+            </div>
+          );
+        })}
+
+        <div style={{ height: 80 }} />
+      </section>
+
+      {/* ── HOW IT WORKS ─────────────────────────────────────────────────── */}
       <section style={{
         background: "var(--surface)",
         borderTop: "1px solid var(--border)",
-        padding: "96px 48px", textAlign: "center",
+        borderBottom: "1px solid var(--border)",
+        padding: "80px 80px",
       }}>
-        <div style={{ maxWidth: 600, margin: "0 auto" }}>
-          <div style={{ fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--accent)", fontWeight: 600, marginBottom: 24 }}>
-            Get started
+        <div style={{ display: "grid", gridTemplateColumns: "240px 1fr", gap: 96 }}>
+          <div>
+            <div style={{ fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--accent)", fontWeight: 700, marginBottom: 20 }}>Process</div>
+            <h2 style={{
+              fontFamily: "'DM Serif Display', serif",
+              fontSize: "clamp(24px, 2.5vw, 36px)",
+              color: "var(--white)", letterSpacing: "-0.02em", margin: 0, lineHeight: 1.15,
+            }}>How it<br />works.</h2>
           </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 0 }}>
+            {[
+              { n: "01", title: "Search", body: "Enter your ZIP to see verified donation centers, clinical trials, and studies near you." },
+              { n: "02", title: "Schedule", body: "Review compensation and eligibility. Book directly through verified partner facilities." },
+              { n: "03", title: "Earn", body: "Complete your session. Receive direct payment. Track your lifetime impact." },
+            ].map((step, i) => (
+              <div key={i} style={{
+                paddingLeft: i > 0 ? 44 : 0,
+                paddingRight: i < 2 ? 44 : 0,
+                borderLeft: i > 0 ? "1px solid var(--border)" : "none",
+              }}>
+                <div style={{ fontSize: 9, color: "var(--text-3)", letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 700, marginBottom: 20 }}>{step.n}</div>
+                <div style={{ fontSize: 10, color: "var(--accent)", letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 700, marginBottom: 16 }}>{step.title}</div>
+                <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.85, margin: 0 }}>{step.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── IMPACT NUMBERS ───────────────────────────────────────────────── */}
+      <div ref={statsRef} style={{ background: "var(--bg)", padding: "96px 80px", borderBottom: "1px solid var(--border)" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 0 }}>
+          {[
+            { value: 142300, suffix: "+", label: "Total contributions nationwide" },
+            { value: 4200000, prefix: "$", label: "Paid directly to contributors" },
+            { value: 89000, suffix: "+", label: "Patients helped by donations" },
+            { value: 2400, suffix: "+", label: "Verified partner centers" },
+          ].map((s, i) => (
+            <div key={i} style={{
+              paddingLeft: i > 0 ? 60 : 0,
+              borderLeft: i > 0 ? "1px solid var(--border)" : "none",
+            }}>
+              <AnimStat value={s.value} prefix={s.prefix || ""} suffix={s.suffix || ""} active={statsActive} size={s.value >= 1000000 ? 44 : 52} />
+              <div style={{ fontSize: 13, color: "var(--text-2)", marginTop: 14 }}>{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── PULL QUOTE ───────────────────────────────────────────────────── */}
+      <section style={{ background: "var(--cream)", padding: "96px 80px" }}>
+        <div style={{ maxWidth: 800, margin: "0 auto", textAlign: "center" }}>
+          <div style={{
+            width: 40, height: 1, background: "rgba(6,13,24,0.2)",
+            margin: "0 auto 48px",
+          }} />
+          <blockquote style={{
+            fontFamily: "'DM Serif Display', serif",
+            fontSize: "clamp(22px, 2.6vw, 36px)",
+            color: "#060D18", lineHeight: 1.48,
+            letterSpacing: "-0.01em", fontStyle: "italic",
+            margin: "0 0 52px",
+          }}>
+            "I started donating plasma to make ends meet. Two years later,
+            I've earned over $9,000 and helped an estimated 60 patients.
+            I didn't know my body could do that."
+          </blockquote>
+          <div style={{ fontSize: 14, fontWeight: 600, color: "#060D18", marginBottom: 4, letterSpacing: "0.01em" }}>Marcus T.</div>
+          <div style={{ fontSize: 13, color: "#647080" }}>Plasma donor · Chicago, IL · 184 sessions</div>
+          <div style={{ width: 40, height: 1, background: "rgba(6,13,24,0.2)", margin: "48px auto 0" }} />
+        </div>
+      </section>
+
+      {/* ── CTA ──────────────────────────────────────────────────────────── */}
+      <section style={{
+        background: "var(--surface)",
+        borderTop: "1px solid var(--border)",
+        padding: "96px 80px",
+        textAlign: "center",
+      }}>
+        <div style={{ maxWidth: 540, margin: "0 auto" }}>
           <h2 style={{
             fontFamily: "'DM Serif Display', serif",
-            fontSize: "clamp(40px, 4.5vw, 68px)",
-            color: "var(--white)", letterSpacing: "-0.025em", lineHeight: 1.02, marginBottom: 20,
+            fontSize: "clamp(44px, 5.5vw, 72px)",
+            color: "var(--white)", letterSpacing: "-0.025em",
+            lineHeight: 1, marginBottom: 52,
           }}>
-            Ready to contribute?
+            Ready to<br />contribute?
           </h2>
-          <p style={{ fontSize: 17, color: "var(--text-2)", lineHeight: 1.75, marginBottom: 48 }}>
-            Enter your ZIP code and discover verified opportunities nearby. Takes 30 seconds.
-          </p>
-          <form onSubmit={handleSearch} style={{ display: "flex", maxWidth: 480, margin: "0 auto 24px" }}>
+          <form onSubmit={handleSearch} style={{ display: "flex", marginBottom: 20 }}>
             <input
               type="text"
-              placeholder="Your ZIP code"
+              placeholder="ZIP code"
               value={zip}
               onChange={(e) => setZip(e.target.value.replace(/\D/g, "").slice(0, 5))}
               maxLength={5}
               style={{
-                flex: 1, height: 56, padding: "0 20px",
+                flex: 1, height: 62, padding: "0 24px",
                 background: "var(--surface-2)",
                 border: "1px solid var(--border-2)", borderRight: "none",
-                color: "var(--white)", fontSize: 16, outline: "none", fontFamily: "inherit",
+                color: "var(--white)", fontSize: 20,
+                outline: "none",
+                fontFamily: "'DM Serif Display', serif",
+                letterSpacing: "0.1em",
               }}
             />
             <button
               type="submit"
               disabled={zip.length !== 5}
               style={{
-                height: 56, padding: "0 32px",
+                height: 62, padding: "0 36px",
                 background: zip.length === 5 ? "var(--accent)" : "var(--surface-3)",
                 color: zip.length === 5 ? "#060D18" : "var(--text-3)",
-                border: "none", fontSize: 12, fontWeight: 700,
-                letterSpacing: "0.08em", textTransform: "uppercase",
+                border: "none",
+                fontSize: 11, fontWeight: 700,
+                letterSpacing: "0.1em", textTransform: "uppercase",
                 cursor: zip.length === 5 ? "pointer" : "default",
                 transition: "all 200ms", fontFamily: "inherit",
               }}
@@ -591,17 +521,20 @@ export default function LumenLanding() {
               Find Opportunities
             </button>
           </form>
-          <p style={{ fontSize: 13, color: "var(--text-3)" }}>Free to use · No account required to browse</p>
+          <p style={{ fontSize: 12, color: "var(--text-3)", letterSpacing: "0.04em", textTransform: "uppercase" }}>
+            Free to browse · No account required
+          </p>
         </div>
       </section>
 
-      {/* ── FOOTER ───────────────────────────────────────────────────────────── */}
+      {/* ── FOOTER ───────────────────────────────────────────────────────── */}
       <footer style={{
         background: "var(--bg)", borderTop: "1px solid var(--border)",
-        padding: "32px 48px", display: "flex", alignItems: "center", justifyContent: "space-between",
+        padding: "28px 80px",
+        display: "flex", alignItems: "center", justifyContent: "space-between",
       }}>
-        <span style={{ fontFamily: "'DM Serif Display', serif", fontSize: 18, color: "var(--accent)", letterSpacing: "0.06em" }}>LUMEN</span>
-        <span style={{ fontSize: 12, color: "var(--text-3)" }}>© 2026 Lumen Health · All contributions through verified medical providers.</span>
+        <span style={{ fontFamily: "'DM Serif Display', serif", fontSize: 16, color: "var(--accent)", letterSpacing: "0.08em" }}>LUMEN</span>
+        <span style={{ fontSize: 11, color: "var(--text-3)", letterSpacing: "0.04em" }}>© 2026 LUMEN HEALTH · ALL CONTRIBUTIONS THROUGH VERIFIED MEDICAL PROVIDERS</span>
         <Link href="/" style={{ fontSize: 12, color: "var(--text-2)", textDecoration: "none" }}>← Picker</Link>
       </footer>
     </div>
