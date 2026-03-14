@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { Quote, Heart, TrendingUp } from "lucide-react";
-import ImageWithFallback from "@/components/figma/ImageWithFallback";
+import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
 import Link from "next/link";
 
 const stories = [
