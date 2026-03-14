@@ -3,12 +3,12 @@
 import Link from "next/link";
 
 // Order deliberately mixed — not labeled so viewers can't tell which is which
-const designs = [
+const designs: { num: string; href: string; accent: string; disabled?: boolean }[] = [
   { num: "1", href: "/orchids", accent: "#1d5fa8" },
   { num: "2", href: "/dashboard", accent: "#a855f7" },
   { num: "3", href: "/figma", accent: "#2E5C8A" },
   { num: "4", href: "/figma/concept", accent: "#6B8E7F" },
-  { num: "5", href: "/combined", accent: "#ec4899", disabled: true },
+  { num: "5", href: "/combined", accent: "#C8861A" },
 ];
 
 export default function DesignPicker() {
