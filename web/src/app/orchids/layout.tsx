@@ -16,7 +16,7 @@ const NAV_LINKS = [
 function NavBar() {
   const pathname = usePathname();
   const router = useRouter();
-  const { user, signOut } = useAuth();
+  const { user, isAdmin, signOut } = useAuth();
 
   const handleSignOut = async () => {
     await signOut();
@@ -106,6 +106,20 @@ function NavBar() {
                   {user.displayName || user.email}
                 </span>
               </Link>
+              {isAdmin && (
+                <Link href="/orchids/admin" style={{
+                  padding: "6px 14px",
+                  fontSize: 13,
+                  fontWeight: 600,
+                  color: "var(--blue)",
+                  background: "rgba(30,90,168,0.15)",
+                  textDecoration: "none",
+                  borderRadius: 6,
+                  border: "1px solid rgba(30,90,168,0.3)",
+                }}>
+                  Admin
+                </Link>
+              )}
               <button
                 onClick={handleSignOut}
                 style={{
