@@ -100,6 +100,23 @@
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
+/* ─── Body Map (Design 6) Theme ──────────────────────────────────────────── */
+.six-theme {
+  --bg: #F4EFE6;
+  --surface: #EBE5DA;
+  --surface-2: #E0D9CC;
+  --text: #1A1710;
+  --text-2: #5A5448;
+  --text-3: #9A9488;
+  --border: rgba(26,23,16,0.10);
+  --border-2: rgba(26,23,16,0.20);
+  --figure: rgba(26,23,16,0.22);
+  --figure-stroke: rgba(26,23,16,0.30);
+  background: #F4EFE6;
+  color: #1A1710;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
 /* ─── Existing App Theme ─────────────────────────────────────────────────── */
 :root {
   --bg: #0b0a12;

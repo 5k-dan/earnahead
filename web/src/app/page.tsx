@@ -9,6 +9,7 @@ const designs: { num: string; href: string; accent: string; disabled?: boolean }
   { num: "3", href: "/figma", accent: "#2E5C8A" },
   { num: "4", href: "/figma/concept", accent: "#6B8E7F" },
   { num: "5", href: "/combined", accent: "#C8861A" },
+  { num: "6", href: "/six", accent: "#B5451E" },
 ];
 
 export default function DesignPicker() {
@@ -32,7 +33,7 @@ export default function DesignPicker() {
           Choose a UI
         </div>
         <p className="sub" style={{ maxWidth: 480, margin: "8px auto 0" }}>
-          Five design directions. Pick one to explore.
+          Six design directions. Pick one to explore.
         </p>
       </div>
 
