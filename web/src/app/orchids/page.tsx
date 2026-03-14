@@ -111,8 +111,8 @@ export default function OrchidsLanding() {
         }} />
         <div style={{ position: "absolute", top: "-20%", right: "-10%", width: 600, height: 600, background: "radial-gradient(circle, rgba(29,95,168,0.18) 0%, transparent 70%)", pointerEvents: "none" }} />
 
-        <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 32px", position: "relative" }}>
-          <div style={{ maxWidth: 640 }}>
+        <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 32px", position: "relative", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 48 }}>
+          <div style={{ maxWidth: 580, flex: "1 1 auto" }}>
             <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 14px", background: "rgba(45,122,90,0.15)", border: "1px solid rgba(45,122,90,0.3)", borderRadius: 20, marginBottom: 32 }}>
               <span style={{ width: 6, height: 6, background: "var(--green-light)", borderRadius: "50%", display: "inline-block" }} />
               <span style={{ fontSize: 13, color: "var(--green-light)", fontWeight: 500, letterSpacing: "0.04em" }}>2,400+ verified healthcare providers</span>
@@ -163,7 +163,7 @@ export default function OrchidsLanding() {
 
           {/* Preview card */}
           <div style={{
-            position: "absolute", right: 32, top: "50%", transform: "translateY(-50%)",
+            flexShrink: 0,
             width: 320, background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)",
             borderRadius: 12, padding: 28, backdropFilter: "blur(16px)",
           }}>
