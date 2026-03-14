@@ -140,3 +140,6 @@ vite.config.ts.timestamp-*
 
 # Designs
 designs/
+
+# VSCode settings
+.vscode/settings.json
