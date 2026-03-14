@@ -4,25 +4,35 @@ import Link from "next/link";
 
 const designs = [
   {
+    num: "1",
     href: "/figma",
-    label: "Figma Professional",
-    description: "Clean, professional healthcare platform with polished UI and animations.",
+    description: "Clean professional layout with polished cards and animations.",
     accent: "#2E5C8A",
-    tag: "Figma",
   },
   {
+    num: "2",
     href: "/figma/concept",
-    label: "Figma Experimental",
-    description: "Bold editorial layout with gradients, floating cards, and full-screen hero.",
+    description: "Bold editorial hero, asymmetric grids, floating map cards.",
     accent: "#6B8E7F",
-    tag: "Figma · Concept",
   },
   {
+    num: "3",
     href: "/orchids",
-    label: "Orchids",
-    description: "Dark navy, serif-driven design — refined and data-focused.",
+    description: "Dark navy, serif-driven — refined and data-focused.",
     accent: "#1d5fa8",
-    tag: "Orchids",
+  },
+  {
+    num: "4",
+    href: "/dashboard",
+    description: "The original working app with Firebase auth and live data.",
+    accent: "#a855f7",
+  },
+  {
+    num: "5",
+    href: "/combined",
+    description: "Best of all designs — coming soon.",
+    accent: "#ec4899",
+    disabled: true,
   },
 ];
 
@@ -47,31 +57,35 @@ export default function DesignPicker() {
           Choose a UI
         </div>
         <p className="sub" style={{ maxWidth: 480, margin: "8px auto 0" }}>
-          Three design directions for the same platform. Pick one to explore.
+          Five design directions for the same platform. Pick one to explore.
         </p>
       </div>
 
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-          gap: 20,
+          gridTemplateColumns: "repeat(5, 1fr)",
+          gap: 16,
           width: "100%",
-          maxWidth: 960,
+          maxWidth: 1100,
         }}
       >
-        {designs.map((d) => (
-          <Link key={d.href} href={d.href} style={{ textDecoration: "none" }}>
+        {designs.map((d) => {
+          const card = (
             <div
               className="surface"
               style={{
-                padding: 28,
-                cursor: "pointer",
-                transition: "transform 0.15s ease, box-shadow 0.15s ease",
+                padding: "28px 20px",
+                cursor: d.disabled ? "default" : "pointer",
+                transition: "transform 0.15s ease",
                 borderTop: `3px solid ${d.accent}`,
+                opacity: d.disabled ? 0.5 : 1,
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";
+                if (!d.disabled) (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";
               }}
               onMouseLeave={(e) => {
                 (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
@@ -79,42 +93,36 @@ export default function DesignPicker() {
             >
               <div
                 style={{
-                  display: "inline-block",
-                  fontSize: 11,
-                  fontWeight: 600,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
+                  width: 40,
+                  height: 40,
+                  borderRadius: "50%",
+                  background: `${d.accent}20`,
+                  border: `1.5px solid ${d.accent}40`,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: 18,
+                  fontWeight: 700,
                   color: d.accent,
-                  marginBottom: 12,
-                  padding: "3px 10px",
-                  borderRadius: 20,
-                  background: `${d.accent}18`,
+                  marginBottom: 16,
                 }}
               >
-                {d.tag}
+                {d.num}
               </div>
-              <div className="h2" style={{ marginBottom: 10, color: "var(--text)" }}>
-                {d.label}
-              </div>
-              <p className="kicker">{d.description}</p>
-              <div
-                style={{
-                  marginTop: 20,
-                  fontSize: 13,
-                  fontWeight: 600,
-                  color: d.accent,
-                }}
-              >
-                View design →
+              <p className="kicker" style={{ flex: 1, marginBottom: 20 }}>{d.description}</p>
+              <div style={{ fontSize: 12, fontWeight: 600, color: d.accent }}>
+                {d.disabled ? "Coming soon" : "View →"}
               </div>
             </div>
-          </Link>
-        ))}
-      </div>
+          );
 
-      <Link href="/login" style={{ fontSize: 13, color: "var(--muted2)" }}>
-        Go to app →
-      </Link>
+          return d.disabled ? (
+            <div key={d.num} style={{ textDecoration: "none" }}>{card}</div>
+          ) : (
+            <Link key={d.num} href={d.href} style={{ textDecoration: "none" }}>{card}</Link>
+          );
+        })}
+      </div>
     </div>
   );
 }
