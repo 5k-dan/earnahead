@@ -18,9 +18,16 @@ function AuthForm() {
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect") || "/orchids/dashboard";
 
-  // Already logged in — bounce to destination
+  // Already logged in
   useEffect(() => {
-    if (!loading && user) router.replace(redirect);
+    if (!loading && user) {
+      // If signed in but unverified, send to verify page
+      if (!user.emailVerified) {
+        router.replace("/orchids/auth/verify");
+      } else {
+        router.replace(redirect);
+      }
+    }
   }, [user, loading, router, redirect]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -30,11 +37,13 @@ function AuthForm() {
     try {
       if (mode === "signin") {
         await signIn(email, password);
+        // onAuthStateChanged will trigger the useEffect above to redirect
       } else {
         if (!name.trim()) { setError("Please enter your name."); setSubmitting(false); return; }
         await signUp(email, password, name.trim());
+        // After signup, send to verify page (email not yet verified)
+        router.replace("/orchids/auth/verify");
       }
-      router.replace(redirect);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
       if (msg.includes("user-not-found") || msg.includes("wrong-password") || msg.includes("invalid-credential")) {
