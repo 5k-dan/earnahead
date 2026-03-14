@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 
 /* ─── Data ─────────────────────────────────────────────────────────────── */
 // pctX / pctY = position as % of the skeleton image dimensions
@@ -11,7 +10,7 @@ const contributions = [
   {
     id: "research",
     label: "Clinical Research",
-    pctX: 50, pctY: 8.5,         // skull center
+    svgX: 110, svgY: 30,         // head
     color: "#1D5FA8",
     comp: "$50–500+",
     sub: "per study",
@@ -24,7 +23,7 @@ const contributions = [
   {
     id: "blood",
     label: "Whole Blood",
-    pctX: 23, pctY: 50,          // left forearm (viewer left)
+    svgX: 18, svgY: 162,         // left forearm
     color: "#8B1F1F",
     comp: "$20–50",
     sub: "per donation",
@@ -37,7 +36,7 @@ const contributions = [
   {
     id: "plasma",
     label: "Plasma",
-    pctX: 77, pctY: 50,          // right forearm (viewer right)
+    svgX: 202, svgY: 162,        // right forearm
     color: "#B5451E",
     comp: "$50–110",
     sub: "per session",
@@ -50,7 +49,7 @@ const contributions = [
   {
     id: "egg",
     label: "Egg Donation",
-    pctX: 43, pctY: 63,          // left pelvis
+    svgX: 82, svgY: 232,         // left pelvis
     color: "#2D7A5A",
     comp: "$5,000–30,000",
     sub: "per cycle",
@@ -63,7 +62,7 @@ const contributions = [
   {
     id: "sperm",
     label: "Sperm Donation",
-    pctX: 57, pctY: 63,          // right pelvis
+    svgX: 138, svgY: 232,        // right pelvis
     color: "#6B4A9B",
     comp: "$100–200",
     sub: "per sample",
@@ -75,51 +74,66 @@ const contributions = [
   },
 ];
 
-/* ─── Body figure with image + dot overlay ──────────────────────────────── */
+/* ─── Body SVG figure ───────────────────────────────────────────────────── */
 
 function BodyFigure({ active }: { active: string | null }) {
+  const sc = "var(--figure-stroke)";
+  const sw = 1.5;
+
   return (
-    <div style={{ position: "relative", width: "100%", maxWidth: 240, userSelect: "none" }}>
-      <Image
-        src="/skeleton.png"
-        alt="Anatomical skeleton diagram"
-        width={800}
-        height={1200}
-        style={{ width: "100%", height: "auto", display: "block" }}
-        priority
-      />
+    <svg
+      viewBox="0 0 220 390"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ width: "100%", maxWidth: 200, display: "block", overflow: "visible" }}
+    >
+      <style>{`
+        @keyframes dot-breathe {
+          0%, 100% { opacity: 0.55; }
+          50% { opacity: 1; }
+        }
+        .dot-idle { animation: dot-breathe 2.8s ease-in-out infinite; }
+      `}</style>
 
-      {/* Dot overlay — absolutely covers the image */}
-      <div style={{ position: "absolute", inset: 0 }}>
-        {contributions.map((c) => {
-          const isActive = active === c.id;
-          const anyActive = active !== null;
+      {/* Head */}
+      <ellipse cx="110" cy="30" rx="24" ry="26" stroke={sc} strokeWidth={sw} />
+      {/* Neck */}
+      <path d="M 100 55 L 100 72 L 120 72 L 120 55" stroke={sc} strokeWidth={sw} />
+      {/* Clavicles */}
+      <path d="M 100 72 Q 78 74 46 84" stroke={sc} strokeWidth={sw} />
+      <path d="M 120 72 Q 142 74 174 84" stroke={sc} strokeWidth={sw} />
+      {/* Arms */}
+      <path d="M 46 84 C 32 115 18 158 14 202" stroke={sc} strokeWidth={sw} />
+      <path d="M 174 84 C 188 115 202 158 206 202" stroke={sc} strokeWidth={sw} />
+      {/* Torso sides */}
+      <path d="M 46 84 L 50 222" stroke={sc} strokeWidth={sw} />
+      <path d="M 174 84 L 170 222" stroke={sc} strokeWidth={sw} />
+      {/* Pelvis arc */}
+      <path d="M 50 222 Q 110 238 170 222" stroke={sc} strokeWidth={sw} />
+      {/* Legs */}
+      <path d="M 72 234 L 64 382" stroke={sc} strokeWidth={sw} />
+      <path d="M 148 234 L 156 382" stroke={sc} strokeWidth={sw} />
 
-          return (
-            <div
-              key={c.id}
-              style={{
-                position: "absolute",
-                left: `${c.pctX}%`,
-                top: `${c.pctY}%`,
-                transform: "translate(-50%, -50%)",
-                width: isActive ? 20 : 12,
-                height: isActive ? 20 : 12,
-                borderRadius: "50%",
-                background: c.color,
-                opacity: anyActive && !isActive ? 0.15 : 1,
-                transition: "all 450ms cubic-bezier(0.34,1.56,0.64,1)",
-                boxShadow: isActive
-                  ? `0 0 0 6px ${c.color}38, 0 0 0 14px ${c.color}18`
-                  : "none",
-                zIndex: 2,
-              }}
-              className={!anyActive ? "dot-idle-six" : undefined}
+      {/* Hotspot dots */}
+      {contributions.map((c) => {
+        const isActive = active === c.id;
+        const anyActive = active !== null;
+        return (
+          <g key={c.id}>
+            {isActive && <circle cx={c.svgX} cy={c.svgY} r={18} fill={c.color} opacity={0.08} />}
+            {isActive && <circle cx={c.svgX} cy={c.svgY} r={12} fill={c.color} opacity={0.15} />}
+            <circle
+              cx={c.svgX} cy={c.svgY}
+              r={isActive ? 7 : 5}
+              fill={c.color}
+              opacity={anyActive && !isActive ? 0.18 : isActive ? 1 : 0.7}
+              style={{ transition: "all 450ms ease" }}
+              className={!anyActive ? "dot-idle" : undefined}
             />
-          );
-        })}
-      </div>
-    </div>
+          </g>
+        );
+      })}
+    </svg>
   );
 }
 
