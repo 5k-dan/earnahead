@@ -111,6 +111,118 @@ const POI_CLUSTERS      = "poi-clusters";
 const POI_CLUSTER_COUNT = "poi-cluster-count";
 const POI_UNCLUSTERED   = "poi-unclustered";
 
+// ─── POI Types + Mock Data ────────────────────────────────────────────────────
+
+export interface POIProperties {
+  id: string;
+  name: string;
+  type: "Plasma" | "Blood" | "Research" | "Sperm" | "Egg";
+  earn: string;
+}
+
+export type POIFeature = GeoJSON.Feature<GeoJSON.Point, POIProperties>;
+export type POIFeatureCollection = GeoJSON.FeatureCollection<GeoJSON.Point, POIProperties>;
+
+/** Drop-in mock data — replace with real API results in production. */
+export const MOCK_POIS: POIFeatureCollection = {
+  type: "FeatureCollection",
+  features: [
+    { type: "Feature", geometry: { type: "Point", coordinates: [-87.6842, 41.9085] }, properties: { id: "1", name: "BioLife Plasma",              type: "Plasma",   earn: "$85"    } },
+    { type: "Feature", geometry: { type: "Point", coordinates: [-87.6397, 41.8782] }, properties: { id: "2", name: "Lifestream Blood Center",      type: "Blood",    earn: "$50"    } },
+    { type: "Feature", geometry: { type: "Point", coordinates: [-87.6204, 41.8954] }, properties: { id: "3", name: "Northwestern Clinical Trials", type: "Research", earn: "$200"   } },
+    { type: "Feature", geometry: { type: "Point", coordinates: [-87.6512, 41.9231] }, properties: { id: "4", name: "CSL Plasma",                   type: "Plasma",   earn: "$90"    } },
+    { type: "Feature", geometry: { type: "Point", coordinates: [-87.6867, 41.8731] }, properties: { id: "5", name: "American Red Cross",           type: "Blood",    earn: "$45"    } },
+    { type: "Feature", geometry: { type: "Point", coordinates: [-87.6741, 41.8820] }, properties: { id: "6", name: "Vitalant Blood Center",        type: "Blood",    earn: "$50"    } },
+    { type: "Feature", geometry: { type: "Point", coordinates: [-87.6278, 41.8805] }, properties: { id: "7", name: "New England Cryogenic",        type: "Sperm",    earn: "$150"   } },
+    { type: "Feature", geometry: { type: "Point", coordinates: [-87.6243, 41.9001] }, properties: { id: "8", name: "Shady Grove Fertility",        type: "Egg",      earn: "$8,500" } },
+  ],
+};
+
+// ─── POI Cluster Helpers ──────────────────────────────────────────────────────
+
+/**
+ * Add a clustered POI source + three layers to the map.
+ * If the source already exists, updates its data in-place (no layer rebuild).
+ *
+ * Layers added (in order):
+ *   poi-clusters       — circle for each cluster bubble
+ *   poi-cluster-count  — symbol showing the count inside each bubble
+ *   poi-unclustered    — circle for individual (non-clustered) points
+ */
+export function addOrUpdatePOIs(map: mapboxgl.Map, geojson: POIFeatureCollection): void {
+  // ── Update path: source exists, just swap data ───────────────────────────
+  if (map.getSource(POI_SOURCE)) {
+    (map.getSource(POI_SOURCE) as mapboxgl.GeoJSONSource).setData(geojson);
+    return;
+  }
+
+  // ── Init path: add source + all three layers ─────────────────────────────
+  map.addSource(POI_SOURCE, {
+    type: "geojson",
+    data: geojson,
+    cluster: true,
+    clusterRadius: 50,    // px — points within 50px merge into a cluster
+    clusterMaxZoom: 14,   // stop clustering above zoom 14
+  });
+
+  // 1. Cluster bubble
+  map.addLayer({
+    id: POI_CLUSTERS,
+    type: "circle",
+    source: POI_SOURCE,
+    filter: ["has", "point_count"],
+    paint: {
+      // Graduated size: small cluster → big cluster
+      "circle-radius": [
+        "step", ["get", "point_count"],
+        16,   // radius for count < 5
+        5,  20, // radius for count 5–19
+        20, 26, // radius for count ≥ 20
+      ],
+      // Graduated color: few → many
+      "circle-color": [
+        "step", ["get", "point_count"],
+        "#93b8e0",  // light blue  (< 5)
+        5,  "#3d7ec4",  // mid blue    (5–19)
+        20, "#0d1f3c",  // navy        (≥ 20)
+      ],
+      "circle-stroke-width": 2,
+      "circle-stroke-color": "white",
+    },
+  });
+
+  // 2. Cluster count label (inside bubble)
+  map.addLayer({
+    id: POI_CLUSTER_COUNT,
+    type: "symbol",
+    source: POI_SOURCE,
+    filter: ["has", "point_count"],
+    layout: {
+      "text-field": ["get", "point_count_abbreviated"],
+      "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+      "text-size": 12,
+      "text-allow-overlap": true,
+    },
+    paint: {
+      "text-color": "white",
+    },
+  });
+
+  // 3. Unclustered single point
+  map.addLayer({
+    id: POI_UNCLUSTERED,
+    type: "circle",
+    source: POI_SOURCE,
+    filter: ["!", ["has", "point_count"]],
+    paint: {
+      "circle-radius": 7,
+      "circle-color": "#1e5aa8",
+      "circle-stroke-width": 2,
+      "circle-stroke-color": "white",
+    },
+  });
+}
+
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 async function geocodeZip(zip: string): Promise<GeocodingFeature | null> {
