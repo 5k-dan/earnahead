@@ -23,8 +23,8 @@ const typeColors: Record<string, { bg: string; light: string }> = {
   Egg: { bg: "#2ecc71", light: "#eafaf1" },
 };
 
-// 60614 — Lincoln Park, Chicago
-const CHICAGO: [number, number] = [-87.6442, 41.9241];
+// Midpoint of all 8 clinic locations — keeps every pin visible at zoom 12
+const CHICAGO: [number, number] = [-87.654, 41.897];
 
 export default function OrchidsMapPage() {
   const [zip, setZip] = useState("60614");
@@ -142,6 +142,7 @@ export default function OrchidsMapPage() {
             pins={pins}
             onPinClick={id => setActiveId(id as number)}
             onZipChange={(_, z) => setZip(z)}
+            options={{ zoom: 12 }}
             style={{ position: "absolute", inset: 0 }}
           />
 
