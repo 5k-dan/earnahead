@@ -117,6 +117,18 @@
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes dot-idle-pulse {
+  0%, 100% { opacity: 0.65; transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: 1;    transform: translate(-50%, -50%) scale(1.2); }
+}
+.dot-idle-six {
+  animation: dot-idle-pulse 2.8s ease-in-out infinite;
+}
+
 /* ─── Existing App Theme ─────────────────────────────────────────────────── */
 :root {
   --bg: #0b0a12;

@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useAuth } from "@/context/AuthContext";
 
 const recentContributions = [
   { date: "Mar 12, 2026", type: "Plasma", clinic: "BioLife Plasma Services", earn: "+$85", patients: 2 },
@@ -40,6 +42,31 @@ const maxEarn = Math.max(...earningsHistory.map(d => d.value));
 
 export default function OrchidsDashboard() {
   const [activeTab, setActiveTab] = useState("overview");
+  const { user, loading } = useAuth();
+  const router = useRouter();
+
+  // Auth guard — redirect to login if not signed in, or verify page if unverified
+  useEffect(() => {
+    if (loading) return;
+    if (!user) {
+      router.replace("/orchids/auth?redirect=/orchids/dashboard");
+    } else if (!user.emailVerified) {
+      router.replace("/orchids/auth/verify");
+    }
+  }, [user, loading, router]);
+
+  if (loading || !user || !user.emailVerified) {
+    return (
+      <div style={{ paddingTop: 64, minHeight: "100vh", background: "var(--off-white)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ width: 32, height: 32, border: "3px solid var(--blue)", borderTopColor: "transparent", borderRadius: "50%", animation: "spin 0.7s linear infinite" }} />
+      </div>
+    );
+  }
+
+  // Greeting based on time of day
+  const hour = new Date().getHours();
+  const greeting = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
+  const firstName = user.displayName?.split(" ")[0] || user.email?.split("@")[0] || "there";
 
   return (
     <div style={{ paddingTop: 64, minHeight: "100vh", background: "var(--off-white)" }}>
@@ -49,7 +76,7 @@ export default function OrchidsDashboard() {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 24 }}>
             <div>
               <div style={{ fontSize: 12, color: "var(--text-muted)", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>Contributor Dashboard</div>
-              <h1 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 32, color: "var(--navy)", letterSpacing: "-0.02em" }}>Good morning, Marcus.</h1>
+              <h1 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 32, color: "var(--navy)", letterSpacing: "-0.02em" }}>{greeting}, {firstName}.</h1>
             </div>
             <Link href="/orchids/listings">
               <button style={{ padding: "10px 22px", background: "var(--navy)", color: "white", fontSize: 14, fontWeight: 600, border: "none", borderRadius: 6, cursor: "pointer" }}>
