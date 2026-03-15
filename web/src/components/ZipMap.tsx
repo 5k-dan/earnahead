@@ -108,13 +108,19 @@ const ZCTA_LINE = "zcta-line";
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 async function geocodeZip(zip: string): Promise<GeocodingFeature | null> {
+  const cacheKey = `zip:geocode:${zip}`;
+  const cached = await getCache<GeocodingFeature | null>(cacheKey);
+  if (cached !== null) return cached;
+
   const url =
     `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(zip)}.json` +
     `?country=US&types=postcode&access_token=${TOKEN}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Geocoding ${res.status}`);
   const data: GeocodingResponse = await res.json();
-  return data.features[0] ?? null;
+  const feature = data.features[0] ?? null;
+  await setCache(cacheKey, feature);
+  return feature;
 }
 
 function geocodingBounds(f: GeocodingFeature): mapboxgl.LngLatBoundsLike {
@@ -128,6 +134,10 @@ function geocodingBounds(f: GeocodingFeature): mapboxgl.LngLatBoundsLike {
 
 /** Fetch ZCTA polygon from Census TIGERweb. Returns null on miss or error. */
 async function fetchZctaPolygon(zip: string): Promise<TigerFeatureCollection | null> {
+  const cacheKey = `zip:polygon:${zip}`;
+  const cached = await getCache<TigerFeatureCollection | null>(cacheKey);
+  if (cached !== null) return cached;
+
   const base = "https://tigerweb.geo.census.gov/arcgis/rest/services/Census2020/Administrative/MapServer/5/query";
   const params = new URLSearchParams({
     where: `ZCTA5CE10='${zip}'`,
@@ -137,8 +147,9 @@ async function fetchZctaPolygon(zip: string): Promise<TigerFeatureCollection | n
   const res = await fetch(`${base}?${params}`);
   if (!res.ok) throw new Error(`TIGERweb ${res.status}`);
   const data: TigerFeatureCollection = await res.json();
-  if (!data.features?.length) return null;
-  return data;
+  const result = data.features?.length ? data : null;
+  await setCache(cacheKey, result);
+  return result;
 }
 
 /**
