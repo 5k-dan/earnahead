@@ -377,6 +377,10 @@ export default function ZipMap({
 
     mapRef.current = map;
 
+    map.on("load", () => {
+      addOrUpdatePOIs(map, MOCK_POIS);
+    });
+
     return () => {
       map.remove();
       mapRef.current = null;
