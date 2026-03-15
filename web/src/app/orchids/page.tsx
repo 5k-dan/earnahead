@@ -157,7 +157,12 @@ export default function OrchidsLanding() {
                   Find Opportunities
                 </button>
               </div>
-              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.35)", marginTop: 12 }}>No account required to browse. All providers are verified.</p>
+              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.35)", marginTop: 12 }}>
+                No account required to browse. All providers are verified.{" "}
+                <Link href={`/orchids/match${zip ? `?zip=${zip}` : ""}`} style={{ color: "rgba(255,255,255,0.55)", textDecoration: "underline" }}>
+                  Check your eligibility →
+                </Link>
+              </p>
             </form>
           </div>
 
