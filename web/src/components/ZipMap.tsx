@@ -353,6 +353,24 @@ function addZcta(map: mapboxgl.Map, fc: TigerFeatureCollection) {
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
+// ─── Pin cluster layer IDs ────────────────────────────────────────────────────
+const PIN_SOURCE        = "map-pins";
+const PIN_CLUSTERS      = "map-pin-clusters";
+const PIN_CLUSTER_COUNT = "map-pin-cluster-count";
+const PIN_CIRCLES       = "map-pin-circles";
+const PIN_LABELS        = "map-pin-labels";
+
+function pinsToGeoJSON(pins: MapPin[]) {
+  return {
+    type: "FeatureCollection" as const,
+    features: pins.map((p) => ({
+      type: "Feature"  as const,
+      geometry: { type: "Point" as const, coordinates: [p.lng, p.lat] },
+      properties: { id: p.id, label: p.label, color: p.color, active: p.active ? 1 : 0 },
+    })),
+  };
+}
+
 export default function ZipMap({
   center,
   pins,
@@ -362,9 +380,10 @@ export default function ZipMap({
   style = {},
   initialBounds,
 }: ZipMapProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<mapboxgl.Map | null>(null);
-  const markersRef = useRef<mapboxgl.Marker[]>([]);
+  const containerRef   = useRef<HTMLDivElement>(null);
+  const mapRef         = useRef<mapboxgl.Map | null>(null);
+  const onPinClickRef  = useRef(onPinClick);
+  useEffect(() => { onPinClickRef.current = onPinClick; });
 
   const [zipInput, setZipInput] = useState("");
   const [zipError, setZipError] = useState("");
