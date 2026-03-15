@@ -10,8 +10,8 @@ export interface MapPin {
   id: number | string;
   lng: number;
   lat: number;
-  label: string;   // shown on the pin bubble (e.g. "$85")
-  color: string;   // hex or CSS color
+  label: string;
+  color: string;
   active?: boolean;
 }
 
@@ -26,55 +26,142 @@ interface ZipMapProps {
   center: [number, number]; // [lng, lat]
   pins: MapPin[];
   onPinClick?: (id: number | string) => void;
-  /** Called with [lng, lat] after a successful ZIP geocode */
   onZipChange?: (center: [number, number], zip: string) => void;
   options?: MapboxOptions;
   style?: React.CSSProperties;
 }
 
-// Mapbox Geocoding API — subset we actually use
+// Mapbox Geocoding API
 interface GeocodingFeature {
-  center: [number, number];                // [lng, lat]
-  bbox?: [number, number, number, number]; // [minLng, minLat, maxLng, maxLat]
+  center: [number, number];
+  bbox?: [number, number, number, number];
   place_name: string;
 }
-
 interface GeocodingResponse {
   features: GeocodingFeature[];
 }
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
+// Census TIGERweb GeoJSON (subset)
+interface TigerFeature {
+  type: "Feature";
+  geometry: GeoJSON.Geometry;
+  properties: Record<string, unknown>;
+}
+interface TigerFeatureCollection {
+  type: "FeatureCollection";
+  features: TigerFeature[];
+}
+
+// ─── Constants ────────────────────────────────────────────────────────────────
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN ?? "";
 const ZIP_RE = /^\d{5}$/;
 const PADDING = 40;
-// Default delta used to build bounds from a point when bbox is absent
-const POINT_DELTA = 0.05; // ~5 km
+const POINT_DELTA = 0.05;
+
+// Mapbox source/layer IDs for the ZCTA polygon
+const ZCTA_SOURCE = "zcta-boundary";
+const ZCTA_FILL = "zcta-fill";
+const ZCTA_LINE = "zcta-line";
+
+// ─── Helpers ─────────────────────────────────────────────────────────────────
 
 async function geocodeZip(zip: string): Promise<GeocodingFeature | null> {
   const url =
     `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(zip)}.json` +
     `?country=US&types=postcode&access_token=${TOKEN}`;
   const res = await fetch(url);
-  if (!res.ok) throw new Error(`Geocoding failed: ${res.status}`);
+  if (!res.ok) throw new Error(`Geocoding ${res.status}`);
   const data: GeocodingResponse = await res.json();
   return data.features[0] ?? null;
 }
 
-function featureToBounds(
-  f: GeocodingFeature,
-): mapboxgl.LngLatBoundsLike {
-  if (f.bbox) {
-    return [
-      [f.bbox[0], f.bbox[1]], // SW
-      [f.bbox[2], f.bbox[3]], // NE
-    ];
-  }
+function geocodingBounds(f: GeocodingFeature): mapboxgl.LngLatBoundsLike {
+  if (f.bbox) return [[f.bbox[0], f.bbox[1]], [f.bbox[2], f.bbox[3]]];
   const [lng, lat] = f.center;
   return [
     [lng - POINT_DELTA, lat - POINT_DELTA],
     [lng + POINT_DELTA, lat + POINT_DELTA],
   ];
+}
+
+/** Fetch ZCTA polygon from Census TIGERweb. Returns null on miss or error. */
+async function fetchZctaPolygon(zip: string): Promise<TigerFeatureCollection | null> {
+  const base = "https://tigerweb.geo.census.gov/arcgis/rest/services/Census2020/Administrative/MapServer/5/query";
+  const params = new URLSearchParams({
+    where: `ZCTA5CE10='${zip}'`,
+    outFields: "*",
+    f: "geojson",
+  });
+  const res = await fetch(`${base}?${params}`);
+  if (!res.ok) throw new Error(`TIGERweb ${res.status}`);
+  const data: TigerFeatureCollection = await res.json();
+  if (!data.features?.length) return null;
+  return data;
+}
+
+/**
+ * Compute LngLatBoundsLike from a GeoJSON feature collection by walking
+ * all coordinate pairs in the geometry.
+ */
+function geoJsonBounds(fc: TigerFeatureCollection): mapboxgl.LngLatBoundsLike | null {
+  let minLng = Infinity, minLat = Infinity, maxLng = -Infinity, maxLat = -Infinity;
+
+  function walkCoords(coords: unknown): void {
+    if (!Array.isArray(coords)) return;
+    if (typeof coords[0] === "number") {
+      const [lng, lat] = coords as [number, number];
+      if (lng < minLng) minLng = lng;
+      if (lng > maxLng) maxLng = lng;
+      if (lat < minLat) minLat = lat;
+      if (lat > maxLat) maxLat = lat;
+    } else {
+      coords.forEach(walkCoords);
+    }
+  }
+
+  fc.features.forEach((f) => walkCoords((f.geometry as { coordinates: unknown }).coordinates));
+
+  if (!isFinite(minLng)) return null;
+  return [[minLng, minLat], [maxLng, maxLat]];
+}
+
+/** Remove existing ZCTA source + layers from the map if present. */
+function clearZcta(map: mapboxgl.Map) {
+  if (map.getLayer(ZCTA_FILL)) map.removeLayer(ZCTA_FILL);
+  if (map.getLayer(ZCTA_LINE)) map.removeLayer(ZCTA_LINE);
+  if (map.getSource(ZCTA_SOURCE)) map.removeSource(ZCTA_SOURCE);
+}
+
+/** Add ZCTA source + layers to the map. */
+function addZcta(map: mapboxgl.Map, fc: TigerFeatureCollection) {
+  clearZcta(map);
+
+  map.addSource(ZCTA_SOURCE, {
+    type: "geojson",
+    data: fc as unknown as GeoJSON.FeatureCollection,
+  });
+
+  map.addLayer({
+    id: ZCTA_FILL,
+    type: "fill",
+    source: ZCTA_SOURCE,
+    paint: {
+      "fill-color": "#1e5aa8",
+      "fill-opacity": 0.08,
+    },
+  });
+
+  map.addLayer({
+    id: ZCTA_LINE,
+    type: "line",
+    source: ZCTA_SOURCE,
+    paint: {
+      "line-color": "#1e5aa8",
+      "line-width": 2,
+      "line-opacity": 0.7,
+    },
+  });
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -178,7 +265,6 @@ export default function ZipMap({
   // ── ZIP search ────────────────────────────────────────────────────────────
   const handleZipSearch = async () => {
     const zip = zipInput.trim();
-
     if (!ZIP_RE.test(zip)) {
       setZipError("Enter a valid 5-digit US ZIP code.");
       return;
@@ -187,19 +273,53 @@ export default function ZipMap({
     setZipError("");
     setZipLoading(true);
 
-    try {
-      const feature = await geocodeZip(zip);
+    const map = mapRef.current;
 
-      if (!feature) {
+    try {
+      // Run both requests in parallel
+      const [geocodeFeature, tigerFc] = await Promise.allSettled([
+        geocodeZip(zip),
+        fetchZctaPolygon(zip),
+      ]);
+
+      const geo = geocodeFeature.status === "fulfilled" ? geocodeFeature.value : null;
+      const fc  = tigerFc.status  === "fulfilled" ? tigerFc.value  : null;
+
+      if (!geo && !fc) {
         setZipError("ZIP code not found.");
         return;
       }
 
-      const bounds = featureToBounds(feature);
-      mapRef.current?.fitBounds(bounds, { padding: PADDING, duration: 800 });
-      onZipChange?.(feature.center, zip);
+      if (map) {
+        // Add/replace ZCTA polygon if we got one
+        const applyLayers = () => {
+          if (fc) {
+            addZcta(map, fc);
+            const polyBounds = geoJsonBounds(fc);
+            if (polyBounds) {
+              map.fitBounds(polyBounds, { padding: PADDING, duration: 800 });
+            }
+          } else if (geo) {
+            // Polygon miss — fall back to Mapbox bbox
+            clearZcta(map);
+            map.fitBounds(geocodingBounds(geo), { padding: PADDING, duration: 800 });
+          }
+        };
+
+        // Layers can only be added once the style is loaded
+        if (map.isStyleLoaded()) {
+          applyLayers();
+        } else {
+          map.once("styledata", applyLayers);
+        }
+      }
+
+      // Notify parent of new center
+      const center: [number, number] = geo?.center ?? [0, 0];
+      onZipChange?.(center, zip);
+
     } catch {
-      setZipError("Couldn't reach geocoding service. Try again.");
+      setZipError("Couldn't complete the search. Try again.");
     } finally {
       setZipLoading(false);
     }
@@ -229,15 +349,14 @@ export default function ZipMap({
 
       {/* ZIP search overlay */}
       <div style={{
-        position: "absolute",
-        top: 12,
-        left: 12,
-        zIndex: 10,
-        display: "flex",
-        flexDirection: "column",
-        gap: 4,
+        position: "absolute", top: 12, left: 12, zIndex: 10,
+        display: "flex", flexDirection: "column", gap: 4,
       }}>
-        <div style={{ display: "flex", gap: 0, boxShadow: "0 2px 8px rgba(0,0,0,0.18)", borderRadius: 8, overflow: "hidden" }}>
+        <div style={{
+          display: "flex", gap: 0,
+          boxShadow: "0 2px 8px rgba(0,0,0,0.18)",
+          borderRadius: 8, overflow: "hidden",
+        }}>
           <input
             type="text"
             value={zipInput}
@@ -249,15 +368,10 @@ export default function ZipMap({
             placeholder="ZIP code"
             maxLength={5}
             style={{
-              width: 96,
-              padding: "8px 12px",
-              border: "none",
-              fontSize: 14,
-              fontFamily: "-apple-system, sans-serif",
-              letterSpacing: "0.06em",
-              color: "#0d1f3c",
-              outline: "none",
-              background: "white",
+              width: 96, padding: "8px 12px", border: "none",
+              fontSize: 14, fontFamily: "-apple-system, sans-serif",
+              letterSpacing: "0.06em", color: "#0d1f3c",
+              outline: "none", background: "white",
             }}
           />
           <button
@@ -266,15 +380,11 @@ export default function ZipMap({
             style={{
               padding: "8px 14px",
               background: zipLoading ? "#8aa8d0" : "#1e5aa8",
-              color: "white",
-              border: "none",
-              fontSize: 13,
-              fontWeight: 600,
+              color: "white", border: "none",
+              fontSize: 13, fontWeight: 600,
               fontFamily: "-apple-system, sans-serif",
               cursor: zipLoading ? "not-allowed" : "pointer",
-              display: "flex",
-              alignItems: "center",
-              gap: 6,
+              display: "flex", alignItems: "center", gap: 6,
               whiteSpace: "nowrap",
             }}
           >
@@ -296,11 +406,8 @@ export default function ZipMap({
 
         {zipError && (
           <div style={{
-            background: "white",
-            color: "#c0392b",
-            fontSize: 12,
-            padding: "5px 10px",
-            borderRadius: 6,
+            background: "white", color: "#c0392b", fontSize: 12,
+            padding: "5px 10px", borderRadius: 6,
             boxShadow: "0 2px 6px rgba(0,0,0,0.12)",
             fontFamily: "-apple-system, sans-serif",
           }}>
