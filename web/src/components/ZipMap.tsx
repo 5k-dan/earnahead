@@ -30,6 +30,8 @@ interface ZipMapProps {
   onZipChange?: (center: [number, number], zip: string) => void;
   options?: MapboxOptions;
   style?: React.CSSProperties;
+  /** If provided, the map will fit to these bounds on initial load instead of using center+zoom */
+  initialBounds?: [[number, number], [number, number]]; // [[minLng, minLat], [maxLng, maxLat]]
 }
 
 // Mapbox Geocoding API
@@ -358,6 +360,7 @@ export default function ZipMap({
   onZipChange,
   options = {},
   style = {},
+  initialBounds,
 }: ZipMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
@@ -386,6 +389,12 @@ export default function ZipMap({
       bearing: options.bearing ?? 0,
       attributionControl: false,
     });
+
+    if (initialBounds) {
+      map.once("load", () => {
+        map.fitBounds(initialBounds, { padding: 60, maxZoom: 14 });
+      });
+    }
 
     map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), "top-right");
     map.addControl(new mapboxgl.AttributionControl({ compact: true }), "bottom-right");
