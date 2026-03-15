@@ -419,6 +419,7 @@ export default function ZipMap({
     pins.forEach((pin) => {
       const el = document.createElement("div");
       el.style.cssText = `
+        display: inline-block;
         background: ${pin.active ? "#0d1f3c" : pin.color};
         color: white;
         font-size: 11px;

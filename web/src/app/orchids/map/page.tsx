@@ -23,8 +23,8 @@ const typeColors: Record<string, { bg: string; light: string }> = {
   Egg: { bg: "#2ecc71", light: "#eafaf1" },
 };
 
-// Chicago center
-const CHICAGO: [number, number] = [-87.6298, 41.8781];
+// 60614 — Lincoln Park, Chicago
+const CHICAGO: [number, number] = [-87.6442, 41.9241];
 
 export default function OrchidsMapPage() {
   const [zip, setZip] = useState("60614");
