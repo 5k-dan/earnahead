@@ -481,7 +481,11 @@ export default function ZipMap({
         filter: ["!", ["has", "point_count"]],
         paint: {
           "circle-color":        ["case", ["==", ["get", "active"], 1], "#0d1f3c", ["get", "color"]],
-          "circle-radius":       ["case", ["==", ["get", "active"], 1], 20, 16],
+          // Base radius grows with label length: 3 chars→16, 4 chars→19, 5+→23; +3 when active
+          "circle-radius": ["+",
+            ["step", ["length", ["get", "label"]], 16, 4, 19, 5, 23],
+            ["case", ["==", ["get", "active"], 1], 3, 0],
+          ],
           "circle-stroke-width": 2, "circle-stroke-color": "white",
         },
       });
