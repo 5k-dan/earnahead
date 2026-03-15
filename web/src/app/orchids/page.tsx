@@ -18,11 +18,11 @@ const howItWorks = [
 ];
 
 const categories = [
-  { name: "Blood Donation", freq: "Every 56 days", earn: "Up to $50/visit", icon: "◈" },
-  { name: "Plasma Donation", freq: "Twice weekly", earn: "$50–$100/visit", icon: "◉" },
-  { name: "Sperm Donation", icon: "◎", freq: "Up to 3×/week", earn: "$100–$200/visit" },
-  { name: "Egg Donation", freq: "Per cycle", earn: "$5,000–$15,000", icon: "◍" },
-  { name: "Medical Research", freq: "Varies", earn: "$50–$2,000", icon: "◑" },
+  { name: "Blood Donation",   type: "Blood",    freq: "Every 56 days", earn: "Up to $50/visit",    icon: "◈" },
+  { name: "Plasma Donation",  type: "Plasma",   freq: "Twice weekly",  earn: "$50–$100/visit",     icon: "◉" },
+  { name: "Sperm Donation",   type: "Sperm",    freq: "Up to 3×/week", earn: "$100–$200/visit",    icon: "◎" },
+  { name: "Egg Donation",     type: "Egg",      freq: "Per cycle",     earn: "$5,000–$15,000",     icon: "◍" },
+  { name: "Medical Research", type: "Research", freq: "Varies",        earn: "$50–$2,000",         icon: "◑" },
 ];
 
 const testimonials = [
@@ -239,15 +239,17 @@ export default function OrchidsLanding() {
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 16 }}>
             {categories.map((cat, i) => (
-              <div key={i} style={{ padding: "28px 24px", border: "1px solid var(--border)", borderRadius: 10, cursor: "pointer", transition: "border-color 200ms ease, box-shadow 200ms ease" }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--blue-muted)"; e.currentTarget.style.boxShadow = "var(--shadow-md)"; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--border)"; e.currentTarget.style.boxShadow = "none"; }}
-              >
-                <div style={{ fontSize: 24, marginBottom: 16, color: "var(--navy)" }}>{cat.icon}</div>
-                <div style={{ fontSize: 15, fontWeight: 600, color: "var(--navy)", marginBottom: 8 }}>{cat.name}</div>
-                <div style={{ fontSize: 12, color: "var(--text-muted)", marginBottom: 6 }}>{cat.freq}</div>
-                <div style={{ fontSize: 13, fontWeight: 600, color: "var(--green)" }}>{cat.earn}</div>
-              </div>
+              <Link key={i} href={`/orchids/listings?type=${cat.type}`} style={{ textDecoration: "none" }}>
+                <div style={{ padding: "28px 24px", border: "1px solid var(--border)", borderRadius: 10, cursor: "pointer", transition: "border-color 200ms ease, box-shadow 200ms ease" }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--blue-muted)"; e.currentTarget.style.boxShadow = "var(--shadow-md)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--border)"; e.currentTarget.style.boxShadow = "none"; }}
+                >
+                  <div style={{ fontSize: 24, marginBottom: 16, color: "var(--navy)" }}>{cat.icon}</div>
+                  <div style={{ fontSize: 15, fontWeight: 600, color: "var(--navy)", marginBottom: 8 }}>{cat.name}</div>
+                  <div style={{ fontSize: 12, color: "var(--text-muted)", marginBottom: 6 }}>{cat.freq}</div>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: "var(--green)" }}>{cat.earn}</div>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -340,8 +342,12 @@ export default function OrchidsLanding() {
           <div style={{ fontFamily: "'DM Serif Display', serif", fontSize: 18, color: "white" }}>Vitalink</div>
           <div style={{ fontSize: 13, color: "rgba(255,255,255,0.35)" }}>© 2026 Vitalink. Built to strengthen communities.</div>
           <div style={{ display: "flex", gap: 24, fontSize: 13 }}>
-            {["Privacy", "Terms", "Safety"].map(l => (
-              <span key={l} style={{ color: "rgba(255,255,255,0.4)", cursor: "pointer" }}>{l}</span>
+            {[
+              { label: "Privacy", href: "/orchids/privacy" },
+              { label: "Terms",   href: "/orchids/terms"   },
+              { label: "Safety",  href: "/orchids/safety"  },
+            ].map(l => (
+              <Link key={l.label} href={l.href} style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{l.label}</Link>
             ))}
           </div>
         </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 const listings = [
@@ -114,7 +115,9 @@ function ListingRow({ listing }: { listing: Listing }) {
 }
 
 export default function OrchidsListings() {
-  const [filterType, setFilterType] = useState("All");
+  const searchParams = useSearchParams();
+  const urlType = searchParams.get("type") ?? "All";
+  const [filterType, setFilterType] = useState(urlType);
   const [sortBy, setSortBy] = useState("distance");
   const types = ["All", "Blood", "Plasma", "Research", "Sperm", "Egg"];
 
