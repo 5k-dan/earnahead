@@ -105,6 +105,12 @@ const ZCTA_SOURCE = "zcta-boundary";
 const ZCTA_FILL = "zcta-fill";
 const ZCTA_LINE = "zcta-line";
 
+// Mapbox source/layer IDs for POI clusters
+const POI_SOURCE        = "pois";
+const POI_CLUSTERS      = "poi-clusters";
+const POI_CLUSTER_COUNT = "poi-cluster-count";
+const POI_UNCLUSTERED   = "poi-unclustered";
+
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 async function geocodeZip(zip: string): Promise<GeocodingFeature | null> {
