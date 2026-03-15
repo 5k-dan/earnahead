@@ -33,6 +33,8 @@ interface ZipMapProps {
   style?: React.CSSProperties;
   /** If provided, the map will fit to these bounds on initial load instead of using center+zoom */
   initialBounds?: [[number, number], [number, number]]; // [[minLng, minLat], [maxLng, maxLat]]
+  /** If provided, the map will search this ZIP immediately after loading */
+  initialZip?: string;
 }
 
 // Mapbox Geocoding API
@@ -383,6 +385,7 @@ export default function ZipMap({
   options = {},
   style = {},
   initialBounds,
+  initialZip,
 }: ZipMapProps) {
   const containerRef   = useRef<HTMLDivElement>(null);
   const mapRef         = useRef<mapboxgl.Map | null>(null);
@@ -390,7 +393,7 @@ export default function ZipMap({
   const onDeselectRef  = useRef(onDeselect);
   useEffect(() => { onPinClickRef.current = onPinClick; onDeselectRef.current = onDeselect; });
 
-  const [zipInput, setZipInput] = useState("");
+  const [zipInput, setZipInput] = useState(initialZip ?? "");
   const [zipError, setZipError] = useState("");
   const [zipLoading, setZipLoading] = useState(false);
 
@@ -418,6 +421,10 @@ export default function ZipMap({
       map.once("load", () => {
         map.fitBounds(initialBounds, { padding: 60, maxZoom: 14 });
       });
+    }
+
+    if (initialZip && ZIP_RE.test(initialZip)) {
+      map.once("load", () => runZipSearchRef.current(initialZip));
     }
 
     map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), "top-right");
@@ -575,8 +582,7 @@ export default function ZipMap({
   }, [pins]);
 
   // ── ZIP search ────────────────────────────────────────────────────────────
-  const handleZipSearch = async () => {
-    const zip = zipInput.trim();
+  const runZipSearch = async (zip: string) => {
     if (!ZIP_RE.test(zip)) {
       setZipError("Enter a valid 5-digit US ZIP code.");
       return;
@@ -636,6 +642,11 @@ export default function ZipMap({
       setZipLoading(false);
     }
   };
+
+  const runZipSearchRef = useRef(runZipSearch);
+  useEffect(() => { runZipSearchRef.current = runZipSearch; });
+
+  const handleZipSearch = () => runZipSearch(zipInput.trim());
 
   // ── No-token fallback ─────────────────────────────────────────────────────
   if (!TOKEN) {

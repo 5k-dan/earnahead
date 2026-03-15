@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import ZipMap from "@/components/ZipMap";
 
@@ -33,7 +34,9 @@ const CLINIC_BOUNDS: [[number, number], [number, number]] = [
 ];
 
 export default function OrchidsMapPage() {
-  const [zip, setZip] = useState("60614");
+  const searchParams = useSearchParams();
+  const urlZip = searchParams.get("zip") ?? "";
+  const [zip, setZip] = useState(urlZip || "60614");
   const [activeId, setActiveId] = useState<number | null>(clinics[0].id);
   const [filterType, setFilterType] = useState("All");
 
@@ -150,6 +153,7 @@ export default function OrchidsMapPage() {
             onDeselect={() => setActiveId(null)}
             onZipChange={(_, z) => setZip(z)}
             initialBounds={CLINIC_BOUNDS}
+            initialZip={urlZip}
             style={{ position: "absolute", inset: 0 }}
           />
 

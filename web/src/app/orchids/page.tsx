@@ -86,7 +86,7 @@ export default function OrchidsLanding() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (zip.length >= 3) router.push(`/orchids/map?zip=${zip}`);
+    if (/^\d{5}$/.test(zip)) router.push(`/orchids/map?zip=${zip}`);
   };
 
   return (
