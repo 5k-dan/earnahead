@@ -475,22 +475,27 @@ export default function ZipMap({
         paint: { "text-color": "white" },
       });
 
-      // ── Individual pin circle (colored by type) ─────────────────────────
+      // ── Individual pin circle ───────────────────────────────────────────
+      // Active:   white circle + type-colored stroke  (always distinct from map)
+      // Inactive: type-colored circle at 35% opacity  (clearly dimmed)
       map.addLayer({
         id: PIN_CIRCLES, type: "circle", source: PIN_SOURCE,
         filter: ["!", ["has", "point_count"]],
         paint: {
-          "circle-color":        ["case", ["==", ["get", "active"], 1], "#0d1f3c", ["get", "color"]],
-          // Base radius grows with label length: 3 chars→16, 4 chars→19, 5+→23; +3 when active
+          "circle-color": ["case", ["==", ["get", "active"], 1], "white", ["get", "color"]],
+          "circle-opacity": ["case", ["==", ["get", "active"], 1], 1, 0.35],
           "circle-radius": ["+",
             ["step", ["length", ["get", "label"]], 16, 4, 19, 5, 23],
             ["case", ["==", ["get", "active"], 1], 3, 0],
           ],
-          "circle-stroke-width": 2, "circle-stroke-color": "white",
+          "circle-stroke-color": ["case", ["==", ["get", "active"], 1], ["get", "color"], "white"],
+          "circle-stroke-width": ["case", ["==", ["get", "active"], 1], 3, 1.5],
+          "circle-stroke-opacity": ["case", ["==", ["get", "active"], 1], 1, 0.35],
         },
       });
 
       // ── Individual pin price label ──────────────────────────────────────
+      // Active: text in the type color (matches stroke); inactive: white at 35%
       map.addLayer({
         id: PIN_LABELS, type: "symbol", source: PIN_SOURCE,
         filter: ["!", ["has", "point_count"]],
@@ -499,7 +504,10 @@ export default function ZipMap({
           "text-font": ["DIN Offc Pro Bold", "Arial Unicode MS Bold"],
           "text-size": 10, "text-allow-overlap": true, "text-ignore-placement": true,
         },
-        paint: { "text-color": "white" },
+        paint: {
+          "text-color":   ["case", ["==", ["get", "active"], 1], ["get", "color"], "white"],
+          "text-opacity": ["case", ["==", ["get", "active"], 1], 1, 0.35],
+        },
       });
 
       // ── Cluster click → zoom in ─────────────────────────────────────────
