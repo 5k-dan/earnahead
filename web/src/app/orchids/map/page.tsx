@@ -34,12 +34,12 @@ const CLINIC_BOUNDS: [[number, number], [number, number]] = [
 
 export default function OrchidsMapPage() {
   const [zip, setZip] = useState("60614");
-  const [activeId, setActiveId] = useState<number>(clinics[0].id);
+  const [activeId, setActiveId] = useState<number | null>(clinics[0].id);
   const [filterType, setFilterType] = useState("All");
 
   const types = ["All", "Blood", "Plasma", "Research", "Sperm", "Egg"];
   const filtered = filterType === "All" ? clinics : clinics.filter(c => c.type === filterType);
-  const active = clinics.find(c => c.id === activeId) ?? clinics[0];
+  const active = activeId != null ? (clinics.find(c => c.id === activeId) ?? null) : null;
 
   const pins = useMemo(() => filtered.map(c => ({
     id: c.id,
@@ -147,6 +147,7 @@ export default function OrchidsMapPage() {
             center={CHICAGO}
             pins={pins}
             onPinClick={id => setActiveId(id as number)}
+            onDeselect={() => setActiveId(null)}
             onZipChange={(_, z) => setZip(z)}
             initialBounds={CLINIC_BOUNDS}
             style={{ position: "absolute", inset: 0 }}

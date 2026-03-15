@@ -27,6 +27,7 @@ interface ZipMapProps {
   center: [number, number]; // [lng, lat]
   pins: MapPin[];
   onPinClick?: (id: number | string) => void;
+  onDeselect?: () => void;
   onZipChange?: (center: [number, number], zip: string) => void;
   options?: MapboxOptions;
   style?: React.CSSProperties;
@@ -361,12 +362,14 @@ const PIN_CIRCLES       = "map-pin-circles";
 const PIN_LABELS        = "map-pin-labels";
 
 function pinsToGeoJSON(pins: MapPin[]) {
+  // hasActive=1 when any pin is selected → enables dimming of non-active pins
+  const hasActive = pins.some((p) => p.active) ? 1 : 0;
   return {
     type: "FeatureCollection" as const,
     features: pins.map((p) => ({
       type: "Feature"  as const,
       geometry: { type: "Point" as const, coordinates: [p.lng, p.lat] },
-      properties: { id: p.id, label: p.label, color: p.color, active: p.active ? 1 : 0 },
+      properties: { id: p.id, label: p.label, color: p.color, active: p.active ? 1 : 0, hasActive },
     })),
   };
 }
@@ -375,6 +378,7 @@ export default function ZipMap({
   center,
   pins,
   onPinClick,
+  onDeselect,
   onZipChange,
   options = {},
   style = {},
@@ -383,7 +387,8 @@ export default function ZipMap({
   const containerRef   = useRef<HTMLDivElement>(null);
   const mapRef         = useRef<mapboxgl.Map | null>(null);
   const onPinClickRef  = useRef(onPinClick);
-  useEffect(() => { onPinClickRef.current = onPinClick; });
+  const onDeselectRef  = useRef(onDeselect);
+  useEffect(() => { onPinClickRef.current = onPinClick; onDeselectRef.current = onDeselect; });
 
   const [zipInput, setZipInput] = useState("");
   const [zipError, setZipError] = useState("");
@@ -483,14 +488,23 @@ export default function ZipMap({
         filter: ["!", ["has", "point_count"]],
         paint: {
           "circle-color": ["case", ["==", ["get", "active"], 1], "white", ["get", "color"]],
-          "circle-opacity": ["case", ["==", ["get", "active"], 1], 1, 0.35],
+          // Full opacity when: this pin is active, OR no pin is active (hasActive=0)
+          "circle-opacity": ["case",
+            ["==", ["get", "active"], 1], 1,
+            ["==", ["get", "hasActive"], 1], 0.35,
+            1,
+          ],
           "circle-radius": ["+",
             ["step", ["length", ["get", "label"]], 16, 4, 19, 5, 23],
             ["case", ["==", ["get", "active"], 1], 3, 0],
           ],
           "circle-stroke-color": ["case", ["==", ["get", "active"], 1], ["get", "color"], "white"],
           "circle-stroke-width": ["case", ["==", ["get", "active"], 1], 3, 1.5],
-          "circle-stroke-opacity": ["case", ["==", ["get", "active"], 1], 1, 0.35],
+          "circle-stroke-opacity": ["case",
+            ["==", ["get", "active"], 1], 1,
+            ["==", ["get", "hasActive"], 1], 0.35,
+            1,
+          ],
         },
       });
 
@@ -506,7 +520,11 @@ export default function ZipMap({
         },
         paint: {
           "text-color":   ["case", ["==", ["get", "active"], 1], ["get", "color"], "white"],
-          "text-opacity": ["case", ["==", ["get", "active"], 1], 1, 0.35],
+          "text-opacity": ["case",
+            ["==", ["get", "active"], 1], 1,
+            ["==", ["get", "hasActive"], 1], 0.35,
+            1,
+          ],
         },
       });
 
@@ -531,6 +549,18 @@ export default function ZipMap({
       map.on("click", PIN_CIRCLES, (e) => {
         const id = e.features?.[0]?.properties?.id;
         if (id != null) onPinClickRef.current?.(id);
+      });
+
+      // ── Double-click pin → deselect ─────────────────────────────────────
+      map.on("dblclick", PIN_CIRCLES, (e) => {
+        e.preventDefault(); // suppress default double-click zoom
+        onDeselectRef.current?.();
+      });
+
+      // ── Click map background → deselect ────────────────────────────────
+      map.on("click", (e) => {
+        const hit = map.queryRenderedFeatures(e.point, { layers: [PIN_CIRCLES, PIN_CLUSTERS] });
+        if (!hit.length) onDeselectRef.current?.();
       });
 
       // ── Cursor pointer on hover ─────────────────────────────────────────
