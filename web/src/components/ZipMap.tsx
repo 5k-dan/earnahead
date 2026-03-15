@@ -96,6 +96,18 @@ async function setCache<T>(key: string, value: T, ttlMs = TTL_24H): Promise<void
 // ─── Constants ────────────────────────────────────────────────────────────────
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN ?? "";
+
+/**
+ * When NEXT_PUBLIC_USE_PROXY=true the client hits the local Express proxy
+ * (src/server/api/mapProxy.ts) instead of calling Mapbox / Census directly.
+ * The proxy keeps the secret MAPBOX_TOKEN server-side and adds server-level
+ * caching + rate limiting.
+ *
+ * Proxy base URL defaults to http://localhost:3001 but can be overridden with
+ * NEXT_PUBLIC_PROXY_BASE (e.g. https://api.yourapp.com).
+ */
+const USE_PROXY = process.env.NEXT_PUBLIC_USE_PROXY === "true";
+const PROXY_BASE = (process.env.NEXT_PUBLIC_PROXY_BASE ?? "http://localhost:3001").replace(/\/$/, "");
 const ZIP_RE = /^\d{5}$/;
 const PADDING = 40;
 const POINT_DELTA = 0.05;
@@ -230,9 +242,10 @@ async function geocodeZip(zip: string): Promise<GeocodingFeature | null> {
   const cached = await getCache<GeocodingFeature | null>(cacheKey);
   if (cached !== null) return cached;
 
-  const url =
-    `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(zip)}.json` +
-    `?country=US&types=postcode&access_token=${TOKEN}`;
+  const url = USE_PROXY
+    ? `${PROXY_BASE}/api/geocode?zip=${encodeURIComponent(zip)}`
+    : `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(zip)}.json` +
+      `?country=US&types=postcode&access_token=${TOKEN}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Geocoding ${res.status}`);
   const data: GeocodingResponse = await res.json();
@@ -256,13 +269,15 @@ async function fetchZctaPolygon(zip: string): Promise<TigerFeatureCollection | n
   const cached = await getCache<TigerFeatureCollection | null>(cacheKey);
   if (cached !== null) return cached;
 
-  const base = "https://tigerweb.geo.census.gov/arcgis/rest/services/Census2020/Administrative/MapServer/5/query";
-  const params = new URLSearchParams({
-    where: `ZCTA5CE10='${zip}'`,
-    outFields: "*",
-    f: "geojson",
-  });
-  const res = await fetch(`${base}?${params}`);
+  let fetchUrl: string;
+  if (USE_PROXY) {
+    fetchUrl = `${PROXY_BASE}/api/zcta?zip=${encodeURIComponent(zip)}`;
+  } else {
+    const base = "https://tigerweb.geo.census.gov/arcgis/rest/services/Census2020/Administrative/MapServer/5/query";
+    const params = new URLSearchParams({ where: `ZCTA5CE10='${zip}'`, outFields: "*", f: "geojson" });
+    fetchUrl = `${base}?${params}`;
+  }
+  const res = await fetch(fetchUrl);
   if (!res.ok) throw new Error(`TIGERweb ${res.status}`);
   const data: TigerFeatureCollection = await res.json();
   const result = data.features?.length ? data : null;
