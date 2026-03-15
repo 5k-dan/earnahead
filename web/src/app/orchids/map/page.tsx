@@ -23,14 +23,11 @@ const typeColors: Record<string, { bg: string; light: string }> = {
   Egg: { bg: "#2ecc71", light: "#eafaf1" },
 };
 
-type Clinic = typeof clinics[0];
-
 // Chicago center
 const CHICAGO: [number, number] = [-87.6298, 41.8781];
 
 export default function OrchidsMapPage() {
   const [zip, setZip] = useState("60614");
-  const [inputZip, setInputZip] = useState("60614");
   const [activeId, setActiveId] = useState<number>(clinics[0].id);
   const [filterType, setFilterType] = useState("All");
 
@@ -51,11 +48,9 @@ export default function OrchidsMapPage() {
     <div style={{ paddingTop: 64, height: "100vh", display: "flex", flexDirection: "column", overflow: "hidden" }}>
       {/* Top bar */}
       <div style={{ background: "white", borderBottom: "1px solid var(--border)", padding: "16px 32px", display: "flex", alignItems: "center", gap: 24, flexShrink: 0 }}>
-        <form onSubmit={e => { e.preventDefault(); setZip(inputZip); }} style={{ display: "flex", gap: 8 }}>
-          <input value={inputZip} onChange={e => setInputZip(e.target.value)} maxLength={5}
-            style={{ padding: "8px 14px", border: "1px solid var(--border)", borderRadius: 6, fontSize: 14, outline: "none", width: 120, letterSpacing: "0.08em", color: "var(--navy)" }} />
-          <button type="submit" style={{ padding: "8px 16px", background: "var(--navy)", color: "white", fontSize: 13, fontWeight: 600, border: "none", borderRadius: 6, cursor: "pointer" }}>Update</button>
-        </form>
+        <div style={{ fontSize: 13, color: "var(--text-muted)" }}>
+          Searching near <strong style={{ color: "var(--navy)" }}>{zip}</strong>
+        </div>
 
         <div style={{ width: 1, height: 32, background: "var(--border)" }} />
 
@@ -146,6 +141,7 @@ export default function OrchidsMapPage() {
             center={CHICAGO}
             pins={pins}
             onPinClick={id => setActiveId(id as number)}
+            onZipChange={(_, z) => setZip(z)}
             style={{ position: "absolute", inset: 0 }}
           />
 
