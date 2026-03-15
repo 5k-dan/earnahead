@@ -143,12 +143,12 @@ export const MOCK_POIS: POIFeatureCollection = {
   features: [
     { type: "Feature", geometry: { type: "Point", coordinates: [-87.6842, 41.9085] }, properties: { id: "1", name: "BioLife Plasma",              type: "Plasma",   earn: "$85"    } },
     { type: "Feature", geometry: { type: "Point", coordinates: [-87.6397, 41.8782] }, properties: { id: "2", name: "Lifestream Blood Center",      type: "Blood",    earn: "$50"    } },
-    { type: "Feature", geometry: { type: "Point", coordinates: [-87.6204, 41.8954] }, properties: { id: "3", name: "Northwestern Clinical Trials", type: "Research", earn: "$200"   } },
+    { type: "Feature", geometry: { type: "Point", coordinates: [-87.6380, 41.8954] }, properties: { id: "3", name: "Northwestern Clinical Trials", type: "Research", earn: "$200"   } },
     { type: "Feature", geometry: { type: "Point", coordinates: [-87.6512, 41.9231] }, properties: { id: "4", name: "CSL Plasma",                   type: "Plasma",   earn: "$90"    } },
     { type: "Feature", geometry: { type: "Point", coordinates: [-87.6867, 41.8731] }, properties: { id: "5", name: "American Red Cross",           type: "Blood",    earn: "$45"    } },
     { type: "Feature", geometry: { type: "Point", coordinates: [-87.6741, 41.8820] }, properties: { id: "6", name: "Vitalant Blood Center",        type: "Blood",    earn: "$50"    } },
-    { type: "Feature", geometry: { type: "Point", coordinates: [-87.6278, 41.8805] }, properties: { id: "7", name: "New England Cryogenic",        type: "Sperm",    earn: "$150"   } },
-    { type: "Feature", geometry: { type: "Point", coordinates: [-87.6243, 41.9001] }, properties: { id: "8", name: "Shady Grove Fertility",        type: "Egg",      earn: "$8,500" } },
+    { type: "Feature", geometry: { type: "Point", coordinates: [-87.6420, 41.8809] }, properties: { id: "7", name: "New England Cryogenic",        type: "Sperm",    earn: "$150"   } },
+    { type: "Feature", geometry: { type: "Point", coordinates: [-87.6450, 41.8992] }, properties: { id: "8", name: "Shady Grove Fertility",        type: "Egg",      earn: "$8,500" } },
   ],
 };
 
@@ -433,48 +433,104 @@ export default function ZipMap({
     mapRef.current.flyTo({ center, zoom: options.zoom ?? 13, duration: 800 });
   }, [center, options.zoom]);
 
-  // ── Re-render markers when pins change ────────────────────────────────────
+  // ── Render pins as a GeoJSON cluster source ───────────────────────────────
   useEffect(() => {
-    if (!mapRef.current) return;
+    const map = mapRef.current;
+    if (!map) return;
 
-    markersRef.current.forEach((m) => m.remove());
-    markersRef.current = [];
+    const data = pinsToGeoJSON(pins);
 
-    pins.forEach((pin) => {
-      const el = document.createElement("div");
-      el.style.cssText = `
-        display: inline-block;
-        background: ${pin.active ? "#0d1f3c" : pin.color};
-        color: white;
-        font-size: 11px;
-        font-weight: 700;
-        font-family: -apple-system, sans-serif;
-        padding: 4px 10px;
-        border-radius: 20px;
-        border: 2px solid ${pin.active ? "white" : "rgba(255,255,255,0.6)"};
-        box-shadow: ${pin.active ? "0 4px 20px rgba(13,31,60,0.4)" : "0 2px 8px rgba(0,0,0,0.18)"};
-        white-space: nowrap;
-        cursor: pointer;
-        transform: ${pin.active ? "scale(1.15)" : "scale(1)"};
-        transition: all 150ms ease;
-        position: relative;
-      `;
-      el.textContent = pin.label;
+    // Fast-path: source already exists — just swap the data
+    if (map.getSource(PIN_SOURCE)) {
+      (map.getSource(PIN_SOURCE) as mapboxgl.GeoJSONSource).setData(data);
+      return;
+    }
 
-      if (onPinClick) {
-        el.addEventListener("click", (e) => {
-          e.stopPropagation();
-          onPinClick(pin.id);
-        });
+    const initPinLayers = () => {
+      map.addSource(PIN_SOURCE, {
+        type: "geojson", data,
+        cluster: true, clusterRadius: 55, clusterMaxZoom: 12,
+      });
+
+      // ── Cluster bubble ──────────────────────────────────────────────────
+      map.addLayer({
+        id: PIN_CLUSTERS, type: "circle", source: PIN_SOURCE,
+        filter: ["has", "point_count"],
+        paint: {
+          "circle-color": "#1e5aa8",
+          "circle-radius": ["step", ["get", "point_count"], 22, 3, 28, 7, 34],
+          "circle-stroke-width": 3, "circle-stroke-color": "white",
+        },
+      });
+
+      // ── Cluster count label ─────────────────────────────────────────────
+      map.addLayer({
+        id: PIN_CLUSTER_COUNT, type: "symbol", source: PIN_SOURCE,
+        filter: ["has", "point_count"],
+        layout: {
+          "text-field": ["get", "point_count_abbreviated"],
+          "text-font": ["DIN Offc Pro Bold", "Arial Unicode MS Bold"],
+          "text-size": 13, "text-allow-overlap": true, "text-ignore-placement": true,
+        },
+        paint: { "text-color": "white" },
+      });
+
+      // ── Individual pin circle (colored by type) ─────────────────────────
+      map.addLayer({
+        id: PIN_CIRCLES, type: "circle", source: PIN_SOURCE,
+        filter: ["!", ["has", "point_count"]],
+        paint: {
+          "circle-color":        ["case", ["==", ["get", "active"], 1], "#0d1f3c", ["get", "color"]],
+          "circle-radius":       ["case", ["==", ["get", "active"], 1], 20, 16],
+          "circle-stroke-width": 2, "circle-stroke-color": "white",
+        },
+      });
+
+      // ── Individual pin price label ──────────────────────────────────────
+      map.addLayer({
+        id: PIN_LABELS, type: "symbol", source: PIN_SOURCE,
+        filter: ["!", ["has", "point_count"]],
+        layout: {
+          "text-field": ["get", "label"],
+          "text-font": ["DIN Offc Pro Bold", "Arial Unicode MS Bold"],
+          "text-size": 10, "text-allow-overlap": true, "text-ignore-placement": true,
+        },
+        paint: { "text-color": "white" },
+      });
+
+      // ── Cluster click → zoom in ─────────────────────────────────────────
+      map.on("click", PIN_CLUSTERS, (e) => {
+        const features = map.queryRenderedFeatures(e.point, { layers: [PIN_CLUSTERS] });
+        if (!features.length) return;
+        const clusterId = features[0].properties?.cluster_id as number;
+        (map.getSource(PIN_SOURCE) as mapboxgl.GeoJSONSource).getClusterExpansionZoom(
+          clusterId,
+          (err: Error | null | undefined, zoom: number | null | undefined) => {
+            if (err || zoom == null) return;
+            map.easeTo({
+              center: (features[0].geometry as GeoJSON.Point).coordinates as [number, number],
+              zoom: zoom + 0.5,
+            });
+          },
+        );
+      });
+
+      // ── Individual pin click ────────────────────────────────────────────
+      map.on("click", PIN_CIRCLES, (e) => {
+        const id = e.features?.[0]?.properties?.id;
+        if (id != null) onPinClickRef.current?.(id);
+      });
+
+      // ── Cursor pointer on hover ─────────────────────────────────────────
+      for (const layer of [PIN_CLUSTERS, PIN_CIRCLES]) {
+        map.on("mouseenter", layer, () => { map.getCanvas().style.cursor = "pointer"; });
+        map.on("mouseleave", layer, () => { map.getCanvas().style.cursor = ""; });
       }
+    };
 
-      const marker = new mapboxgl.Marker({ element: el, anchor: "bottom" })
-        .setLngLat([pin.lng, pin.lat])
-        .addTo(mapRef.current!);
-
-      markersRef.current.push(marker);
-    });
-  }, [pins, onPinClick]);
+    if (map.isStyleLoaded()) initPinLayers();
+    else map.once("styledata", initPinLayers);
+  }, [pins]);
 
   // ── ZIP search ────────────────────────────────────────────────────────────
   const handleZipSearch = async () => {

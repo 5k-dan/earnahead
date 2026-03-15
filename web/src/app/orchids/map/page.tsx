@@ -7,12 +7,12 @@ import ZipMap from "@/components/ZipMap";
 const clinics = [
   { id: 1, name: "BioLife Plasma Services",    type: "Plasma",   earn: "$85",    distance: "0.8 mi", time: "90 min", lat: 41.9085, lng: -87.6842, verified: true, address: "1420 N Milwaukee Ave" },
   { id: 2, name: "Lifestream Blood Center",    type: "Blood",    earn: "$50",    distance: "1.2 mi", time: "60 min", lat: 41.8778, lng: -87.6489, verified: true, address: "820 W Jackson Blvd" },
-  { id: 3, name: "Northwestern Clinical Trials",type: "Research", earn: "$200",   distance: "1.9 mi", time: "4 hrs",  lat: 41.8954, lng: -87.6218, verified: true, address: "675 N St Clair St" },
+  { id: 3, name: "Northwestern Clinical Trials",type: "Research", earn: "$200",   distance: "1.9 mi", time: "4 hrs",  lat: 41.8954, lng: -87.6380, verified: true, address: "675 N St Clair St" },
   { id: 4, name: "CSL Plasma",                 type: "Plasma",   earn: "$90",    distance: "2.3 mi", time: "90 min", lat: 41.9231, lng: -87.6512, verified: true, address: "2211 N Clark St" },
   { id: 5, name: "American Red Cross",         type: "Blood",    earn: "$45",    distance: "2.8 mi", time: "60 min", lat: 41.8731, lng: -87.6867, verified: true, address: "2200 W Harrison St" },
   { id: 6, name: "Vitalant Blood Center",      type: "Blood",    earn: "$50",    distance: "3.4 mi", time: "60 min", lat: 41.8820, lng: -87.6741, verified: true, address: "1615 W Madison St" },
-  { id: 7, name: "New England Cryogenic",      type: "Sperm",    earn: "$150",   distance: "3.9 mi", time: "45 min", lat: 41.8809, lng: -87.6278, verified: true, address: "55 E Monroe St" },
-  { id: 8, name: "Shady Grove Fertility",      type: "Egg",      earn: "$8,500", distance: "4.6 mi", time: "4 wks",  lat: 41.8992, lng: -87.6263, verified: true, address: "900 N Michigan Ave" },
+  { id: 7, name: "New England Cryogenic",      type: "Sperm",    earn: "$150",   distance: "3.9 mi", time: "45 min", lat: 41.8809, lng: -87.6420, verified: true, address: "55 E Monroe St" },
+  { id: 8, name: "Shady Grove Fertility",      type: "Egg",      earn: "$8,500", distance: "4.6 mi", time: "4 wks",  lat: 41.8992, lng: -87.6450, verified: true, address: "900 N Michigan Ave" },
 ];
 
 const typeColors: Record<string, { bg: string; light: string }> = {
