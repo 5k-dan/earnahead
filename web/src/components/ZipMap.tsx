@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import { get as idbGet, set as idbSet } from "idb-keyval";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -50,6 +51,46 @@ interface TigerFeature {
 interface TigerFeatureCollection {
   type: "FeatureCollection";
   features: TigerFeature[];
+}
+
+// ─── Cache ────────────────────────────────────────────────────────────────────
+
+const TTL_24H = 24 * 60 * 60 * 1000;
+
+interface CacheEntry<T> {
+  value: T;
+  expiresAt: number;
+}
+
+/** Read from IndexedDB, fall back to localStorage, return null on miss/expiry. */
+async function getCache<T>(key: string): Promise<T | null> {
+  try {
+    const entry = await idbGet<CacheEntry<T>>(key);
+    if (entry && entry.expiresAt > Date.now()) return entry.value;
+  } catch {
+    // IDB unavailable — try localStorage
+    try {
+      const raw = localStorage.getItem(key);
+      if (raw) {
+        const entry: CacheEntry<T> = JSON.parse(raw);
+        if (entry.expiresAt > Date.now()) return entry.value;
+        localStorage.removeItem(key);
+      }
+    } catch { /* ignore */ }
+  }
+  return null;
+}
+
+/** Write to IndexedDB, fall back to localStorage on failure. */
+async function setCache<T>(key: string, value: T, ttlMs = TTL_24H): Promise<void> {
+  const entry: CacheEntry<T> = { value, expiresAt: Date.now() + ttlMs };
+  try {
+    await idbSet(key, entry);
+  } catch {
+    try {
+      localStorage.setItem(key, JSON.stringify(entry));
+    } catch { /* quota exceeded or private browsing — skip silently */ }
+  }
 }
 
 // ─── Constants ────────────────────────────────────────────────────────────────
