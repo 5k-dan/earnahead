@@ -19,3 +19,5 @@ describe('radius validation',()=>{
  it('coerces query strings and supplies radius default',()=>expect(searchSchema.parse({lat:'33.749',lon:'-84.388'}).radius).toBe(25));
  it.each([{lat:91,lon:0},{lat:0,lon:181},{lat:0,lon:0,radius:0},{lat:0,lon:0,radius:101},{lat:'bad',lon:0},{lat:0,lon:0,type:'MADE_UP'},{lat:'',lon:0},{lat:null,lon:0},{lat:'Infinity',lon:0}])('rejects out-of-bounds query %#',input=>expect(searchSchema.safeParse(input).success).toBe(false));
 });
+
+it('rejects profiles for children and other under-18 users',()=>expect(profileSchema.safeParse({...profile,dob:new Date().getUTCFullYear()-17+'-01-01'}).success).toBe(false));

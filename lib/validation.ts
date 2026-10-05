@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import {ageOn} from './rules.mjs';
-export const profileSchema = z.object({ name: z.string().trim().min(1).max(100), dob: z.string().refine(value=>ageOn(value)!==null,'Enter a valid date of birth that is not in the future.'), city: z.string().trim().min(1).max(120), preferences: z.array(z.enum(['PLASMA','SPERM','EGG','CLINICAL_TRIAL','RESEARCH_STUDY','OTHER'])).max(6) }).strict();
+export const profileSchema = z.object({ name: z.string().trim().min(1).max(100), dob: z.string().refine(value=>ageOn(value)!==null&&ageOn(value)!>=18,'EarnAhead accounts require age 18 or older and a valid date of birth.'), city: z.string().trim().min(1).max(120), preferences: z.array(z.enum(['PLASMA','SPERM','EGG','CLINICAL_TRIAL','RESEARCH_STUDY','OTHER'])).max(6) }).strict();
 const coordinate=z.preprocess(value=>value===null||(typeof value==='string'&&!value.trim())?undefined:value,z.coerce.number().finite());
 export const searchSchema = z.object({ lat: coordinate.refine(n=>n>=-90&&n<=90), lon: coordinate.refine(n=>n>=-180&&n<=180), scope:z.enum(['donations','research']).optional(),radius: z.coerce.number().min(1).max(100).default(25), type: z.enum(['PLASMA','SPERM','EGG','CLINICAL_TRIAL','RESEARCH_STUDY','OTHER']).optional() });
 export const preliminaryDisclaimer = 'You may meet the listed preliminary requirements. Final eligibility is determined by the medical provider.';

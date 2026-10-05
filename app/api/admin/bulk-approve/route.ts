@@ -8,7 +8,7 @@ export async function POST(req:NextRequest){
  const input=z.object({after:z.string().uuid().optional()}).strict().safeParse(req?await req.json().catch(()=>({})):{});if(!input.success)return NextResponse.json({error:'Invalid approval cursor.'},{status:400});
  let query=db.from('opportunities').select('*').eq('review_status','PENDING_REVIEW').order('id').limit(1000);if(input.data.after)query=query.gt('id',input.data.after);
  const {data,error}=await query;if(error)return NextResponse.json({error:error.message},{status:500});
- const reviewable=(data??[]).filter(row=>row.review_status==='PENDING_REVIEW'&&reviewSchema.safeParse(row).success);
+ const reviewable=(data??[]).filter(row=>row.data_source!=='GOOGLE_PLACES'&&row.review_status==='PENDING_REVIEW'&&reviewSchema.safeParse(row).success);
  const nextCursor=data?.length===1000?data[data.length-1].id:null;
  const ids=reviewable.map(r=>r.id);if(!ids.length)return NextResponse.json({approved:0,skipped:data?.length??0,nextCursor});
  let approved=0;

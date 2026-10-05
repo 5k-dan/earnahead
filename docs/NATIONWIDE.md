@@ -15,3 +15,7 @@ The scheduled job uses the existing sync-state row and lock (historical ID `atla
 Donation facility discovery supports each of the 50 states, or a sequential all-state pass, using Google Places. Add GOOGLE_PLACES_API_KEY as a sensitive server-only Vercel Production variable and redeploy before using this feature. Enable Places API (New) in Google Cloud and configure billing and quotas. The importer retrieves the first 20 results per category/state; this is a discovery pass, not an exhaustive directory. These records have NEEDS_SOURCE status, null compensation, and remain invisible until original provider terms are added and approved. Existing sourced Atlanta donation programs remain available.
 
 In Review listings, donation imports and provider sources appear first. Clinical research imports only start when you click Import research batch; each run processes up to 10 registry pages. Keep the page open and click again to resume if more pages remain. Approve reviewed sources to publish them. More states supported does not mean reviewed listings exist in every ZIP code.
+
+## October 5 launch review
+
+Google Places imports, approval and public display are paused. Existing Places-derived locations need independently sourced addresses and permitted geocoding before reactivation; payment-source adapters do not resolve the location-data license. See LEGAL_LAUNCH_REVIEW.md.
