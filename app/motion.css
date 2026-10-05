@@ -24,6 +24,50 @@
   to { opacity:1; transform:translateY(0); }
 }
 @keyframes ea-fade { from { opacity:0; } to { opacity:1; } }
+
+/* One-time entrances use short, bounded delays; long result lists stay still. */
+@media (prefers-reduced-motion:no-preference) {
+  .welcome-hero { animation:ea-soft-enter 480ms cubic-bezier(.22,1,.36,1) both; }
+  .welcome-categories { animation:ea-soft-enter 480ms 90ms cubic-bezier(.22,1,.36,1) both; }
+  .welcome-steps article { animation:ea-soft-enter 420ms cubic-bezier(.22,1,.36,1) both; }
+  .welcome-steps article:nth-child(2) { animation-delay:70ms; }
+  .welcome-steps article:nth-child(3) { animation-delay:140ms; }
+  .listing-grid>.opportunity-card:nth-child(-n+6) { animation:ea-card-enter 360ms cubic-bezier(.22,1,.36,1) backwards; }
+  .listing-grid>.opportunity-card:nth-child(2) { animation-delay:35ms; }
+  .listing-grid>.opportunity-card:nth-child(3) { animation-delay:70ms; }
+  .listing-grid>.opportunity-card:nth-child(4) { animation-delay:90ms; }
+  .listing-grid>.opportunity-card:nth-child(5) { animation-delay:115ms; }
+  .listing-grid>.opportunity-card:nth-child(6) { animation-delay:140ms; }
+  .signup-confirmation { animation:ea-soft-enter 380ms cubic-bezier(.22,1,.36,1) both; }
+  .confirmation-icon { animation:ea-confirm 540ms 100ms cubic-bezier(.22,1,.36,1) both; }
+  .confirmation-icon svg { animation:ea-soft-enter 400ms 210ms ease-out both; }
+  .payment-offer-details[open] p { animation:ea-fade 180ms ease-out both; }
+  .bookmark-button.is-saved svg { animation:ea-save 280ms ease-out; }
+  .primary[href] svg:last-child { transition:transform 180ms ease; }
+  .welcome-category>span { transition:transform 220ms ease,background-color 220ms ease; }
+}
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
+  .primary[href]:hover svg:last-child { transform:translateX(3px); }
+  .welcome-category:hover>span { transform:translateY(-2px) rotate(-4deg);background-color:#e7d8f1; }
+  .opportunity-card { transition:transform 220ms cubic-bezier(.22,1,.36,1),box-shadow 220ms ease,border-color 220ms ease; }
+  .opportunity-card:hover { border-color:#d8c5e6; }
+}
+@keyframes ea-soft-enter {
+  from { opacity:0;transform:translateY(12px); }
+  to { opacity:1;transform:translateY(0); }
+}
+@keyframes ea-card-enter {
+  from { opacity:0;transform:translateY(8px); }
+  to { opacity:1;transform:translateY(0); }
+}
+@keyframes ea-confirm {
+  from { opacity:0;transform:scale(.85); }
+  to { opacity:1;transform:scale(1); }
+}
+@keyframes ea-save {
+  0%,100% { transform:scale(1); }
+  45% { transform:scale(1.2); }
+}
 @media (prefers-reduced-motion:reduce) {
   .page-heading, .filter-panel, .location-results, .modal-backdrop, .modal,
   .notice, .review-item form, .opportunity-card, .primary, .filter-button,
@@ -33,4 +77,9 @@
     transition:none;
   }
   .opportunity-card:hover { transform:none; }
+  .welcome-hero,.welcome-categories,.welcome-steps article,
+  .listing-grid>.opportunity-card,.signup-confirmation,.confirmation-icon,
+  .confirmation-icon svg,.payment-offer-details[open] p,
+  .bookmark-button.is-saved svg,.primary[href] svg:last-child,
+  .welcome-category>span { animation:none;transition:none; }
 }
