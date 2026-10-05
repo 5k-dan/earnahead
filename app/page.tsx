@@ -1,2 +1,2 @@
 import { Marketplace } from '@/components/marketplace';
-export default function Page() { return <Marketplace page="explore" />; }
+export default function Page() { return <Marketplace page="landing" />; }
