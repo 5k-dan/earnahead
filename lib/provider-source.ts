@@ -2,18 +2,26 @@ import type {SupabaseClient} from '@supabase/supabase-js';
 
 // Only maintained, original provider pages are fetched. Listing text never becomes a URL.
 const providers=[
- {name:'CSL Plasma',match:/^CSL Plasma(?:\s|$)/i,age:'https://www.cslplasma.com/faq',payment:'https://www.cslplasma.com/faq',range:/between the ages of (18) to (74)/i},
- {name:'BioLife Plasma Services',match:/^BioLife Plasma(?: Services)?(?:\s|$)/i,age:'https://www.biolifeplasma.com/donation-process/who-can-donate',payment:'https://www.biolifeplasma.com/donation-process/faqs',range:/(18) years old or older/i},
+ {type:'PLASMA',name:'CSL Plasma',identity:/CSL Plasma/i,match:/^CSL Plasma(?:\s|$)/i,age:'https://www.cslplasma.com/faq',payment:'https://www.cslplasma.com/faq',range:/between the ages of (18) to (74)/i},
+ {type:'PLASMA',name:'BioLife Plasma Services',identity:/BioLife/i,match:/^BioLife Plasma(?: Services)?(?:\s|$)/i,age:'https://www.biolifeplasma.com/donation-process/who-can-donate',payment:'https://www.biolifeplasma.com/donation-process/faqs',range:/(18) years old or older/i},
+ {type:'PLASMA',name:'Octapharma Plasma',identity:/Octapharma/i,match:/^Octapharma Plasma(?:\s|$)/i,age:'https://www.octapharmaplasma.com/new-donors/',payment:'https://www.octapharmaplasma.com/new-donors/',range:/between (18) and (70) years old/i},
+ {type:'PLASMA',name:'Grifols',identity:/Grifols/i,match:/^(?:Grifols (?:Biomat|Talecris|Plasma)|Biomat USA|Talecris Plasma Resources)(?:\s|$)/i,age:'https://www.grifolsplasma.com/en/first-donation/are-you-eligible',payment:'https://www.grifolsplasma.com/en/first-donation/faqs',range:/between the ages of (18) and (69)/i},
+ {type:'SPERM',name:'Fairfax Cryobank',identity:/Fairfax Cryobank/i,match:/^Fairfax Cryobank(?:\s|$)/i,age:'https://fairfaxcryobank.com/become-a-donor',payment:'https://fairfaxcryobank.com/become-a-donor',range:/between the ages of (18)\s*-\s*(39)/i,fee:/getting paid \$(150) per donation visit/i,basis:'PER_VISIT'},
+ {type:'EGG',name:'Fairfax EggBank',identity:/Fairfax EggBank/i,match:/^Fairfax EggBank(?:\s|$)/i,age:'https://www.fairfaxeggbank.com/egg-donor-requirements/',payment:'https://www.fairfaxeggbank.com/egg-donor-faqs/',range:/between (19) and (30) years old/i},
+ {type:'EGG',name:'ConceiveAbilities',identity:/ConceiveAbilities/i,match:/^ConceiveAbilities(?:\s|$)/i,age:'https://www.conceiveabilities.com/egg-donors/faq/',payment:'https://www.conceiveabilities.com/egg-donors/faq/',range:/between (21) and (28)/i},
 ];
-export function providerFor(title:string,type:string){return type==='PLASMA'?providers.find(p=>p.match.test(title)):undefined;}
+export function providerFor(title:string,type:string){return providers.find(p=>p.type===type&&p.match.test(title));}
 export function publishedProviderTerms(title:string,type:string,ageHTML:string,paymentHTML:string){
  const provider=providerFor(title,type);if(!provider)return null;
- const text=(html:string)=>html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi,' ').replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi,' ').replace(/<[^>]+>/g,' ').replace(/&nbsp;|&#160;/g,' ').replace(/\s+/g,' ');
+ const text=(html:string)=>html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi,' ').replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi,' ').replace(/<img\b[^>]*alt=["']([^"']*)["'][^>]*>/gi,' $1 ').replace(/<[^>]+>/g,' ').replace(/&nbsp;|&#160;/g,' ').replace(/&ndash;|&mdash;|&#8211;|&#8212;|[–—]/g,'-').replace(/\s+/g,' ');
  const age=text(ageHTML),payment=text(paymentHTML);const match=age.match(provider.range);
  // A live source must still identify the provider and explicitly describe donor payment.
- if(!match||!new RegExp(provider.name.startsWith('CSL')?'CSL Plasma':'BioLife','i').test(age)||!/(?:paid|payment|compensation|money|debit card)/i.test(payment))return null;
- return {source_url:provider.age,minimum_age:Number(match[1]),maximum_age:match[2]?Number(match[2]):null,compensation_min:null,compensation_max:null,compensation_basis:null,
-  requirements:`${provider.name} publishes a minimum age of ${match[1]}${match[2]?` and maximum age of ${match[2]}`:''}. Additional provider screening and requirements apply; read ${provider.age}. Provider payment information: ${provider.payment}. No facility-specific compensation figure was extracted. Final eligibility is determined by the medical provider.`};
+ if(!match||!provider.identity.test(age)||!/(?:paid|payment|compensation|money|debit card|reimbursement)/i.test(payment))return null;
+ // Only an explicit, maintained per-visit fee is extracted. Promotional caps and
+ // multi-cycle egg totals are never treated as a single donation payment.
+ const fee='fee' in provider?payment.match(provider.fee!):null;const amount=fee?Number(fee[1]):null;
+ return {source_url:provider.age,minimum_age:Math.max(type==='EGG'?21:18,Number(match[1])),maximum_age:match[2]?Number(match[2]):null,compensation_min:amount,compensation_max:amount,compensation_basis:amount!==null&&'basis' in provider?provider.basis:null,
+  requirements:`${provider.name} publishes ages ${match[1]}${match[2]?` to ${match[2]}`:' and older'}.${type==='EGG'?' EarnAhead requires age 21 or older for egg programmes.':''} Additional provider screening and requirements apply; read ${provider.age}. Provider payment information: ${provider.payment}.${amount!==null?` Published fee: $${amount} per donation visit; acceptance and provider conditions apply.`:' No universally applicable single-donation compensation figure was extracted; promotional and multi-cycle caps are not presented as guaranteed pay.'} Programme offices may arrange screening or donation at another clinic; confirm the actual appointment location with the provider. Final eligibility is determined by the medical provider.`};
 }
 async function page(url:string){
  const response=await fetch(url,{redirect:'error',signal:AbortSignal.timeout(10000),cache:'no-store'});

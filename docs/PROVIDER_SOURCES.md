@@ -1,9 +1,9 @@
-# Automatic provider sources
+# Donation discovery and provider sources
 
-Donation imports now run an official-source pass afterward. Review listings also has a **Find provider sources** button for existing imports. The first adapters support CSL Plasma and BioLife Plasma Services. Unknown providers, missing age/payment evidence, inaccessible pages, and changed page formats remain hidden for manual review.
+Explore defaults to plasma, sperm, and egg programmes. Research has its own tab; the preference is remembered. Clinical imports are manual batches of at most 10 registry pages. The scheduled job prepares donation sources and refreshes already imported studies without continuously adding new clinical studies.
 
-The process fetches only fixed HTTPS provider URLs, rejects redirects, and never fetches a listing-controlled URL. It requires current provider identity, explicit published age evidence, and donor payment evidence. It stores source links and a preliminary-requirement summary, keeps monetary figures null, and never generalizes location-specific promotional rates. No health data about users is collected.
+Maintained adapters support CSL, BioLife, Octapharma, Grifols, Fairfax Cryobank, Fairfax EggBank, and ConceiveAbilities. They fetch fixed original provider URLs and require provider identity, explicit age requirements and payment evidence. Inaccessible pages or unsupported providers remain hidden. Egg listings have a platform minimum age of 21. Only Fairfax Cryobank's explicit $150 per donation visit is extracted; promotional caps and multi-cycle egg totals are never used as single-donation payments.
 
-Successful records become PENDING_REVIEW, not active or verified. An administrator reviews them and uses Approve all to publish. Existing approved, rejected, or manually sourced records are preserved. The lookup is paginated in batches of 100; provider responses are reused within each request. No extra Google Places requests are needed.
+Prepared records stay PENDING_REVIEW, inactive and unverified until an administrator approves. Existing approved and manually sourced records are preserved. Programme offices can arrange appointments elsewhere: users must confirm the donation location with the provider. No user medical data is collected.
 
-Sources: [CSL FAQ](https://www.cslplasma.com/faq), [BioLife requirements](https://www.biolifeplasma.com/donation-process/who-can-donate), [BioLife payment FAQ](https://www.biolifeplasma.com/donation-process/faqs). Additional brands need provider-specific adapters and validation before being enabled.
+Manual source checks can prepare records when official websites block automated fetches. The egg websites currently return HTTP 403 to the server; their official terms need manual review until automated access becomes available.
