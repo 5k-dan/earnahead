@@ -1,0 +1,37 @@
+.welcome-page{max-width:1120px;margin:24px auto 50px}
+.welcome-hero{display:grid;grid-template-columns:1.15fr 1fr;gap:48px;align-items:center;padding:44px;border:1px solid #e9dfed;border-radius:24px;background:linear-gradient(120deg,#faf0f5,#f0eaf8)}
+.welcome-hero h1{font-size:46px;line-height:1.15;margin:20px 0}
+.welcome-hero p{font-size:15px;line-height:1.8;color:#80718b;margin:0 0 24px}
+.welcome-hero .primary{font-size:14px;min-height:46px}
+.welcome-categories{padding:22px;background:#ffffffa6;border:1px solid #fff;border-radius:18px}
+.welcome-category{display:flex;gap:14px;align-items:flex-start;margin-top:24px}
+.welcome-category>span,.activity-icon{display:grid;place-items:center;flex-shrink:0;width:44px;height:44px;border-radius:13px;background:#eee5f5;color:#956eac}
+.welcome-category h2{font-size:16px;font-weight:500;margin:0 0 6px}
+.welcome-category p{font-size:13px;line-height:1.6;margin:0}
+.welcome-process{margin-top:36px;padding:8px 0}
+.welcome-process>h2{font-size:27px;font-weight:500;margin:12px 0 20px}
+.welcome-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.welcome-steps article{padding:24px;border:1px solid #e9e1ef;border-radius:17px;background:#fff}
+.step-number{font-size:13px;color:#9875af;background:#f3ecf8;border-radius:8px;padding:7px 10px;display:inline-block}
+.welcome-steps h3{font-size:17px;font-weight:500;margin:18px 0 10px}
+.welcome-steps p{font-size:13px;line-height:1.8;color:#86758f;margin:0}
+.welcome-disclaimer{display:flex;gap:9px;align-items:flex-start;font-size:12px;line-height:1.7;color:#8b7896;margin-top:20px}
+.welcome-disclaimer svg{flex-shrink:0;margin-top:2px}
+.activity-page{max-width:1080px;margin-top:24px}
+.activity-sections{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:30px;align-items:start}
+.activity-section{padding:24px;background:white;border:1px solid #e9e1ef;border-radius:18px;min-width:0}
+.activity-section-heading{display:flex;align-items:center;gap:12px;padding-bottom:18px;border-bottom:1px solid #f0eaf4}
+.activity-section-heading h2{font-size:18px;font-weight:500;margin:0}
+.activity-empty{padding:24px 0 4px}
+.activity-empty h3{font-size:19px;font-weight:500;margin:0 0 10px}
+.activity-empty p{font-size:14px;line-height:1.8;margin:0 0 20px}
+.activity-section .listing{margin-top:16px;padding:16px;overflow-wrap:anywhere}
+/* Donor titles don't need the three-line space reserved for research titles. */
+.opportunity-card:is(.type-plasma,.type-sperm,.type-egg) h3{min-height:0;margin-bottom:14px;line-height:1.4;-webkit-line-clamp:2}
+.opportunity-card:is(.type-plasma,.type-sperm,.type-egg) .opportunity-card-main{flex:0;padding-top:14px;padding-bottom:18px}
+.opportunity-card:is(.type-plasma,.type-sperm,.type-egg) .opportunity-card-footer{margin-top:auto;padding-top:15px}
+.opportunity-card:is(.type-plasma,.type-sperm,.type-egg) .provider-name{margin-bottom:7px}
+.listing-grid{align-items:start}
+footer>span:nth-child(2){display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+@media(max-width:1000px){.welcome-hero{gap:24px;padding:28px}.welcome-hero h1{font-size:38px}}
+@media(max-width:760px){.welcome-page,.activity-page{margin-top:8px}.welcome-hero{grid-template-columns:1fr;padding:24px 20px;gap:28px}.welcome-hero h1{font-size:35px}.welcome-categories{padding:18px}.welcome-steps,.activity-sections{grid-template-columns:1fr;gap:16px}.welcome-steps article,.activity-section{padding:20px}.activity-sections{margin-top:24px}.welcome-process{margin-top:28px}.welcome-disclaimer{font-size:12px}.opportunity-card:is(.type-plasma,.type-sperm,.type-egg) h3{font-size:18px}}
