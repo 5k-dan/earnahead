@@ -1,6 +1,12 @@
 # Nationwide discovery
 
-Public radius search supports any US location using the existing PostGIS query. ZIP search and device location need no additional geocoding credential; production city-name search requires OPEN_METEO_API_KEY.
+The October 5, 2026 coverage pass saved actual clinical-trial facility records in all 50 states and DC. See `nationwide-coverage.json` for the database counts. Newly imported records remain pending review, and registry compensation remains null. Donation coverage is a separate provider-source task; nationwide study coverage does not establish nationwide donation inventory.
+
+For a controlled local continuation, put the service role key in the ignored `.env.local` and run `node scripts/import-nationwide.mjs 20`. It resumes an ignored local checkpoint, processes at most 20 registry pages, preserves existing records, and does not publish listings. Never commit the key.
+
+City coordinates come from the [2025 Census Gazetteer](https://www.census.gov/geographies/reference-files/time-series/geo/gazetteer-files.2025.html), bundled in `lib/data/us-places.json`. They represent places, not exact facility addresses. City searches never substitute ZIP or city centroids for imported medical facility coordinates.
+
+Public radius search supports any US location using the existing PostGIS query. ZIP search and device location need no additional geocoding credential; city-name search uses the official 2025 US Census Places Gazetteer across all 50 states plus DC, without an API key. OPEN_METEO_API_KEY is optional for additional place matches.
 
 The review page imports recruiting ClinicalTrials.gov studies across the United States. Every geocoded US facility is considered, including Alaska and Hawaii. Compensation remains null. New records stay pending review. Requests save at most 20 facility records and return a continuation cursor; the review screen resumes saved progress. Existing approvals are preserved.
 
