@@ -1,0 +1,13 @@
+'use client';
+import {useEffect,useRef,useState} from 'react';
+import Link from 'next/link';
+import {Mail,ArrowUpRight,ArrowLeft} from 'lucide-react';
+import {browserDb} from '@/lib/supabase';
+
+export function SignupConfirmation({email,onChangeEmail}:{email:string;onChangeEmail:()=>void}){
+ const [cooldown,setCooldown]=useState(60);const [busy,setBusy]=useState(false);const [status,setStatus]=useState('');const heading=useRef<HTMLHeadingElement>(null);
+ useEffect(()=>{heading.current?.focus();const timer=setInterval(()=>setCooldown(value=>Math.max(0,value-1)),1000);return()=>clearInterval(timer);},[]);
+ const domain=email.split('@')[1]?.toLowerCase();const inbox=domain==='gmail.com'||domain==='googlemail.com'?'https://mail.google.com/':domain==='outlook.com'||domain==='hotmail.com'||domain==='live.com'?'https://outlook.live.com/mail/':domain==='yahoo.com'?'https://mail.yahoo.com/':null;
+ async function resend(){if(busy||cooldown)return;setBusy(true);setStatus('');try{const {error}=await browserDb().auth.resend({type:'signup',email,options:{emailRedirectTo:window.location.origin+'/auth/callback'}});if(error)throw error;setStatus('If this address needs confirmation, another email is on its way. Check your inbox and spam folder.');}catch{setStatus('We couldn’t resend right now. Wait a minute and try again, or contact support.');}finally{setBusy(false);setCooldown(60);}}
+ return <section className="account-panel signup-confirmation"><div className="confirmation-steps" aria-label="Signup progress"><span>1 · Account details</span><span aria-current="step">2 · Confirm email</span></div><div className="confirmation-icon"><Mail size={30}/></div><h1 ref={heading} tabIndex={-1}>Check your email</h1><p>To finish creating your account, open the confirmation email for</p><strong className="confirmation-email">{email}</strong><p>Click the link in that email to confirm your address and set up your profile.</p>{inbox&&<a className="primary" href={inbox} target="_blank" rel="noreferrer">Open your inbox <ArrowUpRight size={17}/></a>}<div className="confirmation-help"><h2>Don’t see it yet?</h2><p>Give it a minute and check your spam or junk folder.</p><button className="confirmation-resend" onClick={resend} disabled={busy||cooldown>0}>{busy?'Sending…':cooldown>0?`Resend email in ${cooldown}s`:'Resend confirmation email'}</button><p role="status" aria-live="polite">{status}</p></div><button className="detail-button" onClick={onChangeEmail}><ArrowLeft size={16}/>Use a different email</button><p className="confirmation-links"><Link href="/login">Already confirmed? Sign in</Link><Link href="/support">Need help?</Link></p></section>;
+}
