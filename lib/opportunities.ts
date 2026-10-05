@@ -8,7 +8,7 @@ export function groupOpportunities(rows:Opportunity[]):OpportunityGroup[]{
 }
 export const opportunityLabels:Record<string,string>={PLASMA:'Plasma donation',SPERM:'Sperm donor program',EGG:'Egg donor program',CLINICAL_TRIAL:'Clinical trial',RESEARCH_STUDY:'Research study',OTHER:'Medical opportunity'};
 
-export const paymentLabels:Record<string,string>={PER_VISIT:'Per visit',PER_MONTH:'Per month',TOTAL_PROGRAM:'Total program',UNSPECIFIED:'Payment period not published',UNPUBLISHED:'Compensation not published'};
+export const paymentLabels:Record<string,string>={PER_VISIT:'Per visit',PER_MONTH:'Per month',TOTAL_PROGRAM:'Full cycle / program',UNSPECIFIED:'Payment period not published',UNPUBLISHED:'Compensation not published'};
 export function paymentCategory(item:Opportunity):string{
  if(item.compensation_min===null&&item.compensation_max===null)return 'UNPUBLISHED';
  return ['PER_VISIT','PER_MONTH','TOTAL_PROGRAM'].includes(item.compensation_basis??'')?item.compensation_basis!:'UNSPECIFIED';
