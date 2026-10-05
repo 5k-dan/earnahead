@@ -1,0 +1,12 @@
+import {fireEvent,render,screen} from '@testing-library/react';
+import {beforeEach,expect,it,vi} from 'vitest';
+const state=vi.hoisted(()=>({user:{id:'own'} as {id:string}|null,enabled:false,path:'/explore'}));
+vi.mock('@/components/auth-provider',()=>({useAuth:()=>({user:state.user})}));
+vi.mock('@tanstack/react-query',()=>({useQuery:()=>({data:state.enabled})}));
+vi.mock('next/navigation',()=>({usePathname:()=>state.path}));
+vi.mock('@/lib/supabase',()=>({configured:true,browserDb:vi.fn()}));
+import {ActivityTracking} from '../components/activity-tracking';
+beforeEach(()=>{state.user={id:'own'};state.enabled=false;state.path='/explore';vi.unstubAllGlobals();});
+it('collects no actions before opt-in or without an account',()=>{const fetcher=vi.fn();vi.stubGlobal('fetch',fetcher);const view=render(<><ActivityTracking/><button data-activity="SAVE_CLICKED">Save</button></>);fireEvent.click(screen.getByText('Save'));expect(fetcher).not.toHaveBeenCalled();state.user=null;state.enabled=true;view.rerender(<><ActivityTracking/><button data-activity="SAVE_CLICKED">Save</button></>);fireEvent.click(screen.getByText('Save'));expect(fetcher).not.toHaveBeenCalled();});
+it('sends only the generic event and stops immediately on consent withdrawal',()=>{const fetcher=vi.fn().mockResolvedValue({ok:true});vi.stubGlobal('fetch',fetcher);state.enabled=true;const view=render(<><ActivityTracking/><button data-activity="SAVE_CLICKED" title="private listing title" data-opportunity-id="private-id">Save</button></>);fireEvent.click(screen.getByText('Save'));expect(fetcher).toHaveBeenCalledTimes(2);expect(JSON.parse(fetcher.mock.calls[1][1].body)).toEqual({event:'SAVE_CLICKED'});state.enabled=false;view.rerender(<><ActivityTracking/><button data-activity="SAVE_CLICKED">Save</button></>);fireEvent.click(screen.getByText('Save'));expect(fetcher).toHaveBeenCalledTimes(2);});
+it('never sends listing paths or query strings when viewing details',()=>{const fetcher=vi.fn().mockResolvedValue({ok:true});vi.stubGlobal('fetch',fetcher);state.enabled=true;state.path='/opportunity/private-id';render(<ActivityTracking/>);expect(JSON.parse(fetcher.mock.calls[0][1].body)).toEqual({event:'OPPORTUNITY_OPENED'});});

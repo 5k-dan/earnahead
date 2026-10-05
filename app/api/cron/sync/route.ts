@@ -10,7 +10,7 @@ export async function GET(req:NextRequest){
  if(!secret||secret.length<32||actual.length!==expected.length||!timingSafeEqual(actual,expected))return NextResponse.json({error:'Unauthorized'},{status:401});
  const url=process.env.NEXT_PUBLIC_SUPABASE_URL,key=process.env.SUPABASE_SERVICE_ROLE_KEY;if(!url||!key)return NextResponse.json({error:'Background sync is not configured.'},{status:503});
  const db=createClient(url,key,{auth:{persistSession:false,autoRefreshToken:false}});const lock=await db.rpc('claim_sync');if(lock.error)return NextResponse.json({error:'Sync database setup is required.'},{status:503});if(!lock.data)return NextResponse.json({skipped:true});
- try{const state=await db.from('sync_state').select('*').eq('id','atlanta').single();if(state.error)throw state.error;
+ try{await db.rpc('prune_activity_events');const state=await db.from('sync_state').select('*').eq('id','atlanta').single();if(state.error)throw state.error;
   const imported=await importPage(db,{source:'trials',scope:'nationwide',pageToken:state.data.cursor?.startsWith('us:')?state.data.cursor.slice(3):undefined});const result=await imported.json();if(!imported.ok)throw new Error('Registry import failed');
   const refreshed=await refreshRegistry(db,state.data.refresh_offset);const update=await db.from('sync_state').update({cursor:result.nextPageToken?'us:'+result.nextPageToken:null,refresh_offset:refreshed.nextOffset,last_completed_at:new Date().toISOString(),status:'OK',imported:result.imported,archived:refreshed.archived}).eq('id','atlanta');if(update.error)throw update.error;
   const log=await db.from('sync_runs').insert({status:'OK',imported:result.imported,archived:refreshed.archived});if(log.error)throw log.error;
