@@ -1,3 +1,4 @@
+import {publishedCompensation} from './rules.mjs';
 import {repairText} from './text';
 export type Opportunity={source_checked_at?:string|null;id:string;title:string;opportunity_type:string;compensation_min:number|null;compensation_max:number|null;compensation_basis?:string|null;minimum_age:number;maximum_age:number|null;source_url:string;distance_miles:number;latitude:number;longitude:number;organization_name?:string;facility_name?:string;address?:string};
 export type OpportunityGroup=Opportunity&{nearbyLocations:Opportunity[]};
@@ -21,4 +22,13 @@ export function resultSections(items:OpportunityGroup[],sort:string){
   const keys=sort==='compensation'?Object.keys(paymentLabels):['ALL'];
   return keys.flatMap(key=>{const matching=rows.filter(item=>key==='ALL'||paymentCategory(item)===key).sort((a,b)=>sort==='compensation'?(b.compensation_max??b.compensation_min??-1)-(a.compensation_max??a.compensation_min??-1)||a.distance_miles-b.distance_miles:a.distance_miles-b.distance_miles);return matching.length?[{title:category.title,description:category.description,paymentLabel:key==='ALL'?null:paymentLabels[key],items:matching}]:[];});
  });
+}
+
+// Only reviewed provider sources justify a variable-rate label. Unknown sources stay unpublished.
+export function compensationDisplay(item:Pick<Opportunity,'compensation_min'|'compensation_max'|'compensation_basis'|'opportunity_type'|'source_url'>){
+ if(item.compensation_min!==null||item.compensation_max!==null)return publishedCompensation(item.compensation_min,item.compensation_max,item.compensation_basis,item.opportunity_type);
+ const variablePlasma=new Set(['https://www.cslplasma.com/faq','https://www.cslplasma.com/center/123','https://www.biolifeplasma.com/donation-process/who-can-donate','https://www.biolifeplasma.com/locations/georgia','https://www.octapharmaplasma.com/new-donors/','https://www.grifolsplasma.com/en/first-donation/are-you-eligible']);
+ if(item.opportunity_type==='PLASMA'&&variablePlasma.has(item.source_url))return 'Rate varies by center';
+ if(item.opportunity_type==='EGG'&&item.source_url==='https://www.fairfaxeggbank.com/egg-donor-requirements/')return 'Rate varies by location';
+ return 'Not published';
 }
