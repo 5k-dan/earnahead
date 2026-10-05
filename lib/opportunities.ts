@@ -1,6 +1,7 @@
+import type {ProviderOffer} from './provider-offers';
 import {publishedCompensation} from './rules.mjs';
 import {repairText} from './text';
-export type Opportunity={source_checked_at?:string|null;id:string;title:string;opportunity_type:string;compensation_min:number|null;compensation_max:number|null;compensation_basis?:string|null;minimum_age:number;maximum_age:number|null;source_url:string;distance_miles:number;latitude:number;longitude:number;organization_name?:string;facility_name?:string;address?:string};
+export type Opportunity={compensation_offer?:ProviderOffer|null;source_checked_at?:string|null;id:string;title:string;opportunity_type:string;compensation_min:number|null;compensation_max:number|null;compensation_basis?:string|null;minimum_age:number;maximum_age:number|null;source_url:string;distance_miles:number;latitude:number;longitude:number;organization_name?:string;facility_name?:string;address?:string};
 export type OpportunityGroup=Opportunity&{nearbyLocations:Opportunity[]};
 export function groupOpportunities(rows:Opportunity[]):OpportunityGroup[]{
  const groups=new Map<string,Opportunity[]>();
@@ -9,8 +10,9 @@ export function groupOpportunities(rows:Opportunity[]):OpportunityGroup[]{
 }
 export const opportunityLabels:Record<string,string>={PLASMA:'Plasma donation',SPERM:'Sperm donor program',EGG:'Egg donor program',CLINICAL_TRIAL:'Clinical trial',RESEARCH_STUDY:'Research study',OTHER:'Medical opportunity'};
 
-export const paymentLabels:Record<string,string>={PER_VISIT:'Per visit',PER_MONTH:'Per month',TOTAL_PROGRAM:'Full cycle / program',UNSPECIFIED:'Payment period not published',UNPUBLISHED:'Compensation not published'};
+export const paymentLabels:Record<string,string>={NEW_DONOR:'New donor offers',MULTI_CYCLE:'Multiple egg cycles',PER_VISIT:'Per visit',PER_MONTH:'Per month',TOTAL_PROGRAM:'Full cycle / program',UNSPECIFIED:'Payment period not published',UNPUBLISHED:'Compensation not published'};
 export function paymentCategory(item:Opportunity):string{
+ if(item.compensation_offer)return item.compensation_offer.kind;
  if(item.compensation_min===null&&item.compensation_max===null)return 'UNPUBLISHED';
  return ['PER_VISIT','PER_MONTH','TOTAL_PROGRAM'].includes(item.compensation_basis??'')?item.compensation_basis!:'UNSPECIFIED';
 }
@@ -25,7 +27,8 @@ export function resultSections(items:OpportunityGroup[],sort:string){
 }
 
 // Only reviewed provider sources justify a variable-rate label. Unknown sources stay unpublished.
-export function compensationDisplay(item:Pick<Opportunity,'compensation_min'|'compensation_max'|'compensation_basis'|'opportunity_type'|'source_url'>){
+export function compensationDisplay(item:Pick<Opportunity,'compensation_min'|'compensation_max'|'compensation_basis'|'opportunity_type'|'source_url'|'compensation_offer'>){
+ if(item.compensation_offer)return item.compensation_offer.label;
  if(item.compensation_min!==null||item.compensation_max!==null)return publishedCompensation(item.compensation_min,item.compensation_max,item.compensation_basis,item.opportunity_type);
  const variablePlasma=new Set(['https://www.cslplasma.com/faq','https://www.cslplasma.com/center/123','https://www.biolifeplasma.com/donation-process/who-can-donate','https://www.biolifeplasma.com/locations/georgia','https://www.octapharmaplasma.com/new-donors/','https://www.grifolsplasma.com/en/first-donation/are-you-eligible']);
  if(item.opportunity_type==='PLASMA'&&variablePlasma.has(item.source_url))return 'Rate varies by center';

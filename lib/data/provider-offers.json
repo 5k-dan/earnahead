@@ -1,0 +1,2414 @@
+{
+  "centers": {
+    "https://www.biolifeplasma.com/locations/arizona/avondale": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/arizona/avondale",
+      "checkedAt": "2026-10-05T21:52:46.487Z",
+      "expiresAt": "2026-10-12T21:52:46.550Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/alabama/birmingham": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/alabama/birmingham",
+      "checkedAt": "2026-10-05T21:52:46.553Z",
+      "expiresAt": "2026-10-12T21:52:46.553Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/alabama/mobile": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/alabama/mobile",
+      "checkedAt": "2026-10-05T21:52:46.557Z",
+      "expiresAt": "2026-10-12T21:52:46.557Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/arizona/glendale": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/arizona/glendale",
+      "checkedAt": "2026-10-05T21:52:46.560Z",
+      "expiresAt": "2026-10-12T21:52:46.560Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/arizona/phoenix": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/arizona/phoenix",
+      "checkedAt": "2026-10-05T21:52:46.698Z",
+      "expiresAt": "2026-10-12T21:52:46.698Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/arizona/mesa": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/arizona/mesa",
+      "checkedAt": "2026-10-05T21:52:46.726Z",
+      "expiresAt": "2026-10-12T21:52:46.726Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/arizona/tucson-auto": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/arizona/tucson-auto",
+      "checkedAt": "2026-10-05T21:52:46.730Z",
+      "expiresAt": "2026-10-12T21:52:46.730Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/arizona/tempe": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/arizona/tempe",
+      "checkedAt": "2026-10-05T21:52:46.740Z",
+      "expiresAt": "2026-10-12T21:52:46.740Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/california/bakersfield": {
+      "label": "Up to $600 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/california/bakersfield",
+      "checkedAt": "2026-10-05T21:52:46.854Z",
+      "expiresAt": "2026-10-12T21:52:46.854Z",
+      "maximum": 600,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/arizona/tucson": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/arizona/tucson",
+      "checkedAt": "2026-10-05T21:52:46.925Z",
+      "expiresAt": "2026-10-12T21:52:46.925Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/arkansas/fayetteville": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/arkansas/fayetteville",
+      "checkedAt": "2026-10-05T21:52:47.018Z",
+      "expiresAt": "2026-10-12T21:52:47.018Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/california/fresno": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/california/fresno",
+      "checkedAt": "2026-10-05T21:52:47.029Z",
+      "expiresAt": "2026-10-12T21:52:47.029Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/california/corona": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/california/corona",
+      "checkedAt": "2026-10-05T21:52:47.077Z",
+      "expiresAt": "2026-10-12T21:52:47.077Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/california/modesto": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/california/modesto",
+      "checkedAt": "2026-10-05T21:52:47.144Z",
+      "expiresAt": "2026-10-12T21:52:47.144Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/california/lakewood": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/california/lakewood",
+      "checkedAt": "2026-10-05T21:52:47.268Z",
+      "expiresAt": "2026-10-12T21:52:47.268Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/california/lemon-grove": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/california/lemon-grove",
+      "checkedAt": "2026-10-05T21:52:47.317Z",
+      "expiresAt": "2026-10-12T21:52:47.317Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/california/rialto": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/california/rialto",
+      "checkedAt": "2026-10-05T21:52:47.401Z",
+      "expiresAt": "2026-10-12T21:52:47.401Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/california/pomona": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/california/pomona",
+      "checkedAt": "2026-10-05T21:52:47.410Z",
+      "expiresAt": "2026-10-12T21:52:47.410Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/california/riverside": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/california/riverside",
+      "checkedAt": "2026-10-05T21:52:47.492Z",
+      "expiresAt": "2026-10-12T21:52:47.492Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/california/roseville": {
+      "label": "Up to $625 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/california/roseville",
+      "checkedAt": "2026-10-05T21:52:47.544Z",
+      "expiresAt": "2026-10-12T21:52:47.544Z",
+      "maximum": 625,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/california/moreno-valley": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/california/moreno-valley",
+      "checkedAt": "2026-10-05T21:52:47.668Z",
+      "expiresAt": "2026-10-12T21:52:47.668Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/california/sacramento-florin": {
+      "label": "Up to $625 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/california/sacramento-florin",
+      "checkedAt": "2026-10-05T21:52:47.704Z",
+      "expiresAt": "2026-10-12T21:52:47.704Z",
+      "maximum": 625,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/california/san-bernardino": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/california/san-bernardino",
+      "checkedAt": "2026-10-05T21:52:47.742Z",
+      "expiresAt": "2026-10-12T21:52:47.742Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/california/san-marcos": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/california/san-marcos",
+      "checkedAt": "2026-10-05T21:52:47.962Z",
+      "expiresAt": "2026-10-12T21:52:47.962Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/california/temecula": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/california/temecula",
+      "checkedAt": "2026-10-05T21:52:47.976Z",
+      "expiresAt": "2026-10-12T21:52:47.976Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/california/sacramento-marc": {
+      "label": "Up to $625 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/california/sacramento-marc",
+      "checkedAt": "2026-10-05T21:52:48.032Z",
+      "expiresAt": "2026-10-12T21:52:48.032Z",
+      "maximum": 625,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/california/stockton": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/california/stockton",
+      "checkedAt": "2026-10-05T21:52:48.048Z",
+      "expiresAt": "2026-10-12T21:52:48.048Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/california/victorville": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/california/victorville",
+      "checkedAt": "2026-10-05T21:52:48.080Z",
+      "expiresAt": "2026-10-12T21:52:48.080Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/california/visalia": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/california/visalia",
+      "checkedAt": "2026-10-05T21:52:48.110Z",
+      "expiresAt": "2026-10-12T21:52:48.110Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/colorado/aurora": {
+      "label": "Up to $625 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/colorado/aurora",
+      "checkedAt": "2026-10-05T21:52:48.296Z",
+      "expiresAt": "2026-10-12T21:52:48.296Z",
+      "maximum": 625,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/colorado/colorado-springs": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/colorado/colorado-springs",
+      "checkedAt": "2026-10-05T21:52:48.340Z",
+      "expiresAt": "2026-10-12T21:52:48.340Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/colorado/colorado-springs-sou": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/colorado/colorado-springs-sou",
+      "checkedAt": "2026-10-05T21:52:48.346Z",
+      "expiresAt": "2026-10-12T21:52:48.346Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/california/vista": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/california/vista",
+      "checkedAt": "2026-10-05T21:52:48.508Z",
+      "expiresAt": "2026-10-12T21:52:48.508Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/colorado/longmont": {
+      "label": "Up to $625 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/colorado/longmont",
+      "checkedAt": "2026-10-05T21:52:48.520Z",
+      "expiresAt": "2026-10-12T21:52:48.520Z",
+      "maximum": 625,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/colorado/loveland": {
+      "label": "Up to $625 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/colorado/loveland",
+      "checkedAt": "2026-10-05T21:52:48.654Z",
+      "expiresAt": "2026-10-12T21:52:48.654Z",
+      "maximum": 625,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/colorado/thornton": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/colorado/thornton",
+      "checkedAt": "2026-10-05T21:52:48.743Z",
+      "expiresAt": "2026-10-12T21:52:48.743Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/florida/casselberry": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/florida/casselberry",
+      "checkedAt": "2026-10-05T21:52:48.760Z",
+      "expiresAt": "2026-10-12T21:52:48.760Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/delaware/newark": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/delaware/newark",
+      "checkedAt": "2026-10-05T21:52:48.804Z",
+      "expiresAt": "2026-10-12T21:52:48.804Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/florida/daytona-beach": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/florida/daytona-beach",
+      "checkedAt": "2026-10-05T21:52:48.950Z",
+      "expiresAt": "2026-10-12T21:52:48.950Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/florida/jacksonville-norm": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/florida/jacksonville-norm",
+      "checkedAt": "2026-10-05T21:52:48.960Z",
+      "expiresAt": "2026-10-12T21:52:48.960Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/florida/gainesville": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/florida/gainesville",
+      "checkedAt": "2026-10-05T21:52:49.051Z",
+      "expiresAt": "2026-10-12T21:52:49.051Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/florida/jacksonville": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/florida/jacksonville",
+      "checkedAt": "2026-10-05T21:52:49.106Z",
+      "expiresAt": "2026-10-12T21:52:49.106Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/florida/orlando-gold": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/florida/orlando-gold",
+      "checkedAt": "2026-10-05T21:52:49.239Z",
+      "expiresAt": "2026-10-12T21:52:49.239Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/florida/lakeland": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/florida/lakeland",
+      "checkedAt": "2026-10-05T21:52:49.308Z",
+      "expiresAt": "2026-10-12T21:52:49.308Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/florida/kissimmee": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/florida/kissimmee",
+      "checkedAt": "2026-10-05T21:52:49.443Z",
+      "expiresAt": "2026-10-12T21:52:49.443Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/florida/orlando-john": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/florida/orlando-john",
+      "checkedAt": "2026-10-05T21:52:49.486Z",
+      "expiresAt": "2026-10-12T21:52:49.486Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/florida/pensacola": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/florida/pensacola",
+      "checkedAt": "2026-10-05T21:52:49.619Z",
+      "expiresAt": "2026-10-12T21:52:49.619Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/florida/largo": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/florida/largo",
+      "checkedAt": "2026-10-05T21:52:49.714Z",
+      "expiresAt": "2026-10-12T21:52:49.714Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/florida/orlando": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/florida/orlando",
+      "checkedAt": "2026-10-05T21:52:49.726Z",
+      "expiresAt": "2026-10-12T21:52:49.726Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/georgia/columbus": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/georgia/columbus",
+      "checkedAt": "2026-10-05T21:52:49.854Z",
+      "expiresAt": "2026-10-12T21:52:49.854Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/florida/tallahassee": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/florida/tallahassee",
+      "checkedAt": "2026-10-05T21:52:49.872Z",
+      "expiresAt": "2026-10-12T21:52:49.872Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/georgia/augusta": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/georgia/augusta",
+      "checkedAt": "2026-10-05T21:52:49.990Z",
+      "expiresAt": "2026-10-12T21:52:49.990Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/florida/tampa": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/florida/tampa",
+      "checkedAt": "2026-10-05T21:52:50.022Z",
+      "expiresAt": "2026-10-12T21:52:50.022Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/georgia/douglasville": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/georgia/douglasville",
+      "checkedAt": "2026-10-05T21:52:50.170Z",
+      "expiresAt": "2026-10-12T21:52:50.170Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/georgia/kennesaw": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/georgia/kennesaw",
+      "checkedAt": "2026-10-05T21:52:50.177Z",
+      "expiresAt": "2026-10-12T21:52:50.177Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/georgia/duluth": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/georgia/duluth",
+      "checkedAt": "2026-10-05T21:52:50.291Z",
+      "expiresAt": "2026-10-12T21:52:50.291Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/georgia/mcdonough": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/georgia/mcdonough",
+      "checkedAt": "2026-10-05T21:52:50.323Z",
+      "expiresAt": "2026-10-12T21:52:50.323Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/georgia/morrow": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/georgia/morrow",
+      "checkedAt": "2026-10-05T21:52:50.395Z",
+      "expiresAt": "2026-10-12T21:52:50.395Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/georgia/warner-robins": {
+      "label": "Up to $800 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/georgia/warner-robins",
+      "checkedAt": "2026-10-05T21:52:50.483Z",
+      "expiresAt": "2026-10-12T21:52:50.483Z",
+      "maximum": 800,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/georgia/snellville": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/georgia/snellville",
+      "checkedAt": "2026-10-05T21:52:50.576Z",
+      "expiresAt": "2026-10-12T21:52:50.576Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/idaho/boise": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/idaho/boise",
+      "checkedAt": "2026-10-05T21:52:50.652Z",
+      "expiresAt": "2026-10-12T21:52:50.652Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/idaho/ammon": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/idaho/ammon",
+      "checkedAt": "2026-10-05T21:52:50.806Z",
+      "expiresAt": "2026-10-12T21:52:50.806Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/idaho/hayden": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/idaho/hayden",
+      "checkedAt": "2026-10-05T21:52:50.814Z",
+      "expiresAt": "2026-10-12T21:52:50.814Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/idaho/nampa": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/idaho/nampa",
+      "checkedAt": "2026-10-05T21:52:50.826Z",
+      "expiresAt": "2026-10-12T21:52:50.826Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/illinois/addison": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/illinois/addison",
+      "checkedAt": "2026-10-05T21:52:50.896Z",
+      "expiresAt": "2026-10-12T21:52:50.896Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/illinois/dekalb": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/illinois/dekalb",
+      "checkedAt": "2026-10-05T21:52:51.061Z",
+      "expiresAt": "2026-10-12T21:52:51.061Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/illinois/fairview-heights": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/illinois/fairview-heights",
+      "checkedAt": "2026-10-05T21:52:51.135Z",
+      "expiresAt": "2026-10-12T21:52:51.135Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/illinois/chicago": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/illinois/chicago",
+      "checkedAt": "2026-10-05T21:52:51.268Z",
+      "expiresAt": "2026-10-12T21:52:51.268Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/illinois/harwood-heights": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/illinois/harwood-heights",
+      "checkedAt": "2026-10-05T21:52:51.343Z",
+      "expiresAt": "2026-10-12T21:52:51.343Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/illinois/bolingbrook": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/illinois/bolingbrook",
+      "checkedAt": "2026-10-05T21:52:51.430Z",
+      "expiresAt": "2026-10-12T21:52:51.430Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/illinois/villa-park": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/illinois/villa-park",
+      "checkedAt": "2026-10-05T21:52:51.463Z",
+      "expiresAt": "2026-10-12T21:52:51.463Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/illinois/joliet": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/illinois/joliet",
+      "checkedAt": "2026-10-05T21:52:51.469Z",
+      "expiresAt": "2026-10-12T21:52:51.469Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/illinois/rockford": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/illinois/rockford",
+      "checkedAt": "2026-10-05T21:52:51.564Z",
+      "expiresAt": "2026-10-12T21:52:51.564Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/indiana/bloomington": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/indiana/bloomington",
+      "checkedAt": "2026-10-05T21:52:51.648Z",
+      "expiresAt": "2026-10-12T21:52:51.648Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/indiana/elkhart": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/indiana/elkhart",
+      "checkedAt": "2026-10-05T21:52:51.702Z",
+      "expiresAt": "2026-10-12T21:52:51.702Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/indiana/greenwood": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/indiana/greenwood",
+      "checkedAt": "2026-10-05T21:52:51.776Z",
+      "expiresAt": "2026-10-12T21:52:51.776Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/indiana/fort-wayne-coldwater": {
+      "label": "Up to $750 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/indiana/fort-wayne-coldwater",
+      "checkedAt": "2026-10-05T21:52:51.810Z",
+      "expiresAt": "2026-10-12T21:52:51.810Z",
+      "maximum": 750,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/indiana/fort-wayne-getz": {
+      "label": "Up to $750 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/indiana/fort-wayne-getz",
+      "checkedAt": "2026-10-05T21:52:51.880Z",
+      "expiresAt": "2026-10-12T21:52:51.880Z",
+      "maximum": 750,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/indiana/kokomo": {
+      "label": "Up to $800 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/indiana/kokomo",
+      "checkedAt": "2026-10-05T21:52:51.956Z",
+      "expiresAt": "2026-10-12T21:52:51.956Z",
+      "maximum": 800,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/indiana/muncie": {
+      "label": "Up to $800 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/indiana/muncie",
+      "checkedAt": "2026-10-05T21:52:51.986Z",
+      "expiresAt": "2026-10-12T21:52:51.986Z",
+      "maximum": 800,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/indiana/indianapolis": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/indiana/indianapolis",
+      "checkedAt": "2026-10-05T21:52:51.988Z",
+      "expiresAt": "2026-10-12T21:52:51.988Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/iowa/ames": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/iowa/ames",
+      "checkedAt": "2026-10-05T21:52:52.037Z",
+      "expiresAt": "2026-10-12T21:52:52.037Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/iowa/ankeny": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/iowa/ankeny",
+      "checkedAt": "2026-10-05T21:52:52.076Z",
+      "expiresAt": "2026-10-12T21:52:52.076Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/iowa/cedar-falls": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/iowa/cedar-falls",
+      "checkedAt": "2026-10-05T21:52:52.104Z",
+      "expiresAt": "2026-10-12T21:52:52.104Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/iowa/cedar-rapids-rockwell": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/iowa/cedar-rapids-rockwell",
+      "checkedAt": "2026-10-05T21:52:52.171Z",
+      "expiresAt": "2026-10-12T21:52:52.171Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/iowa/cedar-rapids-edgewood": {
+      "label": "Up to $800 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/iowa/cedar-rapids-edgewood",
+      "checkedAt": "2026-10-05T21:52:52.280Z",
+      "expiresAt": "2026-10-12T21:52:52.280Z",
+      "maximum": 800,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/iowa/davenport": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/iowa/davenport",
+      "checkedAt": "2026-10-05T21:52:52.338Z",
+      "expiresAt": "2026-10-12T21:52:52.338Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/iowa/coralville": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/iowa/coralville",
+      "checkedAt": "2026-10-05T21:52:52.364Z",
+      "expiresAt": "2026-10-12T21:52:52.364Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/iowa/dubuque": {
+      "label": "Up to $800 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/iowa/dubuque",
+      "checkedAt": "2026-10-05T21:52:52.397Z",
+      "expiresAt": "2026-10-12T21:52:52.398Z",
+      "maximum": 800,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/iowa/des-moines": {
+      "label": "Up to $800 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/iowa/des-moines",
+      "checkedAt": "2026-10-05T21:52:52.400Z",
+      "expiresAt": "2026-10-12T21:52:52.400Z",
+      "maximum": 800,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/kansas/lenexa": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/kansas/lenexa",
+      "checkedAt": "2026-10-05T21:52:52.630Z",
+      "expiresAt": "2026-10-12T21:52:52.630Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/iowa/waterloo": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/iowa/waterloo",
+      "checkedAt": "2026-10-05T21:52:52.646Z",
+      "expiresAt": "2026-10-12T21:52:52.646Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/iowa/sioux-city": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/iowa/sioux-city",
+      "checkedAt": "2026-10-05T21:52:52.740Z",
+      "expiresAt": "2026-10-12T21:52:52.740Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/louisiana/baton-rouge": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/louisiana/baton-rouge",
+      "checkedAt": "2026-10-05T21:52:52.791Z",
+      "expiresAt": "2026-10-12T21:52:52.791Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/iowa/west-des-moines": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/iowa/west-des-moines",
+      "checkedAt": "2026-10-05T21:52:52.816Z",
+      "expiresAt": "2026-10-12T21:52:52.816Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/louisiana/lafayette": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/louisiana/lafayette",
+      "checkedAt": "2026-10-05T21:52:52.918Z",
+      "expiresAt": "2026-10-12T21:52:52.918Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/louisiana/bossier-city": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/louisiana/bossier-city",
+      "checkedAt": "2026-10-05T21:52:53.030Z",
+      "expiresAt": "2026-10-12T21:52:53.030Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/maryland/salisbury": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/maryland/salisbury",
+      "checkedAt": "2026-10-05T21:52:53.149Z",
+      "expiresAt": "2026-10-12T21:52:53.149Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/maryland/baltimore": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/maryland/baltimore",
+      "checkedAt": "2026-10-05T21:52:53.158Z",
+      "expiresAt": "2026-10-12T21:52:53.158Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/maryland/towson": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/maryland/towson",
+      "checkedAt": "2026-10-05T21:52:53.285Z",
+      "expiresAt": "2026-10-12T21:52:53.285Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/maryland/forestville": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/maryland/forestville",
+      "checkedAt": "2026-10-05T21:52:53.491Z",
+      "expiresAt": "2026-10-12T21:52:53.491Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/massachusetts/methuen": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/massachusetts/methuen",
+      "checkedAt": "2026-10-05T21:52:53.516Z",
+      "expiresAt": "2026-10-12T21:52:53.516Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/massachusetts/attleboro": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/massachusetts/attleboro",
+      "checkedAt": "2026-10-05T21:52:53.521Z",
+      "expiresAt": "2026-10-12T21:52:53.521Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/michigan/detroit": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/michigan/detroit",
+      "checkedAt": "2026-10-05T21:52:53.648Z",
+      "expiresAt": "2026-10-12T21:52:53.648Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/massachusetts/worcester": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/massachusetts/worcester",
+      "checkedAt": "2026-10-05T21:52:53.751Z",
+      "expiresAt": "2026-10-12T21:52:53.751Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/michigan/flint": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/michigan/flint",
+      "checkedAt": "2026-10-05T21:52:53.780Z",
+      "expiresAt": "2026-10-12T21:52:53.780Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/massachusetts/medford": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/massachusetts/medford",
+      "checkedAt": "2026-10-05T21:52:53.808Z",
+      "expiresAt": "2026-10-12T21:52:53.808Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/massachusetts/west-springfield": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/massachusetts/west-springfield",
+      "checkedAt": "2026-10-05T21:52:53.972Z",
+      "expiresAt": "2026-10-12T21:52:53.972Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/michigan/grand-rapids": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/michigan/grand-rapids",
+      "checkedAt": "2026-10-05T21:52:54.068Z",
+      "expiresAt": "2026-10-12T21:52:54.068Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/michigan/livonia": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/michigan/livonia",
+      "checkedAt": "2026-10-05T21:52:54.106Z",
+      "expiresAt": "2026-10-12T21:52:54.106Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/michigan/grandville": {
+      "label": "Up to $800 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/michigan/grandville",
+      "checkedAt": "2026-10-05T21:52:54.132Z",
+      "expiresAt": "2026-10-12T21:52:54.132Z",
+      "maximum": 800,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/michigan/holland": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/michigan/holland",
+      "checkedAt": "2026-10-05T21:52:54.214Z",
+      "expiresAt": "2026-10-12T21:52:54.214Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/michigan/mt-pleasant": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/michigan/mt-pleasant",
+      "checkedAt": "2026-10-05T21:52:54.281Z",
+      "expiresAt": "2026-10-12T21:52:54.281Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/michigan/ypsilanti": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/michigan/ypsilanti",
+      "checkedAt": "2026-10-05T21:52:54.394Z",
+      "expiresAt": "2026-10-12T21:52:54.394Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/michigan/warren": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/michigan/warren",
+      "checkedAt": "2026-10-05T21:52:54.448Z",
+      "expiresAt": "2026-10-12T21:52:54.448Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/minnesota/mankato": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/minnesota/mankato",
+      "checkedAt": "2026-10-05T21:52:54.532Z",
+      "expiresAt": "2026-10-12T21:52:54.532Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/michigan/walker": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/michigan/walker",
+      "checkedAt": "2026-10-05T21:52:54.611Z",
+      "expiresAt": "2026-10-12T21:52:54.611Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/minnesota/maple-grove": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/minnesota/maple-grove",
+      "checkedAt": "2026-10-05T21:52:54.624Z",
+      "expiresAt": "2026-10-12T21:52:54.624Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/minnesota/moorhead": {
+      "label": "Up to $750 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/minnesota/moorhead",
+      "checkedAt": "2026-10-05T21:52:54.774Z",
+      "expiresAt": "2026-10-12T21:52:54.774Z",
+      "maximum": 750,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/minnesota/saint-paul": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/minnesota/saint-paul",
+      "checkedAt": "2026-10-05T21:52:54.912Z",
+      "expiresAt": "2026-10-12T21:52:54.912Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/minnesota/waite-park": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/minnesota/waite-park",
+      "checkedAt": "2026-10-05T21:52:54.924Z",
+      "expiresAt": "2026-10-12T21:52:54.924Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/missouri/belton": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/missouri/belton",
+      "checkedAt": "2026-10-05T21:52:54.935Z",
+      "expiresAt": "2026-10-12T21:52:54.935Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/missouri/independence": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/missouri/independence",
+      "checkedAt": "2026-10-05T21:52:55.207Z",
+      "expiresAt": "2026-10-12T21:52:55.207Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/minnesota/mounds-view": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/minnesota/mounds-view",
+      "checkedAt": "2026-10-05T21:52:55.217Z",
+      "expiresAt": "2026-10-12T21:52:55.217Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/missouri/kansas-city-liberty": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/missouri/kansas-city-liberty",
+      "checkedAt": "2026-10-05T21:52:55.219Z",
+      "expiresAt": "2026-10-12T21:52:55.219Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/missouri/joplin": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/missouri/joplin",
+      "checkedAt": "2026-10-05T21:52:55.380Z",
+      "expiresAt": "2026-10-12T21:52:55.380Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/missouri/saint-ann": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/missouri/saint-ann",
+      "checkedAt": "2026-10-05T21:52:55.410Z",
+      "expiresAt": "2026-10-12T21:52:55.410Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/missouri/kansas-city-tiffany-springs": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/missouri/kansas-city-tiffany-springs",
+      "checkedAt": "2026-10-05T21:52:55.533Z",
+      "expiresAt": "2026-10-12T21:52:55.533Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/missouri/springfield-erie": {
+      "label": "Up to $600 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/missouri/springfield-erie",
+      "checkedAt": "2026-10-05T21:52:55.602Z",
+      "expiresAt": "2026-10-12T21:52:55.602Z",
+      "maximum": 600,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/missouri/springfield-mccurry": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/missouri/springfield-mccurry",
+      "checkedAt": "2026-10-05T21:52:55.664Z",
+      "expiresAt": "2026-10-12T21:52:55.664Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/missouri/saint-louis": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/missouri/saint-louis",
+      "checkedAt": "2026-10-05T21:52:55.720Z",
+      "expiresAt": "2026-10-12T21:52:55.720Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/missouri/st-peters": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/missouri/st-peters",
+      "checkedAt": "2026-10-05T21:52:55.753Z",
+      "expiresAt": "2026-10-12T21:52:55.753Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/montana/missoula": {
+      "label": "Up to $800 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/montana/missoula",
+      "checkedAt": "2026-10-05T21:52:55.922Z",
+      "expiresAt": "2026-10-12T21:52:55.922Z",
+      "maximum": 800,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/montana/billings": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/montana/billings",
+      "checkedAt": "2026-10-05T21:52:56.050Z",
+      "expiresAt": "2026-10-12T21:52:56.050Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/nebraska/omaha": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/nebraska/omaha",
+      "checkedAt": "2026-10-05T21:52:56.172Z",
+      "expiresAt": "2026-10-12T21:52:56.172Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/nevada/henderson": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/nevada/henderson",
+      "checkedAt": "2026-10-05T21:52:56.280Z",
+      "expiresAt": "2026-10-12T21:52:56.280Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/nevada/las-vegas-sahara": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/nevada/las-vegas-sahara",
+      "checkedAt": "2026-10-05T21:52:56.494Z",
+      "expiresAt": "2026-10-12T21:52:56.494Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/nevada/las-vegas": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/nevada/las-vegas",
+      "checkedAt": "2026-10-05T21:52:56.509Z",
+      "expiresAt": "2026-10-12T21:52:56.509Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/nevada/north-las-vegas": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/nevada/north-las-vegas",
+      "checkedAt": "2026-10-05T21:52:56.592Z",
+      "expiresAt": "2026-10-12T21:52:56.592Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/new-jersey/deptford": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/new-jersey/deptford",
+      "checkedAt": "2026-10-05T21:52:56.611Z",
+      "expiresAt": "2026-10-12T21:52:56.611Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/new-jersey/egg-harbor-twp": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/new-jersey/egg-harbor-twp",
+      "checkedAt": "2026-10-05T21:52:56.919Z",
+      "expiresAt": "2026-10-12T21:52:56.919Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/montana/great-falls": {
+      "label": "Up to $800 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/montana/great-falls",
+      "checkedAt": "2026-10-05T21:52:56.982Z",
+      "expiresAt": "2026-10-12T21:52:56.982Z",
+      "maximum": 800,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/new-york/latham": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/new-york/latham",
+      "checkedAt": "2026-10-05T21:52:57.081Z",
+      "expiresAt": "2026-10-12T21:52:57.081Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/new-york/rochester": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/new-york/rochester",
+      "checkedAt": "2026-10-05T21:52:57.144Z",
+      "expiresAt": "2026-10-12T21:52:57.144Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/new-york/bronx-hunts": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/new-york/bronx-hunts",
+      "checkedAt": "2026-10-05T21:52:57.156Z",
+      "expiresAt": "2026-10-12T21:52:57.156Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/new-york/new-york": {
+      "label": "Up to $625 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/new-york/new-york",
+      "checkedAt": "2026-10-05T21:52:57.287Z",
+      "expiresAt": "2026-10-12T21:52:57.287Z",
+      "maximum": 625,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/north-carolina/greensboro": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/north-carolina/greensboro",
+      "checkedAt": "2026-10-05T21:52:57.387Z",
+      "expiresAt": "2026-10-12T21:52:57.387Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/north-carolina/charlotte": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/north-carolina/charlotte",
+      "checkedAt": "2026-10-05T21:52:57.524Z",
+      "expiresAt": "2026-10-12T21:52:57.524Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/north-carolina/fayetteville": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/north-carolina/fayetteville",
+      "checkedAt": "2026-10-05T21:52:57.583Z",
+      "expiresAt": "2026-10-12T21:52:57.583Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/north-dakota/bismarck": {
+      "label": "Up to $800 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/north-dakota/bismarck",
+      "checkedAt": "2026-10-05T21:52:57.589Z",
+      "expiresAt": "2026-10-12T21:52:57.589Z",
+      "maximum": 800,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/north-dakota/west-fargo": {
+      "label": "Up to $750 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/north-dakota/west-fargo",
+      "checkedAt": "2026-10-05T21:52:57.657Z",
+      "expiresAt": "2026-10-12T21:52:57.657Z",
+      "maximum": 750,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/ohio/findlay": {
+      "label": "Up to $800 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/ohio/findlay",
+      "checkedAt": "2026-10-05T21:52:57.799Z",
+      "expiresAt": "2026-10-12T21:52:57.799Z",
+      "maximum": 800,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/ohio/lima": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/ohio/lima",
+      "checkedAt": "2026-10-05T21:52:57.806Z",
+      "expiresAt": "2026-10-12T21:52:57.806Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/ohio/mentor": {
+      "label": "Up to $800 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/ohio/mentor",
+      "checkedAt": "2026-10-05T21:52:58.060Z",
+      "expiresAt": "2026-10-12T21:52:58.060Z",
+      "maximum": 800,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/north-dakota/fargo": {
+      "label": "Up to $800 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/north-dakota/fargo",
+      "checkedAt": "2026-10-05T21:52:58.085Z",
+      "expiresAt": "2026-10-12T21:52:58.085Z",
+      "maximum": 800,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/ohio/columbus-bethel": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/ohio/columbus-bethel",
+      "checkedAt": "2026-10-05T21:52:58.088Z",
+      "expiresAt": "2026-10-12T21:52:58.088Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/ohio/middletown": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/ohio/middletown",
+      "checkedAt": "2026-10-05T21:52:58.091Z",
+      "expiresAt": "2026-10-12T21:52:58.091Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/oklahoma/del-city": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/oklahoma/del-city",
+      "checkedAt": "2026-10-05T21:52:58.202Z",
+      "expiresAt": "2026-10-12T21:52:58.202Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/ohio/toledo": {
+      "label": "Up to $600 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/ohio/toledo",
+      "checkedAt": "2026-10-05T21:52:58.240Z",
+      "expiresAt": "2026-10-12T21:52:58.240Z",
+      "maximum": 600,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/oklahoma/broken-arrow": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/oklahoma/broken-arrow",
+      "checkedAt": "2026-10-05T21:52:58.322Z",
+      "expiresAt": "2026-10-12T21:52:58.322Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/oklahoma/oklahoma-city": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/oklahoma/oklahoma-city",
+      "checkedAt": "2026-10-05T21:52:58.373Z",
+      "expiresAt": "2026-10-12T21:52:58.373Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/oregon/portland": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/oregon/portland",
+      "checkedAt": "2026-10-05T21:52:58.386Z",
+      "expiresAt": "2026-10-12T21:52:58.386Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/oklahoma/tulsa": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/oklahoma/tulsa",
+      "checkedAt": "2026-10-05T21:52:58.482Z",
+      "expiresAt": "2026-10-12T21:52:58.482Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/pennsylvania/pittsburgh-mcknight": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/pennsylvania/pittsburgh-mcknight",
+      "checkedAt": "2026-10-05T21:52:58.569Z",
+      "expiresAt": "2026-10-12T21:52:58.569Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/pennsylvania/pittsburgh-brad": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/pennsylvania/pittsburgh-brad",
+      "checkedAt": "2026-10-05T21:52:58.810Z",
+      "expiresAt": "2026-10-12T21:52:58.810Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/south-carolina/greenville": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/south-carolina/greenville",
+      "checkedAt": "2026-10-05T21:52:58.891Z",
+      "expiresAt": "2026-10-12T21:52:58.891Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/pennsylvania/camp-hill": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/pennsylvania/camp-hill",
+      "checkedAt": "2026-10-05T21:52:58.920Z",
+      "expiresAt": "2026-10-12T21:52:58.920Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/tennessee/chattanooga": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/tennessee/chattanooga",
+      "checkedAt": "2026-10-05T21:52:59.164Z",
+      "expiresAt": "2026-10-12T21:52:59.164Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/tennessee/mount-juliet": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/tennessee/mount-juliet",
+      "checkedAt": "2026-10-05T21:52:59.178Z",
+      "expiresAt": "2026-10-12T21:52:59.178Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/tennessee/cordova": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/tennessee/cordova",
+      "checkedAt": "2026-10-05T21:52:59.232Z",
+      "expiresAt": "2026-10-12T21:52:59.232Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/south-carolina/spartanburg": {
+      "label": "Up to $550 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/south-carolina/spartanburg",
+      "checkedAt": "2026-10-05T21:52:59.240Z",
+      "expiresAt": "2026-10-12T21:52:59.240Z",
+      "maximum": 550,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/arlington": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/arlington",
+      "checkedAt": "2026-10-05T21:52:59.315Z",
+      "expiresAt": "2026-10-12T21:52:59.315Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/austin": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/austin",
+      "checkedAt": "2026-10-05T21:52:59.349Z",
+      "expiresAt": "2026-10-12T21:52:59.349Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/burleson": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/burleson",
+      "checkedAt": "2026-10-05T21:52:59.498Z",
+      "expiresAt": "2026-10-12T21:52:59.498Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/dallas-belt": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/dallas-belt",
+      "checkedAt": "2026-10-05T21:52:59.586Z",
+      "expiresAt": "2026-10-12T21:52:59.586Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/abilene": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/abilene",
+      "checkedAt": "2026-10-05T21:52:59.639Z",
+      "expiresAt": "2026-10-12T21:52:59.639Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/beaumont": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/beaumont",
+      "checkedAt": "2026-10-05T21:52:59.652Z",
+      "expiresAt": "2026-10-12T21:52:59.652Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/dallas": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/dallas",
+      "checkedAt": "2026-10-05T21:52:59.764Z",
+      "expiresAt": "2026-10-12T21:52:59.764Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/georgetown": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/georgetown",
+      "checkedAt": "2026-10-05T21:52:59.798Z",
+      "expiresAt": "2026-10-12T21:52:59.798Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/denton": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/denton",
+      "checkedAt": "2026-10-05T21:52:59.917Z",
+      "expiresAt": "2026-10-12T21:52:59.917Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/fort-worth": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/fort-worth",
+      "checkedAt": "2026-10-05T21:53:00.032Z",
+      "expiresAt": "2026-10-12T21:53:00.032Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/houston-buffalo": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/houston-buffalo",
+      "checkedAt": "2026-10-05T21:53:00.054Z",
+      "expiresAt": "2026-10-12T21:53:00.054Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/houston-north": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/houston-north",
+      "checkedAt": "2026-10-05T21:53:00.151Z",
+      "expiresAt": "2026-10-12T21:53:00.151Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/houston-richmond": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/houston-richmond",
+      "checkedAt": "2026-10-05T21:53:00.196Z",
+      "expiresAt": "2026-10-12T21:53:00.196Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/harker-heights": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/harker-heights",
+      "checkedAt": "2026-10-05T21:53:00.324Z",
+      "expiresAt": "2026-10-12T21:53:00.324Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/houston-fm": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/houston-fm",
+      "checkedAt": "2026-10-05T21:53:00.330Z",
+      "expiresAt": "2026-10-12T21:53:00.330Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/lewisville": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/lewisville",
+      "checkedAt": "2026-10-05T21:53:00.482Z",
+      "expiresAt": "2026-10-12T21:53:00.482Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/humble": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/humble",
+      "checkedAt": "2026-10-05T21:53:00.487Z",
+      "expiresAt": "2026-10-12T21:53:00.487Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/irving": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/irving",
+      "checkedAt": "2026-10-05T21:53:00.497Z",
+      "expiresAt": "2026-10-12T21:53:00.497Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/kyle": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/kyle",
+      "checkedAt": "2026-10-05T21:53:00.512Z",
+      "expiresAt": "2026-10-12T21:53:00.512Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/longview": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/longview",
+      "checkedAt": "2026-10-05T21:53:00.662Z",
+      "expiresAt": "2026-10-12T21:53:00.662Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/mesquite": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/mesquite",
+      "checkedAt": "2026-10-05T21:53:00.674Z",
+      "expiresAt": "2026-10-12T21:53:00.674Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/mckinney": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/mckinney",
+      "checkedAt": "2026-10-05T21:53:00.709Z",
+      "expiresAt": "2026-10-12T21:53:00.709Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/lubbock": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/lubbock",
+      "checkedAt": "2026-10-05T21:53:00.809Z",
+      "expiresAt": "2026-10-12T21:53:00.809Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/pearland": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/pearland",
+      "checkedAt": "2026-10-05T21:53:00.831Z",
+      "expiresAt": "2026-10-12T21:53:00.831Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/san-antonio": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/san-antonio",
+      "checkedAt": "2026-10-05T21:53:01.041Z",
+      "expiresAt": "2026-10-12T21:53:01.041Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/san-antonio-deza": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/san-antonio-deza",
+      "checkedAt": "2026-10-05T21:53:01.062Z",
+      "expiresAt": "2026-10-12T21:53:01.062Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/san-antonio-new": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/san-antonio-new",
+      "checkedAt": "2026-10-05T21:53:01.164Z",
+      "expiresAt": "2026-10-12T21:53:01.164Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/north-richland-hills": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/north-richland-hills",
+      "checkedAt": "2026-10-05T21:53:01.196Z",
+      "expiresAt": "2026-10-12T21:53:01.196Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/temple": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/temple",
+      "checkedAt": "2026-10-05T21:53:01.386Z",
+      "expiresAt": "2026-10-12T21:53:01.386Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/tyler": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/tyler",
+      "checkedAt": "2026-10-05T21:53:01.412Z",
+      "expiresAt": "2026-10-12T21:53:01.412Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/spring": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/spring",
+      "checkedAt": "2026-10-05T21:53:01.586Z",
+      "expiresAt": "2026-10-12T21:53:01.586Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/universal-city": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/universal-city",
+      "checkedAt": "2026-10-05T21:53:01.670Z",
+      "expiresAt": "2026-10-12T21:53:01.670Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/texas/waco": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/texas/waco",
+      "checkedAt": "2026-10-05T21:53:01.680Z",
+      "expiresAt": "2026-10-12T21:53:01.680Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/utah/ogden": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/utah/ogden",
+      "checkedAt": "2026-10-05T21:53:01.856Z",
+      "expiresAt": "2026-10-12T21:53:01.856Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/utah/orem": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/utah/orem",
+      "checkedAt": "2026-10-05T21:53:01.872Z",
+      "expiresAt": "2026-10-12T21:53:01.872Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/utah/layton": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/utah/layton",
+      "checkedAt": "2026-10-05T21:53:01.904Z",
+      "expiresAt": "2026-10-12T21:53:01.904Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/utah/american-fork": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/utah/american-fork",
+      "checkedAt": "2026-10-05T21:53:01.921Z",
+      "expiresAt": "2026-10-12T21:53:01.921Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/utah/riverton": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/utah/riverton",
+      "checkedAt": "2026-10-05T21:53:02.158Z",
+      "expiresAt": "2026-10-12T21:53:02.158Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/virginia/chesapeake": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/virginia/chesapeake",
+      "checkedAt": "2026-10-05T21:53:02.324Z",
+      "expiresAt": "2026-10-12T21:53:02.324Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/utah/st-george": {
+      "label": "Up to $600 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/utah/st-george",
+      "checkedAt": "2026-10-05T21:53:02.387Z",
+      "expiresAt": "2026-10-12T21:53:02.387Z",
+      "maximum": 600,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/virginia/colonial-heights": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/virginia/colonial-heights",
+      "checkedAt": "2026-10-05T21:53:02.397Z",
+      "expiresAt": "2026-10-12T21:53:02.397Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/virginia/hampton": {
+      "label": "Up to $600 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/virginia/hampton",
+      "checkedAt": "2026-10-05T21:53:02.400Z",
+      "expiresAt": "2026-10-12T21:53:02.400Z",
+      "maximum": 600,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/virginia/roanoke": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/virginia/roanoke",
+      "checkedAt": "2026-10-05T21:53:02.524Z",
+      "expiresAt": "2026-10-12T21:53:02.524Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/virginia/harrisonburg": {
+      "label": "Up to $800 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/virginia/harrisonburg",
+      "checkedAt": "2026-10-05T21:53:02.774Z",
+      "expiresAt": "2026-10-12T21:53:02.774Z",
+      "maximum": 800,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/washington/bellingham": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/washington/bellingham",
+      "checkedAt": "2026-10-05T21:53:02.777Z",
+      "expiresAt": "2026-10-12T21:53:02.777Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/virginia/richmond": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/virginia/richmond",
+      "checkedAt": "2026-10-05T21:53:02.839Z",
+      "expiresAt": "2026-10-12T21:53:02.839Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/washington/lacey": {
+      "label": "Up to $725 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/washington/lacey",
+      "checkedAt": "2026-10-05T21:53:03.004Z",
+      "expiresAt": "2026-10-12T21:53:03.004Z",
+      "maximum": 725,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/washington/tukwila": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/washington/tukwila",
+      "checkedAt": "2026-10-05T21:53:03.021Z",
+      "expiresAt": "2026-10-12T21:53:03.021Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/washington/pasco": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/washington/pasco",
+      "checkedAt": "2026-10-05T21:53:03.026Z",
+      "expiresAt": "2026-10-12T21:53:03.026Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/washington/vancouver": {
+      "label": "Up to $675 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/washington/vancouver",
+      "checkedAt": "2026-10-05T21:53:03.261Z",
+      "expiresAt": "2026-10-12T21:53:03.261Z",
+      "maximum": 675,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/wisconsin/appleton": {
+      "label": "Up to $800 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/wisconsin/appleton",
+      "checkedAt": "2026-10-05T21:53:03.271Z",
+      "expiresAt": "2026-10-12T21:53:03.271Z",
+      "maximum": 800,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/wisconsin/appleton-eisen": {
+      "label": "Up to $800 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/wisconsin/appleton-eisen",
+      "checkedAt": "2026-10-05T21:53:03.347Z",
+      "expiresAt": "2026-10-12T21:53:03.347Z",
+      "maximum": 800,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/wisconsin/eau-claire": {
+      "label": "Up to $625 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/wisconsin/eau-claire",
+      "checkedAt": "2026-10-05T21:53:03.436Z",
+      "expiresAt": "2026-10-12T21:53:03.436Z",
+      "maximum": 625,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/wisconsin/fond-du-lac": {
+      "label": "Up to $800 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/wisconsin/fond-du-lac",
+      "checkedAt": "2026-10-05T21:53:03.482Z",
+      "expiresAt": "2026-10-12T21:53:03.482Z",
+      "maximum": 800,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/wisconsin/green-bay-finger": {
+      "label": "Up to $600 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/wisconsin/green-bay-finger",
+      "checkedAt": "2026-10-05T21:53:03.533Z",
+      "expiresAt": "2026-10-12T21:53:03.533Z",
+      "maximum": 600,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/wisconsin/green-bay-isbell": {
+      "label": "Up to $800 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/wisconsin/green-bay-isbell",
+      "checkedAt": "2026-10-05T21:53:03.642Z",
+      "expiresAt": "2026-10-12T21:53:03.642Z",
+      "maximum": 800,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/wisconsin/madison": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/wisconsin/madison",
+      "checkedAt": "2026-10-05T21:53:03.696Z",
+      "expiresAt": "2026-10-12T21:53:03.696Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/wisconsin/greenfield": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/wisconsin/greenfield",
+      "checkedAt": "2026-10-05T21:53:03.751Z",
+      "expiresAt": "2026-10-12T21:53:03.751Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/wisconsin/onalaska": {
+      "label": "Up to $800 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/wisconsin/onalaska",
+      "checkedAt": "2026-10-05T21:53:03.880Z",
+      "expiresAt": "2026-10-12T21:53:03.880Z",
+      "maximum": 800,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/wisconsin/mount-pleasant-dura": {
+      "label": "Up to $650 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/wisconsin/mount-pleasant-dura",
+      "checkedAt": "2026-10-05T21:53:03.968Z",
+      "expiresAt": "2026-10-12T21:53:03.968Z",
+      "maximum": 650,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/wisconsin/janesville": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/wisconsin/janesville",
+      "checkedAt": "2026-10-05T21:53:04.050Z",
+      "expiresAt": "2026-10-12T21:53:04.050Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/wisconsin/oshkosh": {
+      "label": "Up to $800 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/wisconsin/oshkosh",
+      "checkedAt": "2026-10-05T21:53:04.114Z",
+      "expiresAt": "2026-10-12T21:53:04.114Z",
+      "maximum": 800,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/wisconsin/milwaukee": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/wisconsin/milwaukee",
+      "checkedAt": "2026-10-05T21:53:04.132Z",
+      "expiresAt": "2026-10-12T21:53:04.132Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/wisconsin/sheboygan": {
+      "label": "Up to $800 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/wisconsin/sheboygan",
+      "checkedAt": "2026-10-05T21:53:04.183Z",
+      "expiresAt": "2026-10-12T21:53:04.183Z",
+      "maximum": 800,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/wisconsin/pewaukee": {
+      "label": "Up to $700 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/wisconsin/pewaukee",
+      "checkedAt": "2026-10-05T21:53:04.194Z",
+      "expiresAt": "2026-10-12T21:53:04.194Z",
+      "maximum": 700,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/wyoming/cheyenne": {
+      "label": "Up to $800 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/wyoming/cheyenne",
+      "checkedAt": "2026-10-05T21:53:04.390Z",
+      "expiresAt": "2026-10-12T21:53:04.390Z",
+      "maximum": 800,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/wisconsin/wausau": {
+      "label": "Up to $800 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/wisconsin/wausau",
+      "checkedAt": "2026-10-05T21:53:04.419Z",
+      "expiresAt": "2026-10-12T21:53:04.419Z",
+      "maximum": 800,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    },
+    "https://www.biolifeplasma.com/locations/wisconsin/stevens-point": {
+      "label": "Up to $800 / first month",
+      "note": "New donors only. First-month promotional total across qualifying donations, not per visit or ongoing monthly pay. Confirm coupon, donation count, deadline and eligibility with this center.",
+      "source": "https://www.biolifeplasma.com/locations/wisconsin/stevens-point",
+      "checkedAt": "2026-10-05T21:53:04.587Z",
+      "expiresAt": "2026-10-12T21:53:04.587Z",
+      "maximum": 800,
+      "basis": "PER_MONTH",
+      "kind": "NEW_DONOR"
+    }
+  },
+  "fairfaxEgg": {
+    "label": "Up to $60,000 across multiple cycles",
+    "note": "Advertised multi-cycle maximum, not payment for one cycle. Individual cycle compensation varies by location and is confirmed by Fairfax EggBank. Acceptance and provider terms apply.",
+    "source": "https://www.fairfaxeggbank.com/egg-donor-faqs/",
+    "checkedAt": "2026-10-05T21:40:00Z",
+    "expiresAt": "2026-11-04T21:40:00Z",
+    "maximum": null,
+    "basis": null,
+    "kind": "MULTI_CYCLE"
+  },
+  "octapharma": {
+    "label": "Advertised up to $750 / first 35 days",
+    "note": "New donors only. Provider-wide advertised maximum; the offer at this center may differ and can change without notice. Confirm the local donation schedule, qualifying visits and deadline. This is not per-visit or ongoing monthly pay.",
+    "source": "https://www.octapharmaplasma.com/new-donors/",
+    "checkedAt": "2026-10-05T21:54:32.204Z",
+    "expiresAt": "2026-10-12T21:54:32.205Z",
+    "maximum": null,
+    "basis": null,
+    "kind": "NEW_DONOR"
+  }
+}

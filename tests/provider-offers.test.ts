@@ -1,0 +1,12 @@
+import {expect,it} from 'vitest';
+import offers from '../lib/data/provider-offers.json';
+import {providerOffer} from '../lib/provider-offers';
+import {paymentCategory,compensationDisplay,Opportunity} from '../lib/opportunities';
+const now=Date.parse('2026-10-05T23:00:00Z');
+const url='https://www.biolifeplasma.com/locations/pennsylvania/camp-hill';
+it('uses the exact center offer rather than a national maximum',()=>{expect(providerOffer(`official-location:${url}:136 S 32nd St`,'https://www.biolifeplasma.com/donation-process/who-can-donate','PLASMA',now)).toEqual(offers.centers[url]);expect(offers.centers[url].maximum).toBeLessThan(800);});
+it('does not invent an offer for an unknown center or the wrong category',()=>{expect(providerOffer('official-location:https://www.biolifeplasma.com/locations/unknown/unknown:123','unknown','PLASMA',now)).toBeNull();expect(providerOffer(`official-location:${url}:123`,'unknown','SPERM',now)).toBeNull();});
+it('expires center promotions instead of advertising stale prices',()=>{expect(providerOffer(`official-location:${url}:123`,'unknown','PLASMA',Date.parse('2026-11-05'))).toBeNull();});
+it('does not compare new-donor promotions as recurring monthly income',()=>{const item={compensation_min:null,compensation_max:675,compensation_basis:'PER_MONTH',compensation_offer:offers.centers[url]} as Opportunity;expect(paymentCategory(item)).toBe('NEW_DONOR');expect(compensationDisplay(item)).toBe(offers.centers[url].label);});
+it('labels Fairfax multi-cycle maximum without presenting it as one cycle',()=>{const offer=providerOffer(null,'https://www.fairfaxeggbank.com/egg-donor-requirements/','EGG',now);expect(offer?.maximum).toBeNull();expect(offer?.label).toContain('across multiple cycles');expect(offer?.kind).toBe('MULTI_CYCLE');});
+it('labels Octapharma as a location-dependent advertised offer',()=>{const offer=providerOffer(null,'https://www.octapharmaplasma.com/new-donors/','PLASMA',now);expect(offer?.label).toContain('Advertised');expect(offer?.note).toContain('may differ');expect(offer?.maximum).toBeNull();});

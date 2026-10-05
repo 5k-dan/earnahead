@@ -1,3 +1,4 @@
+import {liveProviderOffer} from '@/lib/live-provider-offers';
 import { NextRequest, NextResponse } from 'next/server';
 import { serverDb } from '@/lib/server';
 import { configured } from '@/lib/supabase';
@@ -16,7 +17,9 @@ export async function GET(req:NextRequest) {
  if(!data?.length)return NextResponse.json({items:[]});
  const metadata=[];
  for(let start=0;start<data.length;start+=50){const response=await db.from('opportunities').select('*,organizations(name),locations(name,address)').in('id',data.slice(start,start+50).map((row:{id:string})=>row.id));if(response.error)return NextResponse.json({error:'Provider details are temporarily unavailable. Please retry.'},{status:503});metadata.push(...response.data??[]);}
- const byId=new Map((metadata??[]).map(row=>{const org=Array.isArray(row.organizations)?row.organizations[0]:row.organizations;const place=Array.isArray(row.locations)?row.locations[0]:row.locations;return [row.id,{compensation_basis:row.compensation_basis,source_checked_at:row.source_checked_at,organization_name:org?.name,facility_name:place?.name,address:place?.address}];}));
+ const offers=new Map();
+ for(let start=0;start<metadata.length;start+=4){await Promise.all(metadata.slice(start,start+4).map(async row=>offers.set(row.id,await liveProviderOffer(row.external_id,row.source_url,row.opportunity_type))));}
+ const byId=new Map((metadata??[]).map(row=>{const org=Array.isArray(row.organizations)?row.organizations[0]:row.organizations;const place=Array.isArray(row.locations)?row.locations[0]:row.locations;const offer=offers.get(row.id);return [row.id,{...(offer?{compensation_offer:offer,...(offer.maximum!==null?{compensation_min:null,compensation_max:offer.maximum}: {})}:{}),compensation_basis:offer?.basis??row.compensation_basis,source_checked_at:row.source_checked_at,organization_name:org?.name,facility_name:place?.name,address:place?.address}];}));
  const restricted=new Set(metadata.filter(row=>row.data_source==='GOOGLE_PLACES').map(row=>row.id));
  return NextResponse.json({items:data.filter((row:{id:string})=>!restricted.has(row.id)).map((row:{id:string})=>({...row,...byId.get(row.id)}))});
 }
