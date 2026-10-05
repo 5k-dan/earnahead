@@ -29,7 +29,7 @@
 /* Donor titles don't need the three-line space reserved for research titles. */
 .opportunity-card:is(.type-plasma,.type-sperm,.type-egg) h3{min-height:0;margin-bottom:14px;line-height:1.4;-webkit-line-clamp:2}
 .opportunity-card:is(.type-plasma,.type-sperm,.type-egg) .opportunity-card-main{flex:0;padding-top:14px;padding-bottom:18px}
-.opportunity-card:is(.type-plasma,.type-sperm,.type-egg) .opportunity-card-footer{margin-top:auto;padding-top:15px}
+.opportunity-card:is(.type-plasma,.type-sperm,.type-egg) .opportunity-card-footer{margin-top:0;padding-top:15px}
 .opportunity-card:is(.type-plasma,.type-sperm,.type-egg) .provider-name{margin-bottom:7px}
 .listing-grid{align-items:start}
 footer>span:nth-child(2){display:flex;flex-wrap:wrap;gap:8px;align-items:center}
@@ -37,8 +37,8 @@ footer>span:nth-child(2){display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 @media(max-width:760px){.welcome-page,.activity-page{margin-top:8px}.welcome-hero{grid-template-columns:1fr;padding:24px 20px;gap:28px}.welcome-hero h1{font-size:35px}.welcome-categories{padding:18px}.welcome-steps,.activity-sections{grid-template-columns:1fr;gap:16px}.welcome-steps article,.activity-section{padding:20px}.activity-sections{margin-top:24px}.welcome-process{margin-top:28px}.welcome-disclaimer{font-size:12px}.opportunity-card:is(.type-plasma,.type-sperm,.type-egg) h3{font-size:18px}}
 
 /* Keep compensation and conditions inside the same inset as the card content. */
-.listing-grid{align-items:stretch}
-.opportunity-card{height:100%}
+.listing-grid{align-items:start}
+.opportunity-card{height:auto}
 .opportunity-card-footer{gap:14px;align-items:flex-start}
 .opportunity-card-footer>div{min-width:0;flex:1}
 .opportunity-card-footer strong{display:block;font-size:19px;line-height:1.4;letter-spacing:-.3px;overflow-wrap:break-word}
