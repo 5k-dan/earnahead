@@ -1,3 +1,4 @@
+import {repairText} from '@/lib/text';
 import {NextResponse} from 'next/server';
 import type {SupabaseClient} from '@supabase/supabase-js';
 import {z} from 'zod';
@@ -21,7 +22,7 @@ export async function importPage(db:SupabaseClient,body:unknown){
    const organization=await db.from('organizations').select('id').eq('name',row.organization).limit(1).maybeSingle();if(organization.error)throw organization.error;let orgId=organization.data?.id;
    if(!orgId){const result=await db.from('organizations').insert({name:row.organization}).select('id').single();if(result.error)throw result.error;orgId=result.data.id;}
    const location=await db.from('locations').insert({organization_id:orgId,name:row.facility,address:row.address,position:`SRID=4326;POINT(${row.lon} ${row.lat})`}).select('id').single();if(location.error)throw location.error;
-   const record={organization_id:orgId,location_id:location.data.id,title:row.title,opportunity_type:row.type,minimum_age:row.min,maximum_age:row.max,compensation_min:null,compensation_max:row.payMax,...(row.basis?{compensation_basis:row.basis}:{}),data_source:source,external_id:row.external,source_url:row.source,review_status:'PENDING_REVIEW',active:false,verified:false,source_checked_at:source==='CLINICALTRIALS_GOV'?new Date().toISOString():'2026-10-05T00:00:00Z'};
+   const record={organization_id:orgId,location_id:location.data.id,title:repairText(row.title),opportunity_type:row.type,minimum_age:row.min,maximum_age:row.max,compensation_min:null,compensation_max:row.payMax,...(row.basis?{compensation_basis:row.basis}:{}),data_source:source,external_id:row.external,source_url:row.source,review_status:'PENDING_REVIEW',active:false,verified:false,source_checked_at:source==='CLINICALTRIALS_GOV'?new Date().toISOString():'2026-10-05T00:00:00Z'};
    const listing=await db.from('opportunities').insert(record).select('id').single();if(listing.error){await db.from('locations').delete().eq('id',location.data.id);if(listing.error.code==='23505'){existing++;continue;}throw listing.error;}
    if(row.requirements){const requirements=await db.from('eligibility_requirements').insert({opportunity_id:listing.data.id,published_requirement:row.requirements});if(requirements.error){await db.from('opportunities').delete().eq('id',listing.data.id);await db.from('locations').delete().eq('id',location.data.id);throw requirements.error;}}
    imported++;
