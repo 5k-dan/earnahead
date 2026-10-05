@@ -1,0 +1,7 @@
+import {ArrowUpRight,Plane} from 'lucide-react';
+
+// Manually reviewed original provider source on October 5, 2026.
+export function NationalDonorPrograms({category,publishedOnly,payment,now=Date.now()}:{category:string;publishedOnly:boolean;payment:string;now?:number}) {
+ if((category&&category!=='EGG')||publishedOnly||payment!=='ALL'||now>Date.parse('2026-11-04T23:59:59Z'))return null;
+ return <section className="national-donor-programs"><div className="section-heading"><h2>Open to applicants nationwide</h2><p>Separate from nearby results. This program requires travel to a provider-selected clinic.</p></div><article className="national-donor-card"><div><span className="pill"><Plane size={15}/>Travel required · All 50 states</span><h3>Fairfax EggBank travel program</h3><p>Egg donor recruitment across the U.S. Ages 21–30 on EarnAhead; provider screening and acceptance required. Plan for about 5–8 days at the retrieval location with a companion.</p><small>Per-cycle compensation: confirm with provider · Source reviewed October 5, 2026</small></div><a className="primary" href="https://www.fairfaxeggbank.com/egg-donor-travel-program/" target="_blank" rel="noreferrer">Review travel program <ArrowUpRight size={16}/></a></article></section>;
+}
