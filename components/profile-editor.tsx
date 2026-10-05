@@ -1,0 +1,19 @@
+'use client';
+import {useEffect,useRef,useState} from 'react';
+import {useQuery,useQueryClient} from '@tanstack/react-query';
+import {AccountDeletion} from './account-deletion';
+import Link from 'next/link';
+import {useAuth} from './auth-provider';
+import {browserDb} from '@/lib/supabase';
+import {profileSchema} from '@/lib/validation';
+import {useAutosave} from '@/lib/use-autosave';
+import {opportunityLabels} from '@/lib/opportunities';
+type Draft={name:string;dob:string;city:string;preferences:string[]};
+export function ProfileEditor(){const {user,loading}=useAuth();const cache=useQueryClient();const [draft,setDraft]=useState<Draft>({name:'',dob:'',city:'',preferences:[]});const initialized=useRef<string|null>(null);
+ const query=useQuery({queryKey:['profile',user?.id],enabled:!!user,queryFn:async()=>{const {data,error}=await browserDb().from('user_profiles').select('name,dob,city,preferences').eq('user_id',user!.id).maybeSingle();if(error)throw error;return data;}});
+ useEffect(()=>{if(user&&!query.isPending&&initialized.current!==user.id){initialized.current=user.id;setDraft(query.data??{name:'',dob:'',city:'',preferences:[]});}},[user,query.data,query.isPending]);
+ const autosave=useAutosave<Draft>(async value=>{const response=await fetch('/api/profile',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(value)});if(!response.ok)throw new Error();cache.setQueryData(['profile',user?.id],profileSchema.parse(value));void cache.invalidateQueries({queryKey:['identity']});},value=>profileSchema.safeParse(value).success);
+ const change=(patch:Partial<Draft>)=>{const next={...draft,...patch};setDraft(next);autosave.schedule(next);};
+ if(loading)return <p>Loading account…</p>;if(!user)return <div className="account-panel"><h1>Your profile.</h1><p>Sign in to save your profile.</p><Link className="primary" href="/login">Sign in</Link></div>;
+ return <section className="profile-workspace"><div className="eyebrow">JUST THE BASICS</div><h1>Make it yours.</h1><p>Your details help you compare published preliminary requirements. No health information.</p><div className="profile-panel"><div className="panel-heading"><h2>Personal details</h2><span role="status" className="autosave-status">{autosave.status||'Changes save automatically'}</span></div>{query.isError&&<p role="alert">Your saved profile could not load. Refresh before editing.</p>}<form onSubmit={e=>{e.preventDefault();void autosave.flush();}} onBlur={()=>void autosave.flush()}><label>Name<input disabled={query.isPending||query.isError} value={draft.name} onChange={e=>change({name:e.target.value})} autoComplete="name" required/></label><label>Date of birth<input disabled={query.isPending||query.isError} type="date" value={draft.dob} onChange={e=>change({dob:e.target.value})} required/></label><label>City or ZIP code<input disabled={query.isPending||query.isError} value={draft.city} onChange={e=>change({city:e.target.value})} autoComplete="address-level2" required/></label><fieldset><legend>Your interests</legend><div className="interest-options">{Object.entries(opportunityLabels).map(([type,label])=><label className={draft.preferences.includes(type)?'interest-option selected':'interest-option'} key={type}><input type="checkbox" checked={draft.preferences.includes(type)} onChange={e=>change({preferences:e.target.checked?[...draft.preferences,type]:draft.preferences.filter(t=>t!==type)})}/>{label}</label>)}</div></fieldset></form></div><p><Link href="/reset-password">Change password</Link></p><AccountDeletion/></section>;
+}

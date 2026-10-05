@@ -1,0 +1,17 @@
+// @vitest-environment node
+import {beforeEach,expect,it,vi} from 'vitest';
+import {NextRequest} from 'next/server';
+const mocks=vi.hoisted(()=>({user:null as null|{id:string},rpc:vi.fn(),insert:vi.fn()}));
+vi.mock('@/lib/server',()=>({serverDb:()=>({auth:{getUser:async()=>({data:{user:mocks.user},error:null})},rpc:mocks.rpc,from:()=>({insert:mocks.insert})})}));
+import {DELETE} from '../app/api/account/route';
+import {POST as report} from '../app/api/reports/route';
+import {GET as cron} from '../app/api/cron/sync/route';
+beforeEach(()=>{mocks.user=null;vi.clearAllMocks();mocks.rpc.mockResolvedValue({error:null});mocks.insert.mockResolvedValue({error:null});vi.unstubAllEnvs();});
+const request=(path:string,body:unknown,origin='http://localhost')=>new NextRequest('http://localhost'+path,{method:path==='/api/account'?'DELETE':'POST',headers:{origin},body:JSON.stringify(body)});
+it('requires same-origin and a session for account deletion',async()=>{expect((await DELETE(request('/api/account',{confirmation:'DELETE'},'https://other.example'))).status).toBe(403);expect((await DELETE(request('/api/account',{confirmation:'DELETE'}))).status).toBe(401);expect(mocks.rpc).not.toHaveBeenCalled();});
+it('requires explicit deletion confirmation and deletes only the session account',async()=>{mocks.user={id:'own'};expect((await DELETE(request('/api/account',{confirmation:'yes'}))).status).toBe(400);expect((await DELETE(request('/api/account',{confirmation:'DELETE',user_id:'another'}))).status).toBe(200);expect(mocks.rpc).toHaveBeenCalledWith('delete_own_account');});
+it('does not claim successful deletion on database failure',async()=>{mocks.user={id:'own'};mocks.rpc.mockResolvedValue({error:{message:'Unavailable'}});expect((await DELETE(request('/api/account',{confirmation:'DELETE'}))).status).toBe(500);});
+it('requires a session for reports and forbids free text or forged ownership',async()=>{const body={opportunityId:'ea000000-0000-4000-8000-000000000010',reason:'SOURCE'};expect((await report(request('/api/reports',body))).status).toBe(401);mocks.user={id:'own'};expect((await report(request('/api/reports',{...body,message:'health information'}))).status).toBe(400);expect((await report(request('/api/reports',{...body,reporter_id:'other'}))).status).toBe(400);expect(mocks.insert).not.toHaveBeenCalled();});
+it('stores a categorical report with authenticated ownership and tolerates duplicates',async()=>{mocks.user={id:'own'};const body={opportunityId:'ea000000-0000-4000-8000-000000000010',reason:'CLOSED'};expect((await report(request('/api/reports',body))).status).toBe(200);expect(mocks.insert).toHaveBeenCalledWith({opportunity_id:body.opportunityId,reporter_id:'own',reason:'CLOSED'});mocks.insert.mockResolvedValue({error:{code:'23505'}});expect((await report(request('/api/reports',body))).status).toBe(200);});
+it('rejects cron requests with missing or wrong secrets',async()=>{expect((await cron(new NextRequest('http://localhost/api/cron/sync'))).status).toBe(401);vi.stubEnv('CRON_SECRET','a'.repeat(32));expect((await cron(new NextRequest('http://localhost/api/cron/sync',{headers:{authorization:'Bearer wrong'}}))).status).toBe(401);});
+it('reports unavailable background configuration only after secret verification',async()=>{vi.stubEnv('CRON_SECRET','a'.repeat(32));vi.stubEnv('SUPABASE_SERVICE_ROLE_KEY','');expect((await cron(new NextRequest('http://localhost/api/cron/sync',{headers:{authorization:'Bearer '+'a'.repeat(32)}}))).status).toBe(503);});

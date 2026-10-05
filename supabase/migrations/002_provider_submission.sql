@@ -1,0 +1,8 @@
+create function submit_opportunity(org uuid,listing_title text,kind public.opportunity_type,source text,facility_name text,address_text text,latitude double precision,longitude double precision,min_age integer,max_age integer default null) returns uuid language plpgsql security definer set search_path=public,extensions as $$ declare facility uuid; listing uuid;begin
+if not exists(select 1 from organizations where id=org and owner_id=auth.uid()) then raise exception 'You must own this organization.';end if;
+if source !~ '^https?://[^[:space:]]+$' or length(listing_title)<3 or latitude not between -90 and 90 or longitude not between -180 and 180 then raise exception 'Valid published source, title, and coordinates required.';end if;
+insert into locations(organization_id,name,address,position)values(org,facility_name,address_text,ST_SetSRID(ST_MakePoint(longitude,latitude),4326)::geography) returning id into facility;
+insert into opportunities(organization_id,location_id,title,opportunity_type,source_url,data_source,minimum_age,maximum_age,review_status,active,verified)values(org,facility,listing_title,kind,source,'PROVIDER',min_age,max_age,'PENDING_REVIEW',false,false) returning id into listing;return listing;end;$$;
+revoke all on function submit_opportunity(uuid,text,public.opportunity_type,text,text,text,double precision,double precision,integer,integer) from public;
+grant execute on function submit_opportunity(uuid,text,public.opportunity_type,text,text,text,double precision,double precision,integer,integer) to authenticated;
+create policy owner_pending_opportunities on opportunities for select using(exists(select 1 from organizations o where o.id=organization_id and o.owner_id=auth.uid()));

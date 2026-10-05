@@ -1,0 +1,12 @@
+import {beforeEach,expect,it,vi} from 'vitest';
+import {NextRequest} from 'next/server';
+const mocks=vi.hoisted(()=>({getUser:vi.fn(),from:vi.fn()}));
+vi.mock('../lib/server',()=>({serverDb:()=>({auth:{getUser:mocks.getUser},from:mocks.from})}));
+import {POST} from '../app/api/admin/import/route';
+beforeEach(()=>{vi.resetAllMocks();vi.unstubAllGlobals();mocks.getUser.mockResolvedValue({data:{user:{id:'admin',app_metadata:{role:'admin'}}}});});
+const request=(body:unknown)=>new NextRequest('http://localhost/api/admin/import',{method:'POST',body:JSON.stringify(body)});
+it('rejects non-admin imports before contacting sources',async()=>{mocks.getUser.mockResolvedValue({data:{user:{app_metadata:{}}}});expect((await POST(request({source:'donations'}))).status).toBe(403);expect(mocks.from).not.toHaveBeenCalled();});
+it('rejects malformed and extra client fields',async()=>{expect((await POST(request({source:'trials',lat:200}))).status).toBe(400);expect((await POST(request({source:'trials',role:'admin'}))).status).toBe(400);});
+it('passes pagination without publishing listings or requiring a secret key',async()=>{const fetcher=vi.fn().mockResolvedValue({ok:true,json:async()=>({studies:[],nextPageToken:'next'})});vi.stubGlobal('fetch',fetcher);const response=await POST(request({source:'trials',pageToken:'previous'}));expect(await response.json()).toMatchObject({imported:0,nextPageToken:'next'});expect(fetcher.mock.calls[0][0].searchParams.get('pageToken')).toBe('previous');});
+it('skips already imported donations without changing approved terms',async()=>{const chain={select:vi.fn().mockReturnThis(),eq:vi.fn().mockReturnThis(),maybeSingle:vi.fn().mockResolvedValue({data:{id:'existing'}})};mocks.from.mockReturnValue(chain);const response=await POST(request({source:'donations'}));expect(await response.json()).toMatchObject({imported:0,existing:5});expect(mocks.from.mock.calls.every(([table])=>table==='opportunities')).toBe(true);});
+it('reports registry failure without marking a sync successful',async()=>{vi.stubGlobal('fetch',vi.fn().mockResolvedValue({ok:false,status:503}));const response=await POST(request({source:'trials'}));expect(response.status).toBe(500);expect((await response.json()).error).toContain('503');});

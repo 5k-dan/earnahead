@@ -1,0 +1,35 @@
+begin;
+alter table public.opportunities add column if not exists compensation_basis text check(compensation_basis is null or compensation_basis in ('PER_VISIT','PER_MONTH','TOTAL_PROGRAM'));
+alter table public.opportunities add column if not exists source_checked_at timestamptz;
+create table if not exists public.listing_reports(id uuid primary key default gen_random_uuid(),opportunity_id uuid not null references public.opportunities on delete cascade,reporter_id uuid not null references public.users on delete cascade,reason text not null check(reason in ('CLOSED','COMPENSATION','LOCATION','SOURCE','OTHER')),created_at timestamptz not null default now(),resolved_at timestamptz,unique(opportunity_id,reporter_id));
+alter table public.listing_reports enable row level security;
+drop policy if exists reporter_read on public.listing_reports;
+create policy reporter_read on public.listing_reports for select using(reporter_id=auth.uid() or public.is_admin());
+drop policy if exists report_insert on public.listing_reports;
+create policy report_insert on public.listing_reports for insert with check(reporter_id=auth.uid() and exists(select 1 from public.opportunities o where o.id=opportunity_id and o.active));
+drop policy if exists report_admin on public.listing_reports;
+create policy report_admin on public.listing_reports for update using(public.is_admin()) with check(public.is_admin());
+create table if not exists public.sync_state(id text primary key,cursor text,refresh_offset integer not null default 0,last_started_at timestamptz,last_completed_at timestamptz,status text not null default 'IDLE',imported integer not null default 0,archived integer not null default 0);
+alter table public.sync_state enable row level security;
+drop policy if exists sync_admin_read on public.sync_state;
+create policy sync_admin_read on public.sync_state for select using(public.is_admin());
+create table if not exists public.sync_runs(id uuid primary key default gen_random_uuid(),created_at timestamptz not null default now(),status text not null check(status in ('OK','FAILED')),imported integer not null default 0,archived integer not null default 0);
+alter table public.sync_runs enable row level security;
+drop policy if exists sync_runs_admin_read on public.sync_runs;
+create policy sync_runs_admin_read on public.sync_runs for select using(public.is_admin());
+insert into public.sync_state(id)values('atlanta') on conflict do nothing;
+create or replace function public.claim_sync() returns boolean language plpgsql security definer set search_path=public as $$ begin
+ if auth.role() is distinct from 'service_role' then raise exception 'Service access required';end if;
+ update sync_state set status='RUNNING',last_started_at=now() where id='atlanta' and (status<>'RUNNING' or last_started_at<now()-interval '5 minutes');return found;
+end;$$;
+revoke all on function public.claim_sync() from public,anon,authenticated;
+grant execute on function public.claim_sync() to service_role;
+create or replace function public.delete_own_account() returns void language plpgsql security definer set search_path=public,auth as $$ declare account uuid:=auth.uid();begin
+ if account is null then raise exception 'Sign in required';end if;
+ update public.organizations set owner_id=null where owner_id=account;
+ delete from auth.users where id=account;
+end;$$;
+revoke all on function public.delete_own_account() from public,anon;
+grant execute on function public.delete_own_account() to authenticated;
+notify pgrst, 'reload schema';
+commit;

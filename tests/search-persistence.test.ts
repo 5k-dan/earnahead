@@ -1,0 +1,10 @@
+import {renderHook,waitFor} from '@testing-library/react';
+import {beforeEach,expect,it,vi} from 'vitest';
+import {useSearchPersistence,SearchSettings} from '../lib/use-search-persistence';
+const settings:SearchSettings={location:'Atlanta, Georgia',coords:{lat:33.749,lon:-84.388},radius:'50',category:'PLASMA',view:'list',publishedOnly:false,sort:'distance'};
+beforeEach(()=>localStorage.clear());
+it('restores location and filters for the same account',async()=>{localStorage.setItem('earnahead:search:one',JSON.stringify(settings));const restore=vi.fn();renderHook(()=>useSearchPersistence('one',settings,restore));await waitFor(()=>expect(restore).toHaveBeenCalledWith(settings));});
+it('does not restore another account’s preferences',async()=>{localStorage.setItem('earnahead:search:one',JSON.stringify(settings));const restore=vi.fn();renderHook(()=>useSearchPersistence('two',settings,restore));expect(restore.mock.calls[0][0].location).toBe('');});
+it('ignores corrupt saved JSON without crashing',()=>{localStorage.setItem('earnahead:search:one','broken');const restore=vi.fn();renderHook(()=>useSearchPersistence('one',settings,restore));expect(restore.mock.calls[0][0].coords).toBeNull();});
+it('rejects invalid coordinates from persisted settings',()=>{localStorage.setItem('earnahead:search:one',JSON.stringify({...settings,coords:{lat:999,lon:0}}));const restore=vi.fn();renderHook(()=>useSearchPersistence('one',settings,restore));expect(restore.mock.calls[0][0].coords).toBeNull();});
+it('restores the payment period filter without changing old saved searches',()=>{const value={...settings,payment:'PER_MONTH' as const};localStorage.setItem('earnahead:search:one',JSON.stringify(value));const restore=vi.fn();renderHook(()=>useSearchPersistence('one',value,restore));expect(restore).toHaveBeenCalledWith(value);});

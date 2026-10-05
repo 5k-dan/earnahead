@@ -1,0 +1,9 @@
+import {fireEvent,render,screen} from '@testing-library/react';
+import {expect,it,vi} from 'vitest';
+import {OpportunityCard} from '../components/opportunity-card';
+import {OpportunityGroup} from '../lib/opportunities';
+const item:OpportunityGroup={id:'one',title:'Sperm donor program · Atlanta',opportunity_type:'SPERM',compensation_min:null,compensation_max:1400,compensation_basis:'PER_MONTH',minimum_age:18,maximum_age:38,source_url:'https://donatesperm.com/atlanta-office/',distance_miles:2,latitude:33.749,longitude:-84.388,organization_name:'Xytex',facility_name:'Xytex Atlanta',nearbyLocations:[]};
+it('shows provider name, published ages, and monthly payment unit',()=>{render(<OpportunityCard item={item} saved={false} onOpen={vi.fn()} onSave={vi.fn()}/>);expect(screen.getByText('Xytex')).toBeInTheDocument();expect(screen.getByText('Up to $1400 / month')).toBeInTheDocument();expect(screen.getByText('Age 18–38')).toBeInTheDocument();});
+it('shows unpublished payment without inserting a placeholder range',()=>{render(<OpportunityCard item={{...item,compensation_max:null}} saved={false} onOpen={vi.fn()} onSave={vi.fn()}/>);expect(screen.getByText('Not published')).toBeInTheDocument();expect(screen.queryByText(/1400/)).not.toBeInTheDocument();});
+it('reflects a saved bookmark and allows removing it',()=>{const save=vi.fn();render(<OpportunityCard item={item} saved={true} onOpen={vi.fn()} onSave={save}/>);const button=screen.getByRole('button',{name:'Unsave opportunity'});expect(button).toHaveAttribute('aria-pressed','true');fireEvent.click(button);expect(save).toHaveBeenCalledOnce();});
+it('opens full details without shortening the actual provider title',()=>{const open=vi.fn();render(<OpportunityCard item={item} saved={false} onOpen={open} onSave={vi.fn()}/>);fireEvent.click(screen.getByText('View details and provider terms'));expect(open).toHaveBeenCalledOnce();expect(screen.getByTitle(item.title)).toBeInTheDocument();});

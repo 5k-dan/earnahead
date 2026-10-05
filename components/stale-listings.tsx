@@ -1,0 +1,5 @@
+'use client';
+import {useQuery} from '@tanstack/react-query';
+import {browserDb} from '@/lib/supabase';
+import {ReviewForm} from './review-form';
+export function StaleListings({userId,notice}:{userId:string;notice:(s:string)=>void}){const query=useQuery({queryKey:['stale-listings',userId],queryFn:async()=>{const cutoff=new Date(Date.now()-30*86400000).toISOString();const result=await browserDb().from('opportunities').select('*').eq('active',true).or(`source_checked_at.is.null,source_checked_at.lt.${cutoff}`).limit(50);if(result.error)throw result.error;return result.data;}});return <section className="profile-panel"><h2>Source freshness review</h2><p>Active listings with no recorded source check, or a check over 30 days old. Open the provider source before approving the current terms.</p>{query.isError?<p>Freshness review requires the launch migration.</p>:query.isPending?<p>Checking sources…</p>:!query.data?.length?<p>No stale listings in this batch.</p>:query.data.map(row=><details className="review-item" key={row.id}><summary>{row.title}</summary><ReviewForm record={row} notice={notice}/></details>)}</section>;}
