@@ -1,0 +1,9 @@
+import {renderHook} from '@testing-library/react';
+import {useState} from 'react';
+import {expect,it} from 'vitest';
+import {useAutoRadius} from '../lib/use-auto-radius';
+function harness(props:{receivedRadius:string;count:number;success:boolean;key:string|null}){const [radius,setRadius]=useState('25');const message=useAutoRadius({searchKey:props.key,radius,setRadius,count:props.count,ready:props.success&&props.receivedRadius===radius});return{radius,message};}
+it('expands 25 to 50 then 100, and stops at the limit',()=>{const {result,rerender}=renderHook(harness,{initialProps:{receivedRadius:'25',count:0,success:true,key:'place'}});expect(result.current.radius).toBe('50');rerender({receivedRadius:'50',count:0,success:true,key:'place'});expect(result.current.radius).toBe('100');rerender({receivedRadius:'100',count:0,success:true,key:'place'});expect(result.current.radius).toBe('100');expect(result.current.message).toContain('25 miles');expect(result.current.message).toContain('100 miles');});
+it('stops as soon as matching results are found',()=>{const {result,rerender}=renderHook(harness,{initialProps:{receivedRadius:'25',count:0,success:true,key:'place'}});rerender({receivedRadius:'50',count:2,success:true,key:'place'});expect(result.current.radius).toBe('50');});
+it('does not expand on errors, loading, missing coordinates, or a nonempty first search',()=>{for(const props of [{receivedRadius:'25',count:0,success:false,key:'place'},{receivedRadius:'25',count:0,success:true,key:null},{receivedRadius:'25',count:1,success:true,key:'place'}]){const view=renderHook(harness,{initialProps:props});expect(view.result.current.radius).toBe('25');view.unmount();}});
+it('does not show expansion from a different search location',()=>{const {result,rerender}=renderHook(harness,{initialProps:{receivedRadius:'25',count:0,success:true,key:'place'}});rerender({receivedRadius:'50',count:1,success:true,key:'other'});expect(result.current.message).toBe('');});
