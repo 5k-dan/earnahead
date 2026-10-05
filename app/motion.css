@@ -1,0 +1,36 @@
+/* Short interaction cues; no looping decorative motion or layout shifts. */
+.primary, .filter-button, .category-tabs button, .payment-options button,
+.bookmark-button, .view-switch button, .bottom-nav a, .nav-link {
+  transition:background-color 160ms ease, color 160ms ease,
+    border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+@media (prefers-reduced-motion:no-preference) {
+  .page-heading { animation:ea-arrive 320ms ease-out both; }
+  .filter-panel, .location-results { animation:ea-arrive 180ms ease-out both; }
+  .modal-backdrop { animation:ea-fade 160ms ease-out both; }
+  .modal { animation:ea-arrive 220ms ease-out both; }
+  .notice { animation:ea-arrive 200ms ease-out both; }
+  .review-item[open] form { animation:ea-fade 180ms ease-out both; }
+  .primary:active:not(:disabled), .filter-button:active,
+  .bookmark-button:active, .category-tabs button:active,
+  .payment-options button:active { transform:scale(.98); }
+}
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
+  .primary:hover:not(:disabled) { transform:translateY(-1px); box-shadow:0 4px 12px #76549a20; }
+  .opportunity-card:hover { transform:translateY(-2px); }
+}
+@keyframes ea-arrive {
+  from { opacity:0; transform:translateY(6px); }
+  to { opacity:1; transform:translateY(0); }
+}
+@keyframes ea-fade { from { opacity:0; } to { opacity:1; } }
+@media (prefers-reduced-motion:reduce) {
+  .page-heading, .filter-panel, .location-results, .modal-backdrop, .modal,
+  .notice, .review-item form, .opportunity-card, .primary, .filter-button,
+  .category-tabs button, .payment-options button, .bookmark-button,
+  .view-switch button, .bottom-nav a, .nav-link {
+    animation:none;
+    transition:none;
+  }
+  .opportunity-card:hover { transform:none; }
+}
