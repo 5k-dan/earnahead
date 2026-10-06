@@ -81,3 +81,16 @@ footer>span:nth-child(2){display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .mobile-brand{display:none}
 @media(max-width:760px){.mobile-brand{display:block;width:130px;flex-shrink:0}.mobile-brand img{display:block;width:100%;height:auto}header .header-right>span.live-dot{display:none}}
 header .header-right{margin-left:auto}
+/* Compact top navigation with useful actions and restrained motion. */
+header.top-navbar{height:76px;padding:0 38px;display:flex;align-items:center;gap:24px;position:sticky;top:0;z-index:15;background:#ffffffed;backdrop-filter:blur(14px);border-bottom:1px solid #ece5f0;box-shadow:0 2px 12px #513c6603}
+.navbar-context,.navbar-page,.navbar-links,.navbar-account{display:flex;align-items:center}
+.navbar-context{min-width:0;gap:10px}.navbar-page{gap:10px;font-size:14px;font-weight:500;white-space:nowrap}
+.navbar-page-icon{display:grid;place-items:center;width:34px;height:34px;background:#f5eff9;color:#9370aa;border-radius:10px}
+.navbar-access{font-size:10px;font-weight:400;color:#9b80aa;border:1px solid #e9dfef;border-radius:20px;padding:4px 8px;margin-left:4px}
+.navbar-links{gap:12px;margin-left:auto}.navbar-link,.navbar-feedback{display:flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:10px 13px;border-radius:10px;font-size:12px;white-space:nowrap;color:#83718d}
+.navbar-link:hover,.navbar-link.current{background:#f6f0fa;color:#775393}.navbar-feedback{background:#f1e8f8;border:1px solid #e7daf0;color:#80579b}.navbar-feedback:hover,.navbar-feedback.current{background:#e9dbf3}
+.navbar-account{gap:14px;padding-left:20px;border-left:1px solid #eee7f2}.navbar-activity{display:grid;place-items:center;width:40px;height:40px;border-radius:10px;color:#9d87aa}.navbar-activity:hover{background:#f5eff9;color:#80579b}.top-navbar .header-avatar{display:grid;place-items:center;width:36px;height:36px;flex-shrink:0}
+@media(min-width:761px) and (max-width:1100px){header.top-navbar{padding:0 24px;gap:14px}.navbar-access{display:none}.navbar-links{gap:4px}.navbar-link,.navbar-feedback{padding:10px}.navbar-account{gap:6px;padding-left:10px}}
+@media(max-width:760px){header.top-navbar{height:auto;min-height:66px;padding:10px 18px 0;gap:8px;flex-wrap:wrap}.navbar-context{flex:1}.navbar-page{display:none}.top-navbar .mobile-menu{display:grid;place-items:center;width:40px;height:40px;padding:0;border-radius:10px}.top-navbar .mobile-brand{width:135px}.navbar-account{padding-left:0;border:0;gap:4px}.navbar-activity{width:36px}.navbar-links{order:3;width:100%;margin:0;padding:5px 0 10px;justify-content:flex-end;border-top:1px solid #f5eff8;gap:10px}.navbar-link,.navbar-feedback{font-size:11px;min-height:38px;padding:8px 12px}}
+@media(prefers-reduced-motion:no-preference){.navbar-link,.navbar-feedback,.navbar-activity,.top-navbar .header-avatar{transition:background-color 180ms ease,color 180ms ease,box-shadow 180ms ease,transform 180ms ease}.navbar-feedback>svg:last-child{transition:transform 180ms ease}.navbar-page-icon{animation:ea-confirm 350ms ease-out both}.navbar-feedback:hover>svg:last-child{transform:translate(2px,-2px)}}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){.navbar-feedback:hover{transform:translateY(-1px);box-shadow:0 4px 10px #80579b12}.top-navbar .header-avatar:hover{transform:scale(1.06)}}
