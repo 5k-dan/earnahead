@@ -71,3 +71,8 @@ footer>span:nth-child(2){display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .guide-next .primary{flex-shrink:0;min-height:46px;font-size:13px;padding:13px 20px}
 @media(max-width:1000px){.guide-page .welcome-steps{grid-template-columns:1fr}.guide-page .welcome-steps article{padding:24px}.guide-step-top{margin-bottom:18px}}
 @media(max-width:760px){.guide-page{margin-top:8px}.guide-heading{padding-top:12px}.guide-heading h1{font-size:31px;letter-spacing:-.7px}.guide-heading>p{font-size:14px;max-width:none}.guide-next{flex-direction:column;align-items:stretch;padding:22px}.guide-next .primary{justify-content:center}.guide-page .welcome-disclaimer{margin-bottom:24px}}
+/* Equal resting heights without stretching cards when a neighbor expands. */
+.listing-grid>.opportunity-card:is(.type-plasma,.type-sperm,.type-egg){min-height:460px}
+.listing-grid>.opportunity-card:is(.type-plasma,.type-sperm,.type-egg) .opportunity-card-main{flex:1}
+.listing-grid>.opportunity-card:is(.type-plasma,.type-sperm,.type-egg) .opportunity-card-footer{min-height:78px}
+@media(max-width:760px){.listing-grid>.opportunity-card:is(.type-plasma,.type-sperm,.type-egg){min-height:0}.listing-grid>.opportunity-card:is(.type-plasma,.type-sperm,.type-egg) .opportunity-card-main{flex:0}}
