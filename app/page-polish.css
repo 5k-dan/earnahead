@@ -76,3 +76,7 @@ footer>span:nth-child(2){display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .listing-grid>.opportunity-card:is(.type-plasma,.type-sperm,.type-egg) .opportunity-card-main{flex:1}
 .listing-grid>.opportunity-card:is(.type-plasma,.type-sperm,.type-egg) .opportunity-card-footer{min-height:78px}
 @media(max-width:760px){.listing-grid>.opportunity-card:is(.type-plasma,.type-sperm,.type-egg){min-height:0}.listing-grid>.opportunity-card:is(.type-plasma,.type-sperm,.type-egg) .opportunity-card-main{flex:0}}
+/* Use the approved logo asset across desktop and mobile navigation. */
+.brand-logo{display:block;width:200px;max-width:100%;height:auto}
+.mobile-brand{display:none}
+@media(max-width:760px){.mobile-brand{display:block;width:130px;flex-shrink:0}.mobile-brand img{display:block;width:100%;height:auto}header .header-right>span.live-dot{display:none}}
