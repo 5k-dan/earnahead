@@ -80,3 +80,4 @@ footer>span:nth-child(2){display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .brand-logo{display:block;width:200px;max-width:100%;height:auto}
 .mobile-brand{display:none}
 @media(max-width:760px){.mobile-brand{display:block;width:130px;flex-shrink:0}.mobile-brand img{display:block;width:100%;height:auto}header .header-right>span.live-dot{display:none}}
+header .header-right{margin-left:auto}
