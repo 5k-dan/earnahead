@@ -5,7 +5,7 @@ const schema=z.object({location:z.string().max(150),coords:z.object({lat:z.numbe
 export type SearchSettings=z.infer<typeof schema>;
 function donationFirst(value:SearchSettings):SearchSettings {
  const wasResearch=value.discovery==='research'||['CLINICAL_TRIAL','RESEARCH_STUDY','OTHER'].includes(value.category);
- return wasResearch?{...value,discovery:'donations',category:'',payment:'ALL'}:value;
+ return wasResearch?{...value,radius:'25',discovery:'donations',category:'',payment:'ALL'}:{...value,radius:'25'};
 }
 export function useSearchPersistence(userId:string|undefined,value:SearchSettings,restore:(value:SearchSettings)=>void){const key=`earnahead:search:${userId??'guest'}`;const [loaded,setLoaded]=useState('');const callback=useRef(restore);callback.current=restore;
  useEffect(()=>{try{const raw=localStorage.getItem(key);const parsed=raw?schema.safeParse(JSON.parse(raw)):null;callback.current(parsed?.success?donationFirst(parsed.data):{location:'',coords:null,radius:'25',discovery:'donations',category:'',view:'list',publishedOnly:false,sort:'distance'});}catch{callback.current({location:'',coords:null,radius:'25',category:'',view:'list',publishedOnly:false,sort:'distance'});}setLoaded(key);},[key]);
