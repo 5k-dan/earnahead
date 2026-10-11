@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {seed,reserve,available,transition,matches} from './model.js';
+const meeting={date:'2099-01-01',time:'16:00',place:'Student Center East',amount:55};
+test('purchase reservation blocks duplicate bookings, cancellation releases item',()=>{const s=seed();const r=reserve(s,'1',meeting);assert.equal(available(s,'1'),false);assert.throws(()=>reserve(s,'1',meeting),/no longer available/);transition(r,'cancel');assert.equal(available(s,'1'),true);});
+test('purchase confirms pickup and cannot return through invalid transition',()=>{const s=seed(),r=reserve(s,'1',meeting);transition(r,'pickup');assert.equal(r.status,'picked up');assert.throws(()=>transition(r,'pickup'));});
+test('rental requires ordered dates and releases availability on return',()=>{const s=seed();assert.throws(()=>reserve(s,'6',meeting),/Return date/);const r=reserve(s,'6',{...meeting,end:'2099-01-03',amount:12});transition(r,'pickup');transition(r,'return');assert.equal(available(s,'6'),true);});
+test('giveaway and pay what you can retain agreed contribution',()=>{const s=seed();assert.equal(reserve(s,'7',{...meeting,amount:0}).amount,0);assert.equal(reserve(s,'8',{...meeting,amount:2}).amount,2);});
+test('wanted matching respects budget, campus and category',()=>{const s=seed();assert.deepEqual(matches(s.listings,s.requests[0]).map(l=>l.id),['1']);assert.equal(matches(s.listings,{...s.requests[0],budget:30}).length,0);assert.equal(matches(s.listings,{...s.requests[0],campus:'Emory University'}).length,0);});
+test('invalid dates, missing meeting fields and negative prices fail',()=>{for(const d of [{...meeting,date:'2000-01-01'},{...meeting,time:''},{...meeting,amount:-1}])assert.throws(()=>reserve(seed(),'1',d));});
